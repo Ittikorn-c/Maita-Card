@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeesTable extends Migration
+class CreateCustomerCheckinsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('customer_checkins', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger("user_id");
-            $table->unsignedInteger("branch_id");
+            $table->string("checkin_code");
             $table->timestamps();
 
             $table->foreign("user_id")
                     ->references("id")
                     ->on("users");
-            $table->foreign("branch_id")
-                    ->references("id")
-                    ->on("branches");
         });
     }
 
@@ -36,11 +33,10 @@ class CreateEmployeesTable extends Migration
     public function down()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::table("employees", function(Blueprint $table){
+        Schema::table("customer_checkins", function(Blueprint $table){
             $table->dropForeign(["user_id"]);
-            $table->dropForeign(["branch_id"]);
         });
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('customer_checkins');
     }
 }

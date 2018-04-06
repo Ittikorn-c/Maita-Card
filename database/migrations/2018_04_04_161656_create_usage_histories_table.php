@@ -15,7 +15,17 @@ class CreateUsageHistoriesTable extends Migration
     {
         Schema::create('usage_histories', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger("card_id");
+            $table->integer("point");
+            $table->unsignedInteger("employee_id");
             $table->timestamps();
+
+            $table->foreign("card_id")
+                    ->references("id")
+                    ->on("cards");
+            $table->foreign("employee_id")
+                    ->references("id")
+                    ->on("users");
         });
     }
 
@@ -26,6 +36,12 @@ class CreateUsageHistoriesTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table("usage_histories", function(Blueprint $table){
+            $table->dropForeign(["card_id"]);
+            $table->dropForeign(["employee_id"]);
+        });
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('usage_histories');
     }
 }

@@ -15,7 +15,17 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger("template_id");
+            $table->integer("point");
+            $table->string("reward_name");
+            $table->string("reward_img");
+            $table->text("condition");
+            $table->date("exp_date");
             $table->timestamps();
+
+            $table->foreign("template_id")
+                    ->references("id")
+                    ->on("card_templates");
         });
     }
 
@@ -26,6 +36,12 @@ class CreatePromotionsTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table("promotions", function(Blueprint $table){
+            $table->dropForeign(["template_id"]);
+        });
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('promotions');
     }
 }

@@ -15,7 +15,18 @@ class CreateCardTemplatesTable extends Migration
     {
         Schema::create('card_templates', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger("shop_id");
+            $table->string("name");
+            $table->string("img");
+            $table->enum("style",[
+                "stamp",
+                "point"
+            ]);
             $table->timestamps();
+
+            $table->foreign("shop_id")
+                    ->references("id")
+                    ->on("shops");
         });
     }
 
@@ -26,6 +37,12 @@ class CreateCardTemplatesTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table("card_templates", function(Blueprint $table){
+            $table->dropForeign(["shop_id"]);
+        });
+        Schema::disableForeignKeyConstraints();
+        
         Schema::dropIfExists('card_templates');
     }
 }
