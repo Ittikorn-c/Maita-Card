@@ -12,14 +12,14 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('username'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -58,6 +58,99 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="fname" value="{{ old('fname') }}" type="text" class="form-control" name="fname" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="lname" value="{{ old('lname') }}" type="text" class="form-control" name="lname" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="address" value="{{ old('address') }}" type="text" class="form-control" name="address" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" value="{{ old('phone') }}" class="form-control" name="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="birth_date" type="date" value="{{ old('birth_date') }}" class="form-control" name="birth_date" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input id="gender-male" type="radio" value="male" name="gender" class="form-check-input" checked>
+                                    <label for="gender-male" class="form-check-label">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="gender-female" type="radio" value="female" name="gender" class="form-check-input" >
+                                    <label for="gender-female" class="form-check-label">
+                                        Female
+                                    </label>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="facebook" class="col-md-4 col-form-label text-md-right">{{ __('Facebook') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="facebook" type="text" value="{{ old('facebook') }}" class="form-control" name="facebook" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input id="role-customer" type="radio" value="customer" name="role" class="form-check-input" checked>
+                                    <label for="role-customer" class="form-check-label">
+                                        Customer
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="role-owner" type="radio" value="owner" name="role" class="form-check-input" >
+                                    <label for="role-owner" class="form-check-label">
+                                        Owner
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="role-employee" type="radio" value="employee" name="role" class="form-check-input" >
+                                    <label for="role-employee" class="form-check-label">
+                                        Employee
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
