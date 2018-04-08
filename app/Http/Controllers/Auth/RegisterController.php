@@ -63,6 +63,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        echo "<script>console.log('". json_encode($data) ."')</script>";
+        $image_name = $data["username"] . "." . $data["profile"]->getClientOriginalExtension();
+        $data["profile"]->move(public_path("images/profile"), $image_name);
+
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
@@ -73,7 +77,7 @@ class RegisterController extends Controller
             'phone' => $data["phone"],
             'birth_date' => $data["birth_date"],
             "gender" => $data["gender"],
-            "profile_img" => "profile.img",
+            "profile_img" => $image_name,
             "role" => $data["role"],
             "status" => "active",
             "facebook" => $data["facebook"]
