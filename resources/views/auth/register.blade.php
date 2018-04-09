@@ -8,9 +8,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="register">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-
                         <div class="form-group row">
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
@@ -154,15 +153,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" id="profiler">
-                            @{{ profile_upload_src }}
+                        <div class="form-group row" id="profiler" style="height:auto">
+          
                             <label for="profile" class="col-md-4 col-form-label text-md-right">{{ __('Profile') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="height:auto">
                                 <div class="custom-file">
-                                    <input v-on:click="console.log('onchange')" type="file" class="custom-file-input" id="profile" name="profile">
-                                    <label class="custom-file-label" for="profile">Choose file</label>
+                                    <input v-on:change="onSelectProfileUploadImage($event)" class="custom-file-input" type="file" id="profile" name="profile">
+                                    <label class="custom-file-label" for="profile">@{{ profile_upload_filename }}</label>
+                                    
                                 </div>
+                                <img style="max-width:100%;height:auto;margin-top:10px" class="img img-responsive" id="profile-preview" alt="">
                             </div>
                         </div>
                         

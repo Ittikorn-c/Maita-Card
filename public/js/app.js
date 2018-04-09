@@ -13894,10 +13894,29 @@ window.Vue = __webpack_require__(36);
 Vue.component('example-component', __webpack_require__(39));
 
 var app = new Vue({
-  el: '#app'
-});
+    el: '#app',
+    data: {
+        profile_upload_filename: "Choose file"
+    },
+    methods: {
+        onSelectProfileUploadImage: function onSelectProfileUploadImage(event) {
+            console.log(this, event.target.value, "onSelect");
+            console.log("app", app.profile_upload_src);
+            console.log("files", event.target.files[0]);
+            // this.profile_upload_src = event.target.files[0];
+            this.profile_upload_filename = event.target.files[0].name;
+            var fReader = new FileReader();
 
-Vue.set(app, "profile_upload_src", "4555");
+            fReader.onload = function (e) {
+                // app.profile_upload_src = fReader.result;
+                $("#profile-preview").attr("src", e.target.result);
+                console.log($("#profile-preview"));
+                // console.log("onloaded", e.target.result);
+            };
+            fReader.readAsDataURL(event.target.files[0]);
+        }
+    }
+});
 
 /***/ }),
 /* 13 */
