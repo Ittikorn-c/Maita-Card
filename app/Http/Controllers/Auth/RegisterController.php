@@ -49,7 +49,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -63,10 +63,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        echo "<script>console.log('". json_encode($data) ."')</script>";
+        $image_name = $data["username"] . "." . $data["profile"]->getClientOriginalExtension();
+        $data["profile"]->move(public_path("images/profile"), $image_name);
+
         return User::create([
-            'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'fname' => $data["fname"],
+            'lname' => $data["lname"],
+            'address' => $data["address"],
+            'phone' => $data["phone"],
+            'birth_date' => $data["birth_date"],
+            "gender" => $data["gender"],
+            "profile_img" => $image_name,
+            "role" => $data["role"],
+            "status" => "active",
+            "facebook" => $data["facebook"]
         ]);
     }
 }
