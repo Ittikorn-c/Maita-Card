@@ -17,6 +17,7 @@ $factory->define(App\User::class, function (Faker $faker) {
     $username = $faker->unique()->word;
     $fname = $faker->firstName();
     $lname = $faker->lastName();
+    $create_time = $faker->dateTime();
     return [
         'username' => $username,
         'email' => $faker->unique()->safeEmail,
@@ -35,5 +36,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         ]),
         "status" => "active",
         "facebook" => $fname . " " . $lname,
+        "created_at" => $create_time,
+        "updated_at" => $create_time
     ];
 });
