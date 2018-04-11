@@ -13,4 +13,8 @@ class Shop extends Model
     public function cardTemplates(){
         return $this->hasMany("App\CardTemplate", "shop_id");
     }
+
+    public function owner(){
+        return $this->belongsTo("App\User", "owner_id");
+    }
 }
