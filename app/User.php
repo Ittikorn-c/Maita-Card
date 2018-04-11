@@ -57,5 +57,16 @@ class User extends Authenticatable
     public function shops(){
         return $this->hasMany("App\Shop", "owner_id");
     }
+
+    public function scopeOwner($query){
+        return $query->where("role", "owner");
+    }
+
+    public function scopeCustomer($query){
+        return $query->where("role", "customer");
+    }
+    public function scopeEmployee($query){
+        return $query->where("role", "employee");
+    }
 }
 
