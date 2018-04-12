@@ -3,6 +3,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Shop::class, function (Faker $faker) {
+    echo "makeing shop " . date("Y-m-d H:i:s") . "\n";
+    $faker = \Faker\Factory::create();
     $shop_name = $faker->unique()->word();
     $owner = $faker->randomElement(
         App\User::owner()->get()->toArray()

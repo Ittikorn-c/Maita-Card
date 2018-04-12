@@ -14,13 +14,15 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
+    echo "makeing user " . date("Y-m-d H:i:s") . "\n";
+    $faker = \Faker\Factory::create();
     $username = $faker->unique()->word;
     $fname = $faker->firstName();
     $lname = $faker->lastName();
     $create_time = $faker->dateTime();
     return [
         'username' => $username,
-        'email' => $faker->unique()->safeEmail,
+        'email' => $faker->lexify("???").$faker->unique()->safeEmail,
         'password' => Hash::make("123456"), // secret
         'fname' => $fname,
         "lname" => $lname,

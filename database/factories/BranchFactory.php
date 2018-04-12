@@ -3,8 +3,10 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Branch::class, function (Faker $faker) {
+    echo "makeing branch " . date("Y-m-d H:i:s") . "\n";
+    $faker = \Faker\Factory::create();
     $shop = $faker->randomElement(
-        Shop::all()->toArray()
+        App\Shop::all()->toArray()
     );
     $created_at = $faker->dateTimeBetween($min=$shop["created_at"]);
     $updated_at = $faker->dateTimeBetween($min=$created_at);

@@ -3,6 +3,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\UsageHistory::class, function (Faker $faker) {
+    echo "makeing usage history " . date("Y-m-d H:i:s") . "\n";
+    $faker = \Faker\Factory::create();
     $card = $faker->randomElement(
         App\Card::all()->toArray()
     );

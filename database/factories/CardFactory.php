@@ -3,6 +3,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Card::class, function (Faker $faker) {
+    echo "makeing card " . date("Y-m-d H:i:s") . "\n";
+    $faker = \Faker\Factory::create();
     $template = $faker->randomElement(
         App\CardTemplate::all()->toArray()
     );
