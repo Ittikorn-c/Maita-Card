@@ -20,7 +20,7 @@ class CreatePromotionsTable extends Migration
             $table->string("reward_name");
             $table->string("reward_img");
             $table->text("condition");
-            $table->date("exp_date");
+            $table->dateTime("exp_date");
             $table->timestamps();
 
             $table->foreign("template_id")

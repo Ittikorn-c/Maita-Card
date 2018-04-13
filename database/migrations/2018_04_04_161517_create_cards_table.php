@@ -19,7 +19,7 @@ class CreateCardsTable extends Migration
             $table->unsignedInteger("template_id");
             $table->integer("point");
             $table->integer("checkin_point");
-            $table->date("exp_date");
+            $table->dateTime("exp_date");
             $table->timestamps();
 
             $table->foreign("user_id")
