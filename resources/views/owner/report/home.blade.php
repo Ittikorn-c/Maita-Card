@@ -3,16 +3,19 @@
 
 
 @section("content")
+    <!-- {{ var_dump($shops) }} -->
     <div class="container" id="report">
         <div class="row">
             <div class="col-12">
                 <div class="select-shop" style="float:right">
                     <div class="dropdown show">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Shop
+                            {{ $shop->name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
+                            @foreach($shops as $shop)
+                                <a class="dropdown-item" href="{{ route('report', ['shop_id'=>$shop->id])}}">{{$shop->name}}</a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

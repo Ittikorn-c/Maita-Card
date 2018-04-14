@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get("/owner/report", "ReportController@home");
+Route::get("/owner/report/{shop_id?}", "ReportController@home")->name("report");
