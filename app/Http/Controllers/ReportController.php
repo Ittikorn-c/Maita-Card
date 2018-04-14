@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Promotion;
 
 class ReportController extends Controller
 {
@@ -27,14 +28,31 @@ class ReportController extends Controller
                 return redirect("/home");   // this user does not have any shop
         }
         $data = [12, 19, 10, 5, 2, 3];
+        $exchangeData = $this->getBasicExchangeData($shop);
         return view("owner.report.home")
                     ->with("data", implode(",", $data))
                     ->with("shops", $shops)
-                    ->with("shop", $shop);
+                    ->with("shop", $shop)
+                    ->with("exchangeData", $exchangeData);
     }
 
     private function getShops(){
         $owner = Auth::user();
         return $owner->shops;
+    }
+
+    private function getBasicExchangeData($shop){
+        $promotions = Promotion::belongToShop($shop->id)->available()->get();
+        $label = [];
+        $data = [];
+        foreach ($promotions as $promotion) {
+            array_push($label, $promotion->reward_name);
+            array_push($data, $promotion->rewardHistories()->count());
+        }
+
+        return [
+            "label" => $label,
+            "data" => $data
+        ];
     }
 }

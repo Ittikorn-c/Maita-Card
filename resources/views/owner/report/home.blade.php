@@ -3,12 +3,12 @@
 
 
 @section("content")
-    <!-- {{ var_dump($shops) }} -->
     <div class="container" id="report">
         <div class="row">
             <div class="col-12">
                 <div class="select-shop" style="float:right">
-                    <div class="dropdown show">
+                    <h5 style="display:inline">Shop</h5>
+                    <div class="dropdown show" style="display:inline">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ $shop->name }}
                         </a>
@@ -44,7 +44,7 @@
             <div class="col-8">
                 <div class="card">
                     <h5 class="card-header">Exchange Rate</h5>
-                    <canvas class="card-body" id="myChart" width="400" max-height="100"></canvas>
+                    <canvas class="card-body" id="exchangeChart" width="400" max-height="100"></canvas>
                     <p style="text-align:center">
                         exchange - promotion
                     </p>
@@ -138,6 +138,7 @@
 @push("js")
     <script>
         var data  = [ {{ $data }} ];
+        var exchangeData = JSON.parse('{!! json_encode($exchangeData) !!}');
     </script>
     <script src="{{ asset('js/report-home.js') }}"></script>
 @endpush
