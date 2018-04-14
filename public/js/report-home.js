@@ -4574,7 +4574,7 @@
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)(module)))
 
 /***/ }),
 /* 1 */
@@ -4583,7 +4583,7 @@
 "use strict";
 
 
-module.exports = __webpack_require__(13);
+module.exports = __webpack_require__(14);
 module.exports.easing = __webpack_require__(186);
 module.exports.canvas = __webpack_require__(187);
 module.exports.options = __webpack_require__(188);
@@ -16693,6 +16693,34 @@ module.exports = {
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17035,34 +17063,6 @@ helpers.getValueOrDefault = helpers.valueOrDefault;
  * @private
  */
 helpers.getValueAtIndexOrDefault = helpers.valueAtIndexOrDefault;
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
 
 
 /***/ }),
@@ -30265,7 +30265,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_chart_js__);
 window.Vue = __webpack_require__(8);
 
-var randomColor = __webpack_require__(236); // import the script 
+var randomColor = __webpack_require__(231); // import the script 
 
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function () {
@@ -30276,6 +30276,8 @@ window.onload = function () {
     });
 
     initExchangeChart();
+    initPointReceiveChart();
+    initPointAvailableChart();
 };
 
 function shortenLabel(label, n) {
@@ -30310,6 +30312,84 @@ function initExchangeChart() {
                 borderColor: bcolors,
                 borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function initPointReceiveChart() {
+    var bcolor = randomColor({
+        format: "rgba",
+        alpha: 1,
+        luminosity: "light"
+    });
+    var color = bcolor.substring(0, bcolor.lastIndexOf("1")) + "0.4)";
+
+    console.log(bcolor, color);
+    console.log(pointReceiveData);
+    var ctx = $("#pointReceiveChart");
+    var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
+        type: 'line',
+        data: {
+            labels: pointReceiveData.label,
+            datasets: [{
+                label: 'point receive',
+                data: pointReceiveData.data,
+                backgroundColor: color,
+                borderColor: bcolor,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function initPointAvailableChart() {
+    console.log(pointAvailableBundle);
+    var bcolors = randomColor({
+        count: pointAvailableBundle.data.length,
+        format: "rgba",
+        alpha: 1
+    });
+    var colors = [];
+    for (var i = 0; i < bcolors.length; i++) {
+        var l = bcolors[i].length;
+        colors.push(bcolors[i].substring(0, bcolors[i].lastIndexOf("1")) + "0.4)");
+    }
+    var datasets = [];
+    for (var _i = 0; _i < pointAvailableBundle.data.length; _i++) {
+        var element = pointAvailableBundle.data[_i];
+        var dataset = {
+            label: element.name,
+            data: element.data,
+            backgroundColor: colors[_i],
+            borderColor: bcolors[_i],
+            borderWidth: 1
+        };
+        datasets.push(dataset);
+    }
+    var ctx = $("#pointAvailableChart");
+    var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
+        type: 'line',
+        data: {
+            labels: pointAvailableBundle.label,
+            datasets: datasets
         },
         options: {
             scales: {
@@ -30514,7 +30594,7 @@ module.exports = function() {
 "use strict";
 
 
-var helpers = __webpack_require__(13);
+var helpers = __webpack_require__(14);
 
 /**
  * Easing functions adapted from Robert Penner's easing equations.
@@ -30771,7 +30851,7 @@ helpers.easingEffects = effects;
 "use strict";
 
 
-var helpers = __webpack_require__(13);
+var helpers = __webpack_require__(14);
 
 /**
  * @namespace Chart.helpers.canvas
@@ -30992,7 +31072,7 @@ helpers.drawRoundedRectangle = function(ctx) {
 "use strict";
 
 
-var helpers = __webpack_require__(13);
+var helpers = __webpack_require__(14);
 
 /**
  * @alias Chart.helpers.options
@@ -42927,12 +43007,7 @@ module.exports = {
 
 
 /***/ }),
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {// randomColor by David Merfield under the CC0 license
@@ -43389,7 +43464,7 @@ module.exports = {
   return randomColor;
 }));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)(module)))
 
 /***/ })
 /******/ ]);
