@@ -29,9 +29,9 @@ class CardTemplate extends Model
             $age = date_diff($now, $bdate)->format("%y");
 
             if(array_key_exists($age, $ageCount))
-                $ageCount[$age]++;
+                $ageCount[$age] += 1;
             else
-                $ageCount[$age] = 1;
+                $ageCount[$age] = 0;
         }
 
         return $ageCount;

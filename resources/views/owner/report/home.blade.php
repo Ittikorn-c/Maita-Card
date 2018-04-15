@@ -24,22 +24,24 @@
         
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <div class="top-block">
+                <div class="card top-block">
                     Customer of Day
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
-                <div class="top-block">
+                <div class="card top-block">
                     Points Earn
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
-                <div class="top-block">
+                <div class="card top-block">
                     Exchange Times
                 </div>
             </div>
         </div>
 
+        <h4><b>Exchange Rate</b></h4>
+        <hr>
         <div class="row chart-group">
             <div class="col-8">
                 <div class="card">
@@ -52,19 +54,19 @@
                 </div>
             </div>
             <div class="col-4 side-container">
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         PROMOTION
                     </p>
                 </div>
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         AGE
                     </p>
                 </div>
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         GENDER
@@ -72,22 +74,24 @@
                 </div>
             </div>
         </div>
-
+        
+        <h4><b>Point Receive</b></h4>
+        <hr>
         <div class="row chart-group">
             <div class="col-4 side-container">
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         TIME
                     </p>
                 </div>
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         AGE
                     </p>
                 </div>
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         GENDER
@@ -105,7 +109,8 @@
                 </div>
             </div>
         </div>
-
+        <h4><b>Point Available</b></h4>
+        <hr>
         <div class="row chart-group">
             <div class="col-8">
                 <div class="card">
@@ -118,13 +123,13 @@
                 </div>
             </div>
             <div class="col-4 side-container">
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT AVAILABLE <br>
                         AGE
                     </p>
                 </div>
-                <div class="simple-block" style="flex-grow:1">
+                <div class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT AVAILABLE <br>
                         GENDER
