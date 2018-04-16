@@ -2,6 +2,7 @@
     background: #aaa;
     margin: 10px 0px;
     padding: 10px;
+    color: white;
 }
 
 .simple-block:first-child{
@@ -9,6 +10,10 @@
 }
 .simple-block:last-child{
     margin-bottom: 0px;
+}
+.simple-block:hover{
+    text-decoration: none;
+    color:white;
 }
 
 .side-container{
@@ -28,4 +33,13 @@
 
 .chart-group{
     margin-bottom: 30px;
+}
+
+.side-scroll{
+    overflow-y: auto;
+    flex-grow:1;
+}
+.side-menu{
+    display: flex;
+    flex-direction: column;
 }
