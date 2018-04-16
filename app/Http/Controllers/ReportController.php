@@ -70,7 +70,8 @@ class ReportController extends Controller
         ];
 
         return view("owner.report.exchange-promotion")
-                    ->with("bundle", $bundle);
+                    ->with("bundle", $bundle)
+                    ->with("promotions", $promotions);
         
     }
 
