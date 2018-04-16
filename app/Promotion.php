@@ -18,4 +18,14 @@ class Promotion extends Model
     public function rewardHistories(){
         return $this->hasMany("App\RewardHistory", "promotion_id");
     }
+
+    public function scopeBelongToShop($query, $shop_id){
+        return $query->join("card_templates", "promotions.template_id", "=", "card_templates.id")
+                    ->join("shops", "card_templates.shop_id", "=", "shops.id")
+                    ->where("shops.id", $shop_id)
+                    ->select("promotions.*");
+    }
+    public function scopeAvailable($query){
+        return $query->whereDate("promotions.exp_date", ">=", date("Y-m-d"));
+    }
 }

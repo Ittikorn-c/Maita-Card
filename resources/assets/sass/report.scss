@@ -1,0 +1,31 @@
+.simple-block{
+    background: #aaa;
+    margin: 10px 0px;
+    padding: 10px;
+}
+
+.simple-block:first-child{
+    margin-top: 0px;
+}
+.simple-block:last-child{
+    margin-bottom: 0px;
+}
+
+.side-container{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.top-block{
+    padding: 10px 10px;
+    background: #aaa;
+}
+
+.row{
+    margin-bottom: 16px;
+}
+
+.chart-group{
+    margin-bottom: 30px;
+}
