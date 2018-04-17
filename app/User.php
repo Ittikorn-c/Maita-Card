@@ -68,5 +68,12 @@ class User extends Authenticatable
     public function scopeEmployee($query){
         return $query->where("role", "employee");
     }
+
+    public function age(){
+        $bdate = date_create($this->birth_date);
+        $now = date_create(date("Y-m-d"));
+        $age = date_diff($now, $bdate)->format("%y");
+        return (int) $age;
+    }
 }
 
