@@ -74,6 +74,49 @@ class ReportController extends Controller
                     ->with("promotions", $promotions);
         
     }
+    // 
+    public function exchangeAge($shop_id){
+        $auth = $this->checkRoleAuth();
+        if(!is_null($auth))
+            return $auth;
+
+        $shops = $this->getShops();
+        $shop = $shops->find($shop_id);
+        if(is_null($shop))
+            return redirect("/home"); 
+
+        $promotions = Promotion::belongToShop($shop_id)->get();
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $datasets = [];
+        foreach($promotions as $promotion){
+            $exchanges = $promotion->rewardHistories;
+            foreach($exchanges as $exchange){
+                $user = $exchange->card->user;
+                $age = $user->age();
+                $data = [0, 0, 0, 0, 0, 0];
+                
+                if($age <= 6)
+                    $data[0]++;
+                elseif($age <= 12)
+                    $data[1]++;
+                elseif($age <= 19)
+                    $data[2]++;
+                elseif($age <= 39)
+                    $data[3]++;
+                elseif($age <= 59)
+                    $data[4]++;
+                else
+                    $data[5]++;
+
+                $dataset["$promotion->id"] = $data;
+            }
+        }
+        $bundle = [
+            "label" => $label,
+            "dataset" => $dataset
+        ];
+        return view("owner.report.exchange-age")->with("bundle", $bundle);
+    }
 
     private function checkRoleAuth(){
         if(!Auth::check())
