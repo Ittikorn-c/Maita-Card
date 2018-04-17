@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Promotion;
 use App\UsageHistory;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
     //
 
     public function home($shop_id=null){
-        if(!Auth::check())
-            return redirect("/home");
-        if(Auth::user()->role != "owner")        
-            return redirect("/home");
+        $auth = $this->checkRoleAuth();
+        if(!is_null($auth))
+            return $auth;
 
         $shops = $this->getShops();
         if(!is_null($shop_id)){
@@ -40,6 +40,50 @@ class ReportController extends Controller
                     ->with("pointAvailableData", $pointAvailableData);
     }
 
+    public function exchangePromotion($shop_id){
+        $auth = $this->checkRoleAuth();
+        if(!is_null($auth))
+            return $auth;
+
+        $shops = $this->getShops();
+        $shop = $shops->find($shop_id);
+        if(is_null($shop))
+            return redirect("/home"); 
+
+        $today = date("Y-m-d");
+        $promotions = Promotion::belongToShop($shop->id)
+                        ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
+                        ->get();
+        $label = [];
+        $data = [];
+        $available = [];
+        foreach ($promotions as $promotion ) {
+            array_push($label, $promotion->reward_name);
+            array_push($data, $promotion->rewardHistories()->count());
+            array_push($available, $promotion->available);
+        }
+
+        $bundle = [
+            "label" => $label,
+            "data" => $data,
+            "available" => $available
+        ];
+
+        return view("owner.report.exchange-promotion")
+                    ->with("bundle", $bundle)
+                    ->with("promotions", $promotions);
+        
+    }
+
+    private function checkRoleAuth(){
+        if(!Auth::check())
+            return redirect("/home");
+        if(Auth::user()->role != "owner")        
+            return redirect("/home");
+
+        return null;
+    }
+    
     private function getShops(){
         $owner = Auth::user();
         return $owner->shops;

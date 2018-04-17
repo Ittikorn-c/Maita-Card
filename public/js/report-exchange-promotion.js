@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 230);
+/******/ 	return __webpack_require__(__webpack_require__.s = 232);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43312,14 +43312,16 @@ module.exports = {
 /* 227 */,
 /* 228 */,
 /* 229 */,
-/* 230 */
+/* 230 */,
+/* 231 */,
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(231);
+module.exports = __webpack_require__(233);
 
 
 /***/ }),
-/* 231 */
+/* 233 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43330,29 +43332,53 @@ window.Vue = __webpack_require__(12);
 
 var randomColor = __webpack_require__(190); // import the script 
 
+var displayIndex = [];
+var displayData = [];
+var displayLabel = [];
+var shortLabel = [];
+var myChart;
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function () {
     var report = new Vue({
-        el: "#report",
+        el: "#exchange-promotion",
         data: {},
-        methods: {}
+        methods: {
+            onCheckPromotion: function onCheckPromotion(index) {
+                console.log(index);
+                var i = displayIndex.indexOf(index);
+                if (i != -1) {
+                    displayIndex.splice(i, 1);
+                    myChart.data.labels.splice(i, 1);
+                    myChart.data.datasets[0].data.splice(i, 1);
+                } else {
+                    displayIndex.push(index);
+                    myChart.data.labels.push(shortLabel[index]);
+                    myChart.data.datasets[0].data.push(bundle.data[index]);
+                }
+                myChart.update();
+                console.log(displayLabel, displayIndex);
+            }
+        }
     });
 
     initExchangeChart();
-    initPointReceiveChart();
-    initPointAvailableChart();
 };
 
 function shortenLabel(label, n) {
+    var labels = [];
     for (var i = 0; i < label.length; i++) {
-        if (label[i].length > n) label[i] = label[i].substring(0, n - 1) + "...";
+        if (label[i].length > n) {
+            var l = label[i].substring(0, n - 1) + "...";
+            labels.push(l);
+        }
     }
+    return labels;
 }
 
 function initExchangeChart() {
-    shortenLabel(exchangeData.label, 8);
+    shortLabel = shortenLabel(bundle.label, 8);
     var bcolors = randomColor({
-        count: exchangeData.label.length,
+        count: bundle.label.length,
         format: "rgba",
         alpha: 1,
         luminosity: "light"
@@ -43363,96 +43389,27 @@ function initExchangeChart() {
         colors.push(bcolors[i].substring(0, bcolors[i].lastIndexOf("1")) + "0.4)");
     }
     console.log(bcolors, colors);
+
+    for (var _i = 0; _i < bundle.label.length; _i++) {
+        if (bundle.available[_i] == 1) {
+            displayLabel.push(shortLabel[_i]);
+            displayData.push(bundle.data[_i]);
+            displayIndex.push(_i);
+        }
+    }
+
     var ctx = $("#exchangeChart");
-    var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
+    myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
         type: 'bar',
         data: {
-            labels: exchangeData.label,
+            labels: displayLabel,
             datasets: [{
                 label: 'exchage rate',
-                data: exchangeData.data,
+                data: displayData,
                 backgroundColor: colors,
                 borderColor: bcolors,
                 borderWidth: 1
             }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-}
-
-function initPointReceiveChart() {
-    var bcolor = randomColor({
-        format: "rgba",
-        alpha: 1,
-        luminosity: "light"
-    });
-    var color = bcolor.substring(0, bcolor.lastIndexOf("1")) + "0.4)";
-
-    console.log(bcolor, color);
-    console.log(pointReceiveData);
-    var ctx = $("#pointReceiveChart");
-    var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
-        type: 'line',
-        data: {
-            labels: pointReceiveData.label,
-            datasets: [{
-                label: 'point receive',
-                data: pointReceiveData.data,
-                backgroundColor: color,
-                borderColor: bcolor,
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-}
-
-function initPointAvailableChart() {
-    console.log(pointAvailableBundle);
-    var bcolors = randomColor({
-        count: pointAvailableBundle.data.length,
-        format: "rgba",
-        alpha: 1
-    });
-    var colors = [];
-    for (var i = 0; i < bcolors.length; i++) {
-        var l = bcolors[i].length;
-        colors.push(bcolors[i].substring(0, bcolors[i].lastIndexOf("1")) + "0.4)");
-    }
-    var datasets = [];
-    for (var _i = 0; _i < pointAvailableBundle.data.length; _i++) {
-        var element = pointAvailableBundle.data[_i];
-        var dataset = {
-            label: element.name,
-            data: element.data,
-            backgroundColor: colors[_i],
-            borderColor: bcolors[_i],
-            borderWidth: 1
-        };
-        datasets.push(dataset);
-    }
-    var ctx = $("#pointAvailableChart");
-    var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
-        type: 'line',
-        data: {
-            labels: pointAvailableBundle.label,
-            datasets: datasets
         },
         options: {
             scales: {

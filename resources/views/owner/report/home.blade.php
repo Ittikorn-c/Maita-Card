@@ -54,12 +54,12 @@
                 </div>
             </div>
             <div class="col-4 side-container">
-                <div class="card simple-block" style="flex-grow:1">
+                <a href="{{ route('exchange-promotion', ['shop_id' => $shop->id]) }}" class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         PROMOTION
                     </p>
-                </div>
+                </a>
                 <div class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
