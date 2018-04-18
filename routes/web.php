@@ -21,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get("/owner/report/{shop_id?}", "ReportController@home")->name("report");
 Route::get("/owner/report/exchange-promotion/{shop_id}", "ReportController@exchangePromotion")->name("exchange-promotion");
+
+Route::get('maitahome', 'MaitaHomeController@index');

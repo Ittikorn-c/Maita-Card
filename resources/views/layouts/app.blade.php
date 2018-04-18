@@ -20,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack("css")
+    <link href="{{ asset('css/maitahome.css') }}" rel="stylesheet">
 </head>
 <body>
     <div>
