@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    //
 
     public function home($shop_id=null){
         $auth = $this->checkRoleAuth();
@@ -50,10 +49,7 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home"); 
 
-        $today = date("Y-m-d");
-        $promotions = Promotion::belongToShop($shop->id)
-                        ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
-                        ->get();
+        $promotions = getAvailablePromotions($shop_id);
         $label = [];
         $data = [];
         $available = [];
@@ -74,7 +70,7 @@ class ReportController extends Controller
                     ->with("promotions", $promotions);
         
     }
-    // 
+
     public function exchangeAge($shop_id){
         $auth = $this->checkRoleAuth();
         if(!is_null($auth))
@@ -85,10 +81,7 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home"); 
 
-        $today = date("Y-m-d");
-        $promotions = Promotion::belongToShop($shop->id)
-            ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
-            ->get();
+        $promotions = getAvailablePromotions($shop_id);
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = [];
         foreach($promotions as $promotion){
@@ -124,7 +117,44 @@ class ReportController extends Controller
         ];
         return view("owner.report.exchange-age", $bundle);
     }
+    public function exchangeGender($shop_id){
+        $auth = $this->checkRoleAuth();
+        if(!is_null($auth))
+            return $auth;
 
+        $shops = $this->getShops();
+        $shop = $shops->find($shop_id);
+        if(is_null($shop))
+            return redirect("/home");  
+
+        $promotions = getAvailablePromotions($shop_id);
+
+        $label = ["Male", "Female"];
+        $datasets = [];
+        foreach($promotions as $promotion){
+            $exchanges = $promotion->rewardHistories;
+            $dataset = [
+                    "id" => $promotion->id,
+                    "name" => $promotion->reward_name,
+                    "data" => [
+                        "male" => 0,
+                        "female" => 0
+                    ]
+                ];
+            foreach($exchanges as $exchange){
+                $gender = $exchange->card->user->gender;
+                $dataset["data"][$gender]++;
+            }
+            array_push($datasets, $dataset);
+        }
+
+        $bundle = [
+            "label" => $label,
+            "datasets" => $datasets
+        ];
+
+        return view("owner.report.exchange-gender", $bundle);
+    }
     private function checkRoleAuth(){
         if(!Auth::check())
             return redirect("/home");
@@ -200,5 +230,12 @@ class ReportController extends Controller
         }
 
         return $bundle;
+    }
+
+    private function getAvailablePromotions($shop_id){
+        $today = date("Y-m-d");
+        $promotions = Promotion::belongToShop($shop->id)
+            ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
+            ->get();
     }
 }
