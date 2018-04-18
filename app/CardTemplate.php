@@ -24,9 +24,7 @@ class CardTemplate extends Model
         $ageCount = [];
         foreach ($cards as $card) {
             $user = $card->user;
-            $bdate = date_create($user->birth_date);
-            $now = date_create(date("Y-m-d"));
-            $age = date_diff($now, $bdate)->format("%y");
+            $age = $user->age();
 
             if(array_key_exists($age, $ageCount))
                 $ageCount[$age] += 1;

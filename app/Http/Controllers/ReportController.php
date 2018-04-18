@@ -74,6 +74,56 @@ class ReportController extends Controller
                     ->with("promotions", $promotions);
         
     }
+    // 
+    public function exchangeAge($shop_id){
+        $auth = $this->checkRoleAuth();
+        if(!is_null($auth))
+            return $auth;
+
+        $shops = $this->getShops();
+        $shop = $shops->find($shop_id);
+        if(is_null($shop))
+            return redirect("/home"); 
+
+        $today = date("Y-m-d");
+        $promotions = Promotion::belongToShop($shop->id)
+            ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
+            ->get();
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $datasets = [];
+        foreach($promotions as $promotion){
+            $exchanges = $promotion->rewardHistories;
+            $data = [0, 0, 0, 0, 0, 0];
+            foreach($exchanges as $exchange){
+                $user = $exchange->card->user;
+                $age = $user->age();
+                
+                
+                if($age <= 6)
+                    $data[0]++;
+                elseif($age <= 12)
+                    $data[1]++;
+                elseif($age <= 19)
+                    $data[2]++;
+                elseif($age <= 39)
+                    $data[3]++;
+                elseif($age <= 59)
+                    $data[4]++;
+                else
+                    $data[5]++;
+            }
+            $dataset["$promotion->id"] = [
+                "label" => $promotion->reward_name,
+                "data" => $data
+            ];
+        }
+        $bundle = [
+            "label" => $label,
+            "dataset" => $dataset,
+            "promotions" => $promotions
+        ];
+        return view("owner.report.exchange-age", $bundle);
+    }
 
     private function checkRoleAuth(){
         if(!Auth::check())
