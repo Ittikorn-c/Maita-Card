@@ -11,21 +11,17 @@
                     Select Promotion
                 </h4>
                 <div class="side-scroll">
-                    @foreach($bundle["label"] as $index => $label)
+                    @foreach($promotions as $promotion)
                     <div class="form-check">
-                        <input v-on:change="onCheckPromotion({{$index}})" class="form-check-input" type="checkbox" value="" id="promotion-select-{{$index}}" 
-                        @if($bundle["available"][$index] == 1)
-                            {{ "checked" }}
-                        @endif
-                        >
+                        <input v-on:change="onCheckPromotion({{$promotion->id}})" class="form-check-input" type="checkbox" value="" id="promotion-select-{{$promotion->id}}">
                         <label 
-                        @if($bundle["available"][$index] != 1)
+                        @if(((int) $promotion->available) != 1)
                             class='form-check-label exp-promotion'
                         @else
                             class='form-check-label'
                         @endif
-                        for="promotion-select-{{$index}}">
-                            {{ $label }}
+                        for="promotion-select-{{$promotion->id}}">
+                            {{ $promotion->reward_name }}
                         </label>
                     </div>
                     @endforeach 
@@ -41,18 +37,22 @@
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Promotion Name</th>
-                    <th scope="col">Expired Date</th>
-                    <th scope="col">Exchange Times</th>
+                    @foreach($label as $age)
+                        <th scope="col">{{$age}} years</th>
+                    @endforeach
+                    
                     </tr>
                 </thead>
                 <tbody>
-                    @php($i = 1)
+                    
                     @foreach($promotions as $promotion)
+                    @php($data = $dataset[$promotion->id]["data"])
                     <tr>
-                        <th scope="row">{{ $i++ }}</th>
+                        <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $promotion->reward_name }}</td>
-                        <td>{{ $promotion->exp_date }}</td>
-                        <td>{{ $promotion->rewardHistories()->count() }}</td>
+                        @foreach($data as $time)
+                            <td>{{ $time }}</td>
+                        @endforeach
                     </tr>
                     @endforeach
                 </tbody>
@@ -64,8 +64,9 @@
 
 @push("js")
     <script>
-        var bundle = JSON.parse('{!! json_encode($bundle) !!}');
-        console.log("bundle", bundle);
+        var label = JSON.parse('{!! json_encode($label) !!}');
+        var datasets = JSON.parse('{!! json_encode($dataset) !!}');
+
     </script>
     <script src="{{ asset('js/report-exchange-age.js') }}"></script>
 @endpush

@@ -85,15 +85,19 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home"); 
 
-        $promotions = Promotion::belongToShop($shop_id)->get();
+        $today = date("Y-m-d");
+        $promotions = Promotion::belongToShop($shop->id)
+            ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
+            ->get();
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = [];
         foreach($promotions as $promotion){
             $exchanges = $promotion->rewardHistories;
+            $data = [0, 0, 0, 0, 0, 0];
             foreach($exchanges as $exchange){
                 $user = $exchange->card->user;
                 $age = $user->age();
-                $data = [0, 0, 0, 0, 0, 0];
+                
                 
                 if($age <= 6)
                     $data[0]++;
@@ -107,15 +111,18 @@ class ReportController extends Controller
                     $data[4]++;
                 else
                     $data[5]++;
-
-                $dataset["$promotion->id"] = $data;
             }
+            $dataset["$promotion->id"] = [
+                "label" => $promotion->reward_name,
+                "data" => $data
+            ];
         }
         $bundle = [
             "label" => $label,
-            "dataset" => $dataset
+            "dataset" => $dataset,
+            "promotions" => $promotions
         ];
-        return view("owner.report.exchange-age")->with("bundle", $bundle);
+        return view("owner.report.exchange-age", $bundle);
     }
 
     private function checkRoleAuth(){
