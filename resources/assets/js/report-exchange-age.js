@@ -2,12 +2,7 @@ window.Vue = require('vue');
 import Chart from 'chart.js';
 var randomColor = require('randomcolor'); // import the script 
 
-var displayIndex = [];
-var displayData = [];
-var displayLabel = [];
-var shortLabel = [];
 var myChart;
-var idIndexHash = [];
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function(){
     const report = new Vue({
@@ -37,13 +32,9 @@ window.onload = function(){
                                     };
                     myChart.data.datasets.push(dataset);
                     let index = myChart.data.datasets.length-1;
-                    addDataIndex(id, index);
-                    console.log(idIndexHash);
-                }else{
-                    let index = getDataIndex(id);
                     
-                    console.log("index=%d, len=%d", index,myChart.data.datasets.length);
-                    console.log(idIndexHash);
+                }else{
+                    
                     for (var i = 0; i < myChart.data.datasets.length; i++) {
                         const data = myChart.data.datasets[i];
                         if(data.id == id)
@@ -109,15 +100,4 @@ function initExchangeChart(){
             }
         }
     })
-}
-
-function getDataIndex(id){
-
-    
-    return idIndexHash[id];
-}
-
-function addDataIndex(id, index){
-
-    idIndexHash[id] = index;
 }

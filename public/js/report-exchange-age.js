@@ -4574,7 +4574,7 @@
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)(module)))
 
 /***/ }),
 /* 1 */
@@ -5621,8 +5621,7 @@ helpers.getValueAtIndexOrDefault = helpers.valueAtIndexOrDefault;
 
 
 /***/ }),
-/* 9 */,
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -5650,6 +5649,7 @@ module.exports = function(module) {
 
 
 /***/ }),
+/* 10 */,
 /* 11 */
 /***/ (function(module, exports) {
 
@@ -43269,7 +43269,7 @@ module.exports = {
   return randomColor;
 }));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)(module)))
 
 /***/ }),
 /* 190 */,
@@ -43334,12 +43334,7 @@ window.Vue = __webpack_require__(12);
 
 var randomColor = __webpack_require__(189); // import the script 
 
-var displayIndex = [];
-var displayData = [];
-var displayLabel = [];
-var shortLabel = [];
 var myChart;
-var idIndexHash = [];
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function () {
     var report = new Vue({
@@ -43367,13 +43362,8 @@ window.onload = function () {
                     };
                     myChart.data.datasets.push(dataset);
                     var index = myChart.data.datasets.length - 1;
-                    addDataIndex(id, index);
-                    console.log(idIndexHash);
                 } else {
-                    var _index = getDataIndex(id);
 
-                    console.log("index=%d, len=%d", _index, myChart.data.datasets.length);
-                    console.log(idIndexHash);
                     for (var i = 0; i < myChart.data.datasets.length; i++) {
                         var _data = myChart.data.datasets[i];
                         if (_data.id == id) break;
@@ -43437,16 +43427,6 @@ function initExchangeChart() {
             }
         }
     });
-}
-
-function getDataIndex(id) {
-
-    return idIndexHash[id];
-}
-
-function addDataIndex(id, index) {
-
-    idIndexHash[id] = index;
 }
 
 /***/ })

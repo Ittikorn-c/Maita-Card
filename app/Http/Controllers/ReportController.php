@@ -49,7 +49,7 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home"); 
 
-        $promotions = getAvailablePromotions($shop_id);
+        $promotions = $this->getPromotionsWithAvailable($shop_id);
         $label = [];
         $data = [];
         $available = [];
@@ -81,7 +81,7 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home"); 
 
-        $promotions = getAvailablePromotions($shop_id);
+        $promotions = getPromotionsWithAvailable($shop_id);
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = [];
         foreach($promotions as $promotion){
@@ -127,7 +127,7 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home");  
 
-        $promotions = getAvailablePromotions($shop_id);
+        $promotions = $this->getPromotionsWithAvailable($shop_id);
 
         $label = ["Male", "Female"];
         $datasets = [];
@@ -139,13 +139,14 @@ class ReportController extends Controller
                     "data" => [
                         "male" => 0,
                         "female" => 0
-                    ]
+                    ],
+                    "available" => $promotion->available
                 ];
             foreach($exchanges as $exchange){
                 $gender = $exchange->card->user->gender;
                 $dataset["data"][$gender]++;
             }
-            array_push($datasets, $dataset);
+            $datasets[$promotion->id] = $dataset;
         }
 
         $bundle = [
@@ -232,10 +233,11 @@ class ReportController extends Controller
         return $bundle;
     }
 
-    private function getAvailablePromotions($shop_id){
+    private function getPromotionsWithAvailable($shop_id){
         $today = date("Y-m-d");
-        $promotions = Promotion::belongToShop($shop->id)
+        $promotions = Promotion::belongToShop($shop_id)
             ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
             ->get();
+        return $promotions;
     }
 }

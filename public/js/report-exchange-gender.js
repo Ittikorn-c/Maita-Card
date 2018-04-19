@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 232);
+/******/ 	return __webpack_require__(__webpack_require__.s = 236);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43314,14 +43314,18 @@ module.exports = {
 /* 229 */,
 /* 230 */,
 /* 231 */,
-/* 232 */
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(233);
+module.exports = __webpack_require__(237);
 
 
 /***/ }),
-/* 233 */
+/* 237 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43332,31 +43336,26 @@ window.Vue = __webpack_require__(12);
 
 var randomColor = __webpack_require__(189); // import the script 
 
-var displayIndex = [];
-var displayData = [];
-var displayLabel = [];
-var shortLabel = [];
 var myChart;
+var mcolor = 'rgba(79, 138, 255, 0.4)';
+var bmcolor = 'rgba(79, 138, 255, 1)';
+var fcolor = 'rgba(255, 61, 237, 0.4)';
+var bfcolor = 'rgba(255, 61, 237, 1)';
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function () {
     var report = new Vue({
-        el: "#exchange-promotion",
+        el: "#exchange-gender",
         data: {},
         methods: {
-            onCheckPromotion: function onCheckPromotion(index) {
-                console.log(index);
-                var i = displayIndex.indexOf(index);
-                if (i != -1) {
-                    displayIndex.splice(i, 1);
-                    myChart.data.labels.splice(i, 1);
-                    myChart.data.datasets[0].data.splice(i, 1);
-                } else {
-                    displayIndex.push(index);
-                    myChart.data.labels.push(shortLabel[index]);
-                    myChart.data.datasets[0].data.push(bundle.data[index]);
-                }
+            onCheckPromotion: function onCheckPromotion(id) {
+                console.log("click ", id);
+                var dataset = datasets[id];
+                console.log(datasets);
+                var data = [dataset.data.male, dataset.data.female];
+
+                myChart.data.datasets[0].data = data;
+
                 myChart.update();
-                console.log(displayLabel, displayIndex);
             }
         }
     });
@@ -43376,9 +43375,7 @@ function shortenLabel(label, n) {
 }
 
 function initExchangeChart() {
-    shortLabel = shortenLabel(bundle.label, 8);
     var bcolors = randomColor({
-        count: bundle.label.length,
         format: "rgba",
         alpha: 1,
         luminosity: "light"
@@ -43390,24 +43387,16 @@ function initExchangeChart() {
     }
     console.log(bcolors, colors);
 
-    for (var _i = 0; _i < bundle.label.length; _i++) {
-        if (bundle.available[_i] == 1) {
-            displayLabel.push(shortLabel[_i]);
-            displayData.push(bundle.data[_i]);
-            displayIndex.push(_i);
-        }
-    }
-
     var ctx = $("#exchangeChart");
     myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
-            labels: displayLabel,
+            labels: label,
             datasets: [{
                 label: 'exchage rate',
-                data: displayData,
-                backgroundColor: colors,
-                borderColor: bcolors,
+                data: [10, 1],
+                backgroundColor: [mcolor, fcolor],
+                borderColor: [bmcolor, bfcolor],
                 borderWidth: 1
             }]
         },
@@ -43421,6 +43410,16 @@ function initExchangeChart() {
             }
         }
     });
+}
+
+function getDataIndex(id) {
+
+    return idIndexHash[id];
+}
+
+function addDataIndex(id, index) {
+
+    idIndexHash[id] = index;
 }
 
 /***/ })
