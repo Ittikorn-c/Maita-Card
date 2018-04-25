@@ -27,6 +27,10 @@ Route::prefix("owner/report")->group(function(){
     Route::get("exchange/promotion/{shop_id}", "ReportController@exchangePromotion");
     Route::get("exchange/age/{shop_id}", "ReportController@exchangeAge");
     Route::get("exchange/gender/{shop_id}", "ReportController@exchangeGender");
+
+    Route::get("pointReceive/time/{shop_id}", "ReportController@pointReceiveTime");
+    Route::get("pointReceive/age/{shop_id}", "ReportController@pointReceiveAge");
+    Route::get("pointReceive/gender/{shop_id}", "ReportController@pointReceiveGender");
 });
 
 Route::get("/storage/{filename}", "StorageController@show");

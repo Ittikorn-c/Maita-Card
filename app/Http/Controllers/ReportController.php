@@ -185,6 +185,7 @@ class ReportController extends Controller
         return view("owner.report.gender", compact("label", "datasets"));
     }
 
+
     // ----------- helper method -----------
     private function checkRoleAuth(){
         if(!Auth::check())
