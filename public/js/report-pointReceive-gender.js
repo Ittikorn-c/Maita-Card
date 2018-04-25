@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 234);
+/******/ 	return __webpack_require__(__webpack_require__.s = 238);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43316,14 +43316,18 @@ module.exports = {
 /* 231 */,
 /* 232 */,
 /* 233 */,
-/* 234 */
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(235);
+module.exports = __webpack_require__(239);
 
 
 /***/ }),
-/* 235 */
+/* 239 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43335,42 +43339,24 @@ window.Vue = __webpack_require__(138);
 var randomColor = __webpack_require__(189); // import the script 
 
 var myChart;
+var mcolor = 'rgba(79, 138, 255, 0.4)';
+var bmcolor = 'rgba(79, 138, 255, 1)';
+var fcolor = 'rgba(255, 61, 237, 0.4)';
+var bfcolor = 'rgba(255, 61, 237, 1)';
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function () {
-    console.log("checkbox", $(".promotion-checkbox  "));
     var report = new Vue({
-        el: "#exchange-age",
+        el: "#pointReceive-gender",
         data: {},
         methods: {
             onCheckPromotion: function onCheckPromotion(id) {
+                console.log("click ", id);
+                var dataset = datasets[id];
+                console.log(dataset);
+                var data = [dataset.data.male, dataset.data.female];
 
-                if ($("#promotion-select-" + id).is(":checked")) {
-                    var data = datasets[id];
-                    var bcolor = randomColor({
-                        format: "rgba",
-                        alpha: 1,
-                        luminosity: "light"
-                    });
-                    var color = bcolor.substring(0, bcolor.lastIndexOf("1")) + "0.4)";
+                myChart.data.datasets[0].data = data;
 
-                    var dataset = {
-                        id: id,
-                        label: data["label"],
-                        data: data["data"],
-                        backgroundColor: color,
-                        borderColor: bcolor,
-                        borderWidth: 1
-                    };
-                    myChart.data.datasets.push(dataset);
-                    var index = myChart.data.datasets.length - 1;
-                } else {
-
-                    for (var i = 0; i < myChart.data.datasets.length; i++) {
-                        var _data = myChart.data.datasets[i];
-                        if (_data.id == id) break;
-                    }
-                    myChart.data.datasets.splice(i, 1);
-                }
                 myChart.update();
             }
         }
@@ -43403,20 +43389,18 @@ function initExchangeChart() {
     }
     console.log(bcolors, colors);
 
-    var ctx = $("#exchangeChart");
+    var ctx = $("#pointReceiveChart");
     myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels: label,
-            datasets: [
-                // {
-                //     label: 'exchage rate',
-                //     data: displayData,
-                //     backgroundColor: colors,
-                //     borderColor: bcolors,
-                //     borderWidth: 1
-                // }
-            ]
+            datasets: [{
+                label: 'exchage rate',
+                data: [10, 1],
+                backgroundColor: [mcolor, fcolor],
+                borderColor: [bmcolor, bfcolor],
+                borderWidth: 1
+            }]
         },
         options: {
             scales: {
@@ -43428,6 +43412,16 @@ function initExchangeChart() {
             }
         }
     });
+}
+
+function getDataIndex(id) {
+
+    return idIndexHash[id];
+}
+
+function addDataIndex(id, index) {
+
+    idIndexHash[id] = index;
 }
 
 /***/ })

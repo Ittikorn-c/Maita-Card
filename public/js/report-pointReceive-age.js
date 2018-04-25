@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 234);
+/******/ 	return __webpack_require__(__webpack_require__.s = 240);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43316,14 +43316,20 @@ module.exports = {
 /* 231 */,
 /* 232 */,
 /* 233 */,
-/* 234 */
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(235);
+module.exports = __webpack_require__(241);
 
 
 /***/ }),
-/* 235 */
+/* 241 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43339,23 +43345,31 @@ var myChart;
 window.onload = function () {
     console.log("checkbox", $(".promotion-checkbox  "));
     var report = new Vue({
-        el: "#exchange-age",
+        el: "#pointReceive-age",
         data: {},
         methods: {
             onCheckPromotion: function onCheckPromotion(id) {
 
-                if ($("#promotion-select-" + id).is(":checked")) {
+                if ($("#template-select-" + id).is(":checked")) {
+                    console.log("checked");
                     var data = datasets[id];
-                    var bcolor = randomColor({
-                        format: "rgba",
-                        alpha: 1,
-                        luminosity: "light"
-                    });
-                    var color = bcolor.substring(0, bcolor.lastIndexOf("1")) + "0.4)";
+                    // let bcolor = randomColor({
+                    //     format: "rgba",
+                    //     alpha: 1,
+                    //     luminosity: "light"
+                    // });
+                    // let color = bcolor.substring(0, bcolor.lastIndexOf("1")) + "0.4)";
+                    var bcolor = void 0,
+                        color = void 0;
+
+                    var _randomChartColor = randomChartColor();
+
+                    bcolor = _randomChartColor.bcolor;
+                    color = _randomChartColor.color;
 
                     var dataset = {
                         id: id,
-                        label: data["label"],
+                        label: data["template_name"],
                         data: data["data"],
                         backgroundColor: color,
                         borderColor: bcolor,
@@ -43364,7 +43378,7 @@ window.onload = function () {
                     myChart.data.datasets.push(dataset);
                     var index = myChart.data.datasets.length - 1;
                 } else {
-
+                    console.log("unchecked");
                     for (var i = 0; i < myChart.data.datasets.length; i++) {
                         var _data = myChart.data.datasets[i];
                         if (_data.id == id) break;
@@ -43379,6 +43393,20 @@ window.onload = function () {
     initExchangeChart();
 };
 
+function randomChartColor() {
+    var bcolor = randomColor({
+        format: "rgba",
+        alpha: 1,
+        luminosity: "light"
+    });
+    var color = bcolor.substring(0, bcolor.lastIndexOf("1")) + "0.4)";
+
+    return {
+        bcolor: bcolor,
+        color: color
+    };
+}
+
 function shortenLabel(label, n) {
     var labels = [];
     for (var i = 0; i < label.length; i++) {
@@ -43391,32 +43419,34 @@ function shortenLabel(label, n) {
 }
 
 function initExchangeChart() {
-    var bcolors = randomColor({
-        format: "rgba",
-        alpha: 1,
-        luminosity: "light"
-    });
-    var colors = [];
-    for (var i = 0; i < bcolors.length; i++) {
-        var l = bcolors[i].length;
-        colors.push(bcolors[i].substring(0, bcolors[i].lastIndexOf("1")) + "0.4)");
-    }
-    console.log(bcolors, colors);
 
-    var ctx = $("#exchangeChart");
+    var ds = [];
+    $.each(datasets, function (id, e) {
+        var bcolor = void 0,
+            color = void 0;
+
+        var _randomChartColor2 = randomChartColor();
+
+        bcolor = _randomChartColor2.bcolor;
+        color = _randomChartColor2.color;
+
+        var d = {
+            id: id,
+            label: e.template_name,
+            data: e.data,
+            backgroundColor: color,
+            borderColor: bcolor,
+            borderWidth: 1
+        };
+        ds.push(d);
+    });
+
+    var ctx = $("#pointReceiveChart");
     myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
         type: 'bar',
         data: {
             labels: label,
-            datasets: [
-                // {
-                //     label: 'exchage rate',
-                //     data: displayData,
-                //     backgroundColor: colors,
-                //     borderColor: bcolors,
-                //     borderWidth: 1
-                // }
-            ]
+            datasets: ds
         },
         options: {
             scales: {

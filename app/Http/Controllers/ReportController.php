@@ -173,16 +173,16 @@ class ReportController extends Controller
 
     public function pointReceiveAge($shop_id){
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
-        $datasets = $this.getPointReceiveAge($shop_id);
+        $datasets = $this->getPointReceiveAge($shop_id);
 
-        return view("owner.report.age",compact("label", "datasets"));
+        return view("owner.report.pointReceive.age",compact("label", "datasets"));
     }
 
     public function pointReceiveGender($shop_id){
         $label = ["male", "female"];
-        $datasets = $this.getPointReceiveGender($shop_id);
+        $datasets = $this->getPointReceiveGender($shop_id);
 
-        return view("owner.report.gender", compact("label", "datasets"));
+        return view("owner.report.PointReceive.gender", compact("label", "datasets"));
     }
 
 
@@ -301,9 +301,9 @@ class ReportController extends Controller
                 $user = $card->user;
                 $point = $card->usageHistories->sum('point');
                 $age = $user->age();
-                $dataset["data"][this.getAgeIndex($age)] += $point;
+                $dataset["data"][$this->getAgeIndex($age)] += $point;
             }
-            array_push($datasets, $dataset);
+            $datasets[$template->id] = $dataset;
         }
         return $datasets;
     }
@@ -315,18 +315,22 @@ class ReportController extends Controller
             $dataset = [
                 "template_id" => $template->id,
                 "template_name" => $template->name,
-                "data" => ["male", "female"]
+                "data" => [
+                            "male" => 0,
+                            "female" => 0
+                        ]
             ];
             foreach ($template->cards as $card ) {
                 $user = $card->user;
                 $point = $card->usageHistories->sum('point');
-                if($user->gnder == "male")
+                if($user->gender == "male")
                     $dataset["data"]["male"] += $point;
                 else
                     $dataset["data"]["female"] += $point;
             }
+            $datasets[$template->id] = $dataset;
         }
-        return $result;
+        return $datasets;
     }
     public function getPointAvailableAge($shop_id){
         $shop = Shop::find($shop_id);
