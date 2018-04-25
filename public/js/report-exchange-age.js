@@ -43337,6 +43337,7 @@ var randomColor = __webpack_require__(189); // import the script
 var myChart;
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function () {
+    console.log("checkbox", $(".promotion-checkbox  "));
     var report = new Vue({
         el: "#exchange-age",
         data: {},

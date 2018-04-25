@@ -60,18 +60,18 @@
                         PROMOTION
                     </p>
                 </a>
-                <div class="card simple-block" style="flex-grow:1">
+                <a href="{{ route('exchange-age', ['shop_id' => $shop->id]) }}" class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         AGE
                     </p>
-                </div>
-                <div class="card simple-block" style="flex-grow:1">
+                </a>
+                <a href="{{ route('exchange-gender', ['shop_id' => $shop->id]) }}" class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         GENDER
                     </p>
-                </div>
+                </a>
             </div>
         </div>
         

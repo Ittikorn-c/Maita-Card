@@ -5,6 +5,7 @@ var randomColor = require('randomcolor'); // import the script
 var myChart;
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function(){
+    console.log("checkbox", $(".promotion-checkbox  "));
     const report = new Vue({
         el: "#exchange-age",
         data: {

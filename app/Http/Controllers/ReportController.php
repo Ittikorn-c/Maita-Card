@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Promotion;
 use App\UsageHistory;
+use App\Shop;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
@@ -81,7 +82,7 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home"); 
 
-        $promotions = getPromotionsWithAvailable($shop_id);
+        $promotions = $this->getPromotionsWithAvailable($shop_id);
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = [];
         foreach($promotions as $promotion){
@@ -156,6 +157,32 @@ class ReportController extends Controller
 
         return view("owner.report.exchange-gender", $bundle);
     }
+
+    public function pointReceiveTime($shop_id){
+        $auth = $this->checkRoleAuth();
+        if(!is_null($auth))
+            return $auth;
+
+        $shops = $this->getShops();
+        $shop = $shops->find($shop_id);
+        if(is_null($shop))
+            return redirect("/home");
+
+        
+    }
+
+    public function pointReceiveAge($shop_id){
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $datasets = this.getPointReceiveAge($shop_id);
+
+        return view("owner.report.pointReceiveAge",compact("label", "datasets"));
+    }
+
+    public function pointReceiveGender($shop_id){
+
+    }
+
+    // ----------- helper method -----------
     private function checkRoleAuth(){
         if(!Auth::check())
             return redirect("/home");
@@ -239,5 +266,84 @@ class ReportController extends Controller
             ->select(DB::raw("promotions.*, (promotions.exp_date >= '$today') as 'available'"))
             ->get();
         return $promotions;
+    }
+
+    public function getPointReceiveTime($shop_id){
+        $raw = DB::table("shops")->join("card_templates", "card_templates.shop_id", "=", "shops.id")
+                            ->join("cards", "cards.template_id", "=", "card_templates.id")
+                            ->join("usage_histories", "usage_histories.card_id", "=", "cards.id")
+                            ->select(DB::raw("Hour(usage_histories.created_at) as 'hour', sum(usage_histories.point) as 'point'"))
+                            ->groupBy("hour")
+                            ->where("shops.id", $shop_id)
+                            ->get();
+        $result = [];
+        foreach($raw as $data){
+            $result[$data->hour] = $data->point;
+        }
+
+        return $result;
+    }
+
+    public function getPointReceiveAge($shop_id){
+        $shop = Shop::find($shop_id);
+        $datasets = [];
+        foreach ($shop->cardTemplates as $template) {
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => [0, 0, 0, 0, 0, 0]
+            ];
+            foreach ($template->cards as $card) {
+                $user = $card->user;
+                $point = $card->usageHistories->sum('point');
+                $age = $user->age();
+                $dataset["data"][this.getAgeIndex($age)] += $point;
+            }
+            array_push($datasets, $dataset);
+        }
+        return $datasets;
+    }
+
+    public function getPointReceiveGender($shop_id){
+        $shop = Shop::find($shop_id);
+        $datasets = [];
+        foreach ($shop->cardTemplates as $template) {
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => ["male", "female"]
+            ];
+            foreach ($template->cards as $card ) {
+                $user = $card->user;
+                $point = $card->usageHistories->sum('point');
+                if($user->gnder == "male")
+                    $dataset["data"]["male"] += $point;
+                else
+                    $dataset["data"]["female"] += $point;
+            }
+        }
+        return $result;
+    }
+    public function getPointAvailableAge($shop_id){
+        $shop = Shop::find($shop_id);
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $result = [
+            ""
+        ];
+    }
+
+    private function getAgeIndex($age){
+        if($age <= 6)
+            return 0;
+        elseif($age <= 12)
+            return 1;
+        elseif($age <= 19)
+            return 2;
+        elseif($age <= 39)
+            return 3;
+        elseif($age <= 59)
+            return 4;
+        else
+            return 5;
     }
 }

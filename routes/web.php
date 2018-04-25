@@ -22,6 +22,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get("/owner/report/{shop_id?}", "ReportController@home")->name("report");
 Route::get("/owner/report/exchange-promotion/{shop_id}", "ReportController@exchangePromotion")->name("exchange-promotion");
 Route::get("/owner/report/exchange-age/{shop_id}", "ReportController@exchangeAge")->name("exchange-age");
-Route::get("/owner/report/exchange-gender/{shop_id}", "ReportController@exchangeGender")->name("exchange-age");
+Route::get("/owner/report/exchange-gender/{shop_id}", "ReportController@exchangeGender")->name("exchange-gender");
 
 Route::get("/storage/{filename}", "StorageController@show");

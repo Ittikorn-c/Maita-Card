@@ -13,7 +13,7 @@
                 <div class="side-scroll">
                     @foreach($promotions as $promotion)
                     <div class="form-check">
-                        <input v-on:change="onCheckPromotion({{$promotion->id}})" class="form-check-input" type="checkbox" value="" id="promotion-select-{{$promotion->id}}">
+                        <input v-on:change="onCheckPromotion({{$promotion->id}})" class="form-check-input promotion-checkbox" type="checkbox" value="" id="promotion-select-{{$promotion->id}}">
                         <label 
                         @if(((int) $promotion->available) != 1)
                             class='form-check-label exp-promotion'
