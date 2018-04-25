@@ -168,7 +168,13 @@ class ReportController extends Controller
         if(is_null($shop))
             return redirect("/home");
 
-        
+        $label = [];
+        for ($i=0; $i < 24; $i++) { 
+            array_push($label, $i);
+        }
+        $datasets = $this->getPointReceiveTime($shop_id);
+
+        return view("owner.report.pointReceive.time", compact("label", "datasets"));
     }
 
     public function pointReceiveAge($shop_id){
@@ -276,16 +282,24 @@ class ReportController extends Controller
         $raw = DB::table("shops")->join("card_templates", "card_templates.shop_id", "=", "shops.id")
                             ->join("cards", "cards.template_id", "=", "card_templates.id")
                             ->join("usage_histories", "usage_histories.card_id", "=", "cards.id")
-                            ->select(DB::raw("Hour(usage_histories.created_at) as 'hour', sum(usage_histories.point) as 'point'"))
-                            ->groupBy("hour")
+                            ->select(DB::raw("card_templates.id, card_templates.name, Hour(usage_histories.created_at) as 'hour', sum(usage_histories.point) as 'point'"))
+                            ->groupBy("hour", "card_templates.id")
                             ->where("shops.id", $shop_id)
                             ->get();
-        $result = [];
+        $templates = Shop::find($shop_id)->cardTemplates;
+        $datasets = [];
+        foreach($templates as $template){
+            $datasets[$template->id] = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => []
+            ];
+        }
         foreach($raw as $data){
-            $result[$data->hour] = $data->point;
+            $datasets[$data->id]["data"]["$data->hour"] = $data->point;
         }
 
-        return $result;
+        return $datasets;
     }
 
     public function getPointReceiveAge($shop_id){
