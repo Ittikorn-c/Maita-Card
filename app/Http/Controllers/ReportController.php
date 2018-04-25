@@ -173,13 +173,16 @@ class ReportController extends Controller
 
     public function pointReceiveAge($shop_id){
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
-        $datasets = this.getPointReceiveAge($shop_id);
+        $datasets = $this.getPointReceiveAge($shop_id);
 
-        return view("owner.report.pointReceiveAge",compact("label", "datasets"));
+        return view("owner.report.age",compact("label", "datasets"));
     }
 
     public function pointReceiveGender($shop_id){
+        $label = ["male", "female"];
+        $datasets = $this.getPointReceiveGender($shop_id);
 
+        return view("owner.report.gender", compact("label", "datasets"));
     }
 
     // ----------- helper method -----------

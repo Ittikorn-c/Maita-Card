@@ -14,7 +14,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             @foreach($shops as $shop)
-                                <a class="dropdown-item" href="{{ route('report', ['shop_id'=>$shop->id])}}">{{$shop->name}}</a>
+                                <a class="dropdown-item" href='{{ url("owner/report/$shop->id") }}'> {{ $shop->name }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -54,19 +54,19 @@
                 </div>
             </div>
             <div class="col-4 side-container">
-                <a href="{{ route('exchange-promotion', ['shop_id' => $shop->id]) }}" class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/exchange/promotion/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         PROMOTION
                     </p>
                 </a>
-                <a href="{{ route('exchange-age', ['shop_id' => $shop->id]) }}" class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/exchange/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         AGE
                     </p>
                 </a>
-                <a href="{{ route('exchange-gender', ['shop_id' => $shop->id]) }}" class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/exchange/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         GENDER
