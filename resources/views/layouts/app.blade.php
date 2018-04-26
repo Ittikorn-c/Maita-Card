@@ -47,9 +47,11 @@
                             Shop Category
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <a class="dropdown-item" href="">food</a>
-                            <a class="dropdown-item" href="">barber</a>
-
+                            <a class="dropdown-item" href="">restaurant</a>
+                            <a class="dropdown-item" href="">cafe</a>
+                            <a class="dropdown-item" href="">salon</a>
+                            <a class="dropdown-item" href="">fitness</a>
+                            <a class="dropdown-item" href="">cinema</a>
 
                           </div>
                         </li>
