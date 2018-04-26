@@ -36,6 +36,8 @@ Route::get('/qr-code/{uid}', 'QRController@showQR')->where('uid', '[0-9]+');
 
 Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
 
+Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
+
 // Route::get('/scan', function () {
 // 	return view('qr/scan');
 // });
