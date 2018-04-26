@@ -19,6 +19,10 @@ class Shop extends Model
         return $this->belongsTo("App\User", "owner_id");
     }
 
+    public function scopeRestaurant($query){
+      return $query->where("category", "restaurant");
+    }
+
     public function scopeAllEmployees($query, $shop_id){
         return DB::table("shops")
                     ->join("branches", "shops.id", "=", "branches.shop_id")
