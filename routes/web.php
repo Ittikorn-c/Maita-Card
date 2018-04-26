@@ -19,9 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
-
 Route::prefix("owner/report")->group(function(){
     Route::get("{shop_id?}", "ReportController@home");
     Route::get("exchange/promotion/{shop_id}", "ReportController@exchangePromotion");
@@ -32,5 +29,6 @@ Route::prefix("owner/report")->group(function(){
     Route::get("pointReceive/age/{shop_id}", "ReportController@pointReceiveAge");
     Route::get("pointReceive/gender/{shop_id}", "ReportController@pointReceiveGender");
 });
+Route::get('maitahome', 'MaitaHomeController@index');
 
 Route::get("/storage/{filename}", "StorageController@show");
