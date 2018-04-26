@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -65,7 +66,9 @@ class RegisterController extends Controller
     {
         echo "<script>console.log('". json_encode($data) ."')</script>";
         $image_name = $data["username"] . "." . $data["profile"]->getClientOriginalExtension();
-        $data["profile"]->move(public_path("images/profile"), $image_name);
+        // $data["profile"]->move(public_path("images/profile"), $image_name);
+        // Storage::put("public/profile/$image_name", $data["profile"]);
+        Storage::disk('public')->put("profile/$image_name", file_get_contents($data["profile"]));
 
         return User::create([
             'username' => $data['username'],

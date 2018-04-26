@@ -31,4 +31,3 @@ Route::prefix("owner/report")->group(function(){
 });
 Route::get('maitahome', 'MaitaHomeController@index');
 
-Route::get("/storage/{filename}", "StorageController@show");
