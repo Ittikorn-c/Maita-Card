@@ -16,6 +16,9 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css');
 
 // owner/report
+
+
+
 mix.js('resources/assets/js/owner/reports/exchanges/age.js', 'public/js/owner/reports/exchanges')
     .js('resources/assets/js/owner/reports/exchanges/gender.js', 'public/js/owner/reports/exchanges')
     .js('resources/assets/js/owner/reports/exchanges/promotion.js', 'public/js/owner/reports/exchanges')
