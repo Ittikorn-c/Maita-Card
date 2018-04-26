@@ -36,9 +36,13 @@ Route::get('/qr-code/{uid}', 'QRController@showQR')->where('uid', '[0-9]+');
 
 Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
 
+Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
+
 // Route::get('/scan', function () {
 // 	return view('qr/scan');
 // });
 
-Route::get('/reward_history', 'RewardHistoryController@index');
-Route::get('/card/{card}', 'CardController@show')->where('card', '[0-9]+');
+Route::get('/profile', 'ProfileController@index');
+Route::get('/profile/{id}', 'ProfileController@show')
+    ->where('id' ,'[0-9]+');
+
