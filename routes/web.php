@@ -39,3 +39,6 @@ Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where
 // Route::get('/scan', function () {
 // 	return view('qr/scan');
 // });
+
+Route::get('/reward_history', 'RewardHistoryController@index');
+Route::get('/card/{card}', 'CardController@show')->where('card', '[0-9]+');
