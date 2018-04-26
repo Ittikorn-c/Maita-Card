@@ -15,7 +15,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('profile.index', ['users' => $users]);
     }
 
     /**
@@ -45,9 +46,10 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user_profile = User::findOrFail($id);
+        return view('profile.show', ['user' => $user_profile]);
     }
 
     /**
