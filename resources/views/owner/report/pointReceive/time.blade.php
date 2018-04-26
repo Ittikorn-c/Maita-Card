@@ -61,7 +61,7 @@
         var datasets = JSON.parse('{!! json_encode($datasets) !!}');
 
     </script>
-    <script src="{{ asset('js/report-pointReceive-time.js') }}"></script>
+    <script src="{{ asset('js/owner/reports/pointReceive/time.js') }}"></script>
 @endpush
 @push("css")
     <link href="{{ asset('css/report.css') }}" rel="stylesheet">

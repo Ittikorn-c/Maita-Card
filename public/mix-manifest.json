@@ -1,13 +1,13 @@
 {
-    "/js/report-pointReceive-time.js": "/js/report-pointReceive-time.js",
-    "/js/report-pointReceive-gender.js": "/js/report-pointReceive-gender.js",
-    "/js/report-pointReceive-age.js": "/js/report-pointReceive-age.js",
-    "/js/report-home.js": "/js/report-home.js",
-    "/js/report-exchange-promotion.js": "/js/report-exchange-promotion.js",
-    "/js/report-exchange-gender.js": "/js/report-exchange-gender.js",
-    "/js/report-exchange-age.js": "/js/report-exchange-age.js",
+    "/js/owner/reports/pointReceive/time.js": "/js/owner/reports/pointReceive/time.js",
+    "/js/owner/reports/pointReceive/gender.js": "/js/owner/reports/pointReceive/gender.js",
+    "/js/owner/reports/pointReceive/age.js": "/js/owner/reports/pointReceive/age.js",
+    "/js/owner/reports/home.js": "/js/owner/reports/home.js",
+    "/js/owner/reports/exchanges/promotion.js": "/js/owner/reports/exchanges/promotion.js",
+    "/js/owner/reports/exchanges/gender.js": "/js/owner/reports/exchanges/gender.js",
+    "/js/owner/reports/exchanges/age.js": "/js/owner/reports/exchanges/age.js",
     "/js/app.js": "/js/app.js",
-    "/css/report.css": "/css/report.css",
     "/css/app.css": "/css/app.css",
+    "/css/report.css": "/css/report.css",
     "/js/register.js": "/js/register.js"
 }

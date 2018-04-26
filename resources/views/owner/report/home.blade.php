@@ -146,7 +146,7 @@
         var pointReceiveData = JSON.parse('{!! json_encode($pointReceiveData) !!}');
         var pointAvailableBundle = JSON.parse('{!! json_encode($pointAvailableData) !!}');
     </script>
-    <script src="{{ asset('js/report-home.js') }}"></script>
+    <script src="{{ asset('js/owner/reports/home.js') }}"></script>
 @endpush
 @push("css")
     <link href="{{ asset('css/report.css') }}" rel="stylesheet">
