@@ -43442,7 +43442,7 @@ function initExchangeChart() {
 
     var ctx = $("#pointReceiveChart");
     myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: label,
             datasets: ds

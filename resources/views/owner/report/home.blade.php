@@ -48,7 +48,7 @@
                     <h5 class="card-header">Exchange Rate</h5>
                     <canvas class="card-body" id="exchangeChart" width="400" max-height="100"></canvas>
                     <p style="text-align:center">
-                        exchange - promotion
+                        Exchange Rate per promotion
                     </p>
                     
                 </div>
@@ -79,31 +79,31 @@
         <hr>
         <div class="row chart-group">
             <div class="col-4 side-container">
-                <div class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/pointReceive/time/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         TIME
                     </p>
-                </div>
-                <div class="card simple-block" style="flex-grow:1">
+                </a>
+                <a href='{{ url("/owner/report/pointReceive/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         AGE
                     </p>
-                </div>
-                <div class="card simple-block" style="flex-grow:1">
+                </a>
+                <a href='{{ url("/owner/report/pointReceive/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         GENDER
                     </p>
-                </div>
+                </a>
             </div>
             <div class="col-8">
                 <div class="card">
                     <h5 class="card-header">Point Receive</h5>
                     <canvas class="card-body" id="pointReceiveChart" width="400" max-height="400"></canvas>
                     <p style="text-align:center">
-                        exchange - promotion
+                        Total point receive by time
                     </p>
                     
                 </div>
@@ -117,7 +117,7 @@
                     <h5 class="card-header">Point Available</h5>
                     <canvas class="card-body" id="pointAvailableChart" width="400" max-height="100"></canvas>
                     <p style="text-align:center">
-                        exchange - promotion
+                        Point Available on card by user age
                     </p>
                     
                 </div>

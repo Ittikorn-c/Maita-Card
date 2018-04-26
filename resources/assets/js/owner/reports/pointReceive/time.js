@@ -96,7 +96,7 @@ function initExchangeChart(){
 
     var ctx = $("#pointReceiveChart");
     myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: label,
             datasets: ds
