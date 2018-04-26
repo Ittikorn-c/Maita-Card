@@ -30,8 +30,9 @@ Route::prefix("owner/report")->group(function(){
     Route::get("pointReceive/gender/{shop_id}", "ReportController@pointReceiveGender");
 });
 Route::get('maitahome', 'MaitaHomeController@index');
+Route::get('/maitahome/{promotion}','MaitaHomeController@show')->where('promotion','[0-9]+');
 
-Route::get('/qr-code', 'QRController@showQR');
+Route::get('/qr-code/{uid}', 'QRController@showQR')->where('uid', '[0-9]+');
 
 Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
 
@@ -40,3 +41,4 @@ Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where
 // });
 
 Route::get('/profile/{user_id}', 'PromotionController@showCardPromo')->where('user_id', '[0-9]+');
+
