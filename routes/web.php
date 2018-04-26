@@ -31,3 +31,11 @@ Route::prefix("owner/report")->group(function(){
 });
 Route::get('maitahome', 'MaitaHomeController@index');
 
+Route::get('/qr-code', 'QRController@showQR');
+
+Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
+
+// Route::get('/scan', function () {
+// 	return view('qr/scan');
+// });
+
