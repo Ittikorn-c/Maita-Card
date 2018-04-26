@@ -67,7 +67,7 @@
         var bundle = JSON.parse('{!! json_encode($bundle) !!}');
         console.log("bundle", bundle);
     </script>
-    <script src="{{ asset('js/report-exchange-promotion.js') }}"></script>
+    <script src="{{ asset('js/owner/reports/exchanges/promotion.js') }}"></script>
 @endpush
 @push("css")
     <link href="{{ asset('css/report.css') }}" rel="stylesheet">
