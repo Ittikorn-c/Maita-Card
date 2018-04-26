@@ -39,3 +39,4 @@ Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where
 // 	return view('qr/scan');
 // });
 
+Route::get('/profile/{user_id}', 'PromotionController@showCardPromo')->where('user_id', '[0-9]+');
