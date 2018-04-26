@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Promotion;
 use Illuminate\Http\Request;
 
-class MaitaHomeController extends Controller
+use Carbon\Carbon;
+
+class PromotionController extends Controller
 {
+
+    public function showCardPromo($template_id){
+        $promo = Promotion::where('template_id', '=', $template_id)->get();
+        $today = new Carbon;
+        return view('rewards/show', ['promos' => $promo, 'today' => $today]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +23,10 @@ class MaitaHomeController extends Controller
     public function index()
     {
         //
-        $promotions = Promotion::all();
-        return view('maitahomes.index',['promotions'=>$promotions]);
+
+        $promo = Promotion::all();
+        $today = new Carbon;
+        return view('rewards/show', ['promos' => $promo, 'today' => $today]);
     }
 
     /**
@@ -49,7 +59,6 @@ class MaitaHomeController extends Controller
     public function show(Promotion $promotion)
     {
         //
-        return view('maitahomes.show',['promotion'=>$promotion]);
     }
 
     /**

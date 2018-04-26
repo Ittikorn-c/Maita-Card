@@ -13,9 +13,13 @@ let mix = require('laravel-mix');
  
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/register.js', 'public/js')
+    .sass('resources/assets/sass/maitahome.scss', 'public/css')
     .sass('resources/assets/sass/app.scss', 'public/css');
 
 // owner/report
+
+
+
 mix.js('resources/assets/js/owner/reports/exchanges/age.js', 'public/js/owner/reports/exchanges')
     .js('resources/assets/js/owner/reports/exchanges/gender.js', 'public/js/owner/reports/exchanges')
     .js('resources/assets/js/owner/reports/exchanges/promotion.js', 'public/js/owner/reports/exchanges')
@@ -24,5 +28,3 @@ mix.js('resources/assets/js/owner/reports/exchanges/age.js', 'public/js/owner/re
     .js('resources/assets/js/owner/reports/pointReceive/time.js', 'public/js/owner/reports/pointReceive')
     .js('resources/assets/js/owner/reports/home.js', 'public/js/owner/reports')
     .sass('resources/assets/sass/report.scss', 'public/css');
-    
-    
