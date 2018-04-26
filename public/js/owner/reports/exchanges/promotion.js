@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 230);
+/******/ 	return __webpack_require__(__webpack_require__.s = 234);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43312,14 +43312,18 @@ module.exports = {
 /* 227 */,
 /* 228 */,
 /* 229 */,
-/* 230 */
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(231);
+module.exports = __webpack_require__(235);
 
 
 /***/ }),
-/* 231 */
+/* 235 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43330,44 +43334,31 @@ window.Vue = __webpack_require__(138);
 
 var randomColor = __webpack_require__(188); // import the script 
 
+var displayIndex = [];
+var displayData = [];
+var displayLabel = [];
+var shortLabel = [];
 var myChart;
 // var data  = [12, 19, 3, 5, 2, 3];
 window.onload = function () {
-    console.log("checkbox", $(".promotion-checkbox  "));
     var report = new Vue({
-        el: "#exchange-age",
+        el: "#exchange-promotion",
         data: {},
         methods: {
-            onCheckPromotion: function onCheckPromotion(id) {
-
-                if ($("#promotion-select-" + id).is(":checked")) {
-                    var data = datasets[id];
-                    var bcolor = randomColor({
-                        format: "rgba",
-                        alpha: 1,
-                        luminosity: "light"
-                    });
-                    var color = bcolor.substring(0, bcolor.lastIndexOf("1")) + "0.4)";
-
-                    var dataset = {
-                        id: id,
-                        label: data["label"],
-                        data: data["data"],
-                        backgroundColor: color,
-                        borderColor: bcolor,
-                        borderWidth: 1
-                    };
-                    myChart.data.datasets.push(dataset);
-                    var index = myChart.data.datasets.length - 1;
+            onCheckPromotion: function onCheckPromotion(index) {
+                console.log(index);
+                var i = displayIndex.indexOf(index);
+                if (i != -1) {
+                    displayIndex.splice(i, 1);
+                    myChart.data.labels.splice(i, 1);
+                    myChart.data.datasets[0].data.splice(i, 1);
                 } else {
-
-                    for (var i = 0; i < myChart.data.datasets.length; i++) {
-                        var _data = myChart.data.datasets[i];
-                        if (_data.id == id) break;
-                    }
-                    myChart.data.datasets.splice(i, 1);
+                    displayIndex.push(index);
+                    myChart.data.labels.push(shortLabel[index]);
+                    myChart.data.datasets[0].data.push(bundle.data[index]);
                 }
                 myChart.update();
+                console.log(displayLabel, displayIndex);
             }
         }
     });
@@ -43387,7 +43378,9 @@ function shortenLabel(label, n) {
 }
 
 function initExchangeChart() {
+    shortLabel = shortenLabel(bundle.label, 8);
     var bcolors = randomColor({
+        count: bundle.label.length,
         format: "rgba",
         alpha: 1,
         luminosity: "light"
@@ -43399,20 +43392,26 @@ function initExchangeChart() {
     }
     console.log(bcolors, colors);
 
+    for (var _i = 0; _i < bundle.label.length; _i++) {
+        if (bundle.available[_i] == 1) {
+            displayLabel.push(shortLabel[_i]);
+            displayData.push(bundle.data[_i]);
+            displayIndex.push(_i);
+        }
+    }
+
     var ctx = $("#exchangeChart");
     myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
         type: 'bar',
         data: {
-            labels: label,
-            datasets: [
-                // {
-                //     label: 'exchage rate',
-                //     data: displayData,
-                //     backgroundColor: colors,
-                //     borderColor: bcolors,
-                //     borderWidth: 1
-                // }
-            ]
+            labels: displayLabel,
+            datasets: [{
+                label: 'exchage rate',
+                data: displayData,
+                backgroundColor: colors,
+                borderColor: bcolors,
+                borderWidth: 1
+            }]
         },
         options: {
             scales: {

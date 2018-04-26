@@ -60,24 +60,24 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 236);
+/******/ 	return __webpack_require__(__webpack_require__.s = 242);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 236:
+/***/ 242:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(237);
+module.exports = __webpack_require__(243);
 
 
 /***/ }),
 
-/***/ 237:
+/***/ 243:
 /***/ (function(module, __webpack_exports__) {
 
 "use strict";
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\maita-card\\resources\\assets\\js\\owner\\reports\\pointReceive\\age.js'");
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\maita-card\\resources\\assets\\js\\owner\\reports\\home.js'");
 
 /***/ })
 

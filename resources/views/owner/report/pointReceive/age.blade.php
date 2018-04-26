@@ -1,27 +1,21 @@
 @extends("layouts.app")
 
 @section("content")
-    <div class="container" id="exchange-age">
+    <div class="container" id="pointReceive-age">
         <div class="row">
             <div class="col-xs-12 col-md-8">
-                <canvas style="padding:5px;" class="card-body" id="exchangeChart" width="400" max-height="100"></canvas>
+                <canvas style="padding:5px;" class="card-body" id="pointReceiveChart" width="400" max-height="100"></canvas>
             </div>
             <div class="col-xs-12 col-md-4 side-menu" style="height:300px">
                 <h4>
                     Select Promotion
                 </h4>
                 <div class="side-scroll">
-                    @foreach($promotions as $promotion)
+                    @foreach($datasets as $dataset)
                     <div class="form-check">
-                        <input v-on:change="onCheckPromotion({{$promotion->id}})" class="form-check-input" type="checkbox" value="" id="promotion-select-{{$promotion->id}}">
-                        <label 
-                        @if(((int) $promotion->available) != 1)
-                            class='form-check-label exp-promotion'
-                        @else
-                            class='form-check-label'
-                        @endif
-                        for="promotion-select-{{$promotion->id}}">
-                            {{ $promotion->reward_name }}
+                        <input v-on:change="onCheckPromotion({{$dataset['template_id']}})" class="form-check-input promotion-checkbox" type="checkbox" value="" id="template-select-{{$dataset['template_id']}}" checked>
+                        <label class='form-check-label'for="pointReceive-select-{{$dataset['template_id']}}">
+                            {{ $dataset['template_name'] }}
                         </label>
                     </div>
                     @endforeach 
@@ -45,12 +39,11 @@
                 </thead>
                 <tbody>
                     
-                    @foreach($promotions as $promotion)
-                    @php($data = $dataset[$promotion->id]["data"])
+                    @foreach($datasets as $dataset)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $promotion->reward_name }}</td>
-                        @foreach($data as $time)
+                        <td>{{ $dataset['template_name']}}</td>
+                        @foreach($dataset['data'] as $time)
                             <td>{{ $time }}</td>
                         @endforeach
                     </tr>
@@ -65,10 +58,10 @@
 @push("js")
     <script>
         var label = JSON.parse('{!! json_encode($label) !!}');
-        var datasets = JSON.parse('{!! json_encode($dataset) !!}');
+        var datasets = JSON.parse('{!! json_encode($datasets) !!}');
 
     </script>
-    <script src="{{ asset('js/report-exchange-age.js') }}"></script>
+    <script src="{{ asset('js/owner/reports/pointReceive/age.js') }}"></script>
 @endpush
 @push("css")
     <link href="{{ asset('css/report.css') }}" rel="stylesheet">

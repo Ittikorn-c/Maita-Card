@@ -14,7 +14,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             @foreach($shops as $shop)
-                                <a class="dropdown-item" href="{{ route('report', ['shop_id'=>$shop->id])}}">{{$shop->name}}</a>
+                                <a class="dropdown-item" href='{{ url("owner/report/$shop->id") }}'> {{ $shop->name }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -48,30 +48,30 @@
                     <h5 class="card-header">Exchange Rate</h5>
                     <canvas class="card-body" id="exchangeChart" width="400" max-height="100"></canvas>
                     <p style="text-align:center">
-                        exchange - promotion
+                        Exchange Rate per promotion
                     </p>
                     
                 </div>
             </div>
             <div class="col-4 side-container">
-                <a href="{{ route('exchange-promotion', ['shop_id' => $shop->id]) }}" class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/exchange/promotion/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         PROMOTION
                     </p>
                 </a>
-                <div class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/exchange/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         AGE
                     </p>
-                </div>
-                <div class="card simple-block" style="flex-grow:1">
+                </a>
+                <a href='{{ url("/owner/report/exchange/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         GENDER
                     </p>
-                </div>
+                </a>
             </div>
         </div>
         
@@ -79,31 +79,31 @@
         <hr>
         <div class="row chart-group">
             <div class="col-4 side-container">
-                <div class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/pointReceive/time/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         TIME
                     </p>
-                </div>
-                <div class="card simple-block" style="flex-grow:1">
+                </a>
+                <a href='{{ url("/owner/report/pointReceive/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         AGE
                     </p>
-                </div>
-                <div class="card simple-block" style="flex-grow:1">
+                </a>
+                <a href='{{ url("/owner/report/pointReceive/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         GENDER
                     </p>
-                </div>
+                </a>
             </div>
             <div class="col-8">
                 <div class="card">
                     <h5 class="card-header">Point Receive</h5>
                     <canvas class="card-body" id="pointReceiveChart" width="400" max-height="400"></canvas>
                     <p style="text-align:center">
-                        exchange - promotion
+                        Total point receive by time
                     </p>
                     
                 </div>
@@ -117,7 +117,7 @@
                     <h5 class="card-header">Point Available</h5>
                     <canvas class="card-body" id="pointAvailableChart" width="400" max-height="100"></canvas>
                     <p style="text-align:center">
-                        exchange - promotion
+                        Point Available on card by user age
                     </p>
                     
                 </div>
@@ -146,7 +146,7 @@
         var pointReceiveData = JSON.parse('{!! json_encode($pointReceiveData) !!}');
         var pointAvailableBundle = JSON.parse('{!! json_encode($pointAvailableData) !!}');
     </script>
-    <script src="{{ asset('js/report-home.js') }}"></script>
+    <script src="{{ asset('js/owner/reports/home.js') }}"></script>
 @endpush
 @push("css")
     <link href="{{ asset('css/report.css') }}" rel="stylesheet">
