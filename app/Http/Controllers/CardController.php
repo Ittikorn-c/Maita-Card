@@ -49,9 +49,9 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-        if (\Auth::user()->cant('view', $card)) {
+/*        if (\Auth::user()->cant('view', $card)) {
             return redirect('/');
-        }
+        }*/
 
         return view('card.detail', compact('card'));
     }

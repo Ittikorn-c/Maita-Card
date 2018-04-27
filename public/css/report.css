@@ -1,8 +1,9 @@
 .simple-block {
-  background: #aaa;
   margin: 10px 0px;
   padding: 10px;
   color: white;
+  font-size: 150%;
+  font-weight: bold;
 }
 
 .simple-block:first-child {
@@ -30,7 +31,7 @@
 
 .top-block {
   padding: 10px 10px;
-  background: #aaa;
+  color: white;
 }
 
 .row {
@@ -60,5 +61,64 @@
 
 .exp-promotion {
   color: red;
+}
+
+a#exchange-promotion {
+  background: #8CCBE1;
+}
+
+a#exchange-age {
+  background: #30A1CA;
+}
+
+a#exchange-gender {
+  background: #03749D;
+}
+
+a#point-receive-time {
+  background: #EB635C;
+}
+
+a#point-receive-age {
+  background: #E22117;
+}
+
+a#point-receive-gender {
+  background: #B80A00;
+}
+
+a#point-available-age {
+  background: #FFEB6F;
+}
+
+a#point-available-gender {
+  background: #FFE74F;
+}
+
+.card-header#exchange {
+  background-color: #024056;
+  color: white;
+}
+
+.card-header#point-receive {
+  background-color: #C61407;
+  color: white;
+}
+
+.card-header#point-available {
+  background-color: #FFB732;
+  color: white;
+}
+
+#total-customer {
+  background-color: #F45DD1;
+}
+
+#total-card {
+  background: #009324;
+}
+
+#total-exchange {
+  background: #FFB732;
 }
 
