@@ -72,7 +72,7 @@ Route::get('/profile/{id}', 'ProfileController@show')
 Route::resource('/shops', 'ShopController');
 Route::get('/shops/{shop}/promotion', 'ShopController@indexPromotion');
 Route::get('/shops/{shop}/promotion/{promotion}', 'ShopController@showPromotion')->where('promotion','[0-9]+');
-Route::get('/shops/{shop}/create', 'ShopController@createPromotion');
+Route::get('/shops/{shop}/promotion/create', 'ShopController@createPromotion');
 Route::get('/shops/{shop}/promotion/{promotion}/edit', 'ShopController@editPromotion');
 Route::put('/shops/{shop}/promotion/{promotion}', 'ShopController@updatePromotion');
 Route::delete('/shops/{shop}/promotion/{promotion}',  'ShopController@destroyPromotion');

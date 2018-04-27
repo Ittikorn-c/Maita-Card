@@ -50,9 +50,16 @@
                         <label class="font-weight-bold">Point </label>
                         <input class="text-center h4" type="text" name="point" value="{{ old('point') ?? $promotion->point }}">
                     </div>
-                  </div>
+                </div>
+                <div class="m-2 card-header text-center">
+                    <label class="font-weight-bold">Expiry Date:</label>
+                    <input name="exp_date" type="date" class="" value="{{ old('exp_date') ?? explode(' ', $promotion->exp_date)[0] }}">
+                    <input name="exp_time" type="time" class="" value="{{ old('exp_time') ?? explode(' ', $promotion->exp_date)[1] }}">
+                </div>
+                <div class="m-2 d-flex align-items-center card-header">
+                    <button class="mx-auto btn btn-dark font-weight-bold" type="submit">submit</button>
+                </div>
             </div>
-
         </form>
     </div>
 @endsection   
