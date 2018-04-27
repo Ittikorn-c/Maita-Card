@@ -36,6 +36,8 @@ class UsageController extends Controller
     public function create()
     {
         //
+
+        return view('qr/scan', ['role' => 'employee']);
     }
 
     /**
@@ -47,6 +49,27 @@ class UsageController extends Controller
     public function store(Request $request)
     {
         //
+
+        $role = $request->input('role');
+
+        //case employee scan
+        if ($role === 'employee'){
+
+            $card_id = \App\Card::where('user_id', '=', $request->input('uid'))->first();
+
+            // fix 
+            $employee_id = 1;
+
+            $usage = new UsageHistory;
+            $usage->card_id = $card_id->id;
+            $usage->point = $request->input('point');
+            $usage->employee_id = $employee_id;
+
+            $usage->save();
+            return redirect('/' . $employee_id . '/scan');            
+        }
+
+
     }
 
     /**

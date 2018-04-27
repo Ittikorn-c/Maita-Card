@@ -41,9 +41,9 @@ Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where
 
 Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
 
-// Route::get('/scan', function () {
-// 	return view('qr/scan');
-// });
+Route::get('/{user}/scan', 'UsageController@create')->where('user', '[0-9]+');
+
+Route::post('/scan', 'UsageController@store');
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/{id}', 'ProfileController@show')
@@ -51,6 +51,10 @@ Route::get('/profile/{id}', 'ProfileController@show')
 
 
 Route::resource('/shops', 'ShopController');
+Route::get('/shops/{shop}/promotion', 'ShopController@indexPromotion');
+Route::get('/shops/{shop}/promotion/{promotion}', 'ShopController@showPromotion')->where('promotion','[0-9]+');
+Route::get('/shops/{shop}/create', 'ShopController@createPromotion');
+Route::get('/shops/{shop}/promotion/{promotion}/edit', 'ShopController@editPromotion');
 Route::put('/shops/{shop}/promotion/{promotion}', 'ShopController@updatePromotion');
 Route::delete('/shops/{shop}/promotion/{promotion}',  'ShopController@destroyPromotion');
 Route::post('/shops/{shop}/promotion', 'ShopController@storePromotion');
