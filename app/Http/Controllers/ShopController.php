@@ -100,20 +100,20 @@ class ShopController extends Controller
         $templates = CardTemplate::where('shop_id', $shop->id)->pluck('id')->toArray();
         $promotions = Promotion::whereIn('template_id', $templates)->get();
 
-        return view('shop.promotion.index', compact('shop', 'promotions'));
+        return view('shops.promotion.index', compact('shop', 'promotions'));
     }
 
     public function showPromotion(Shop $shop, Promotion $promotion){
         $this->isShopOwner($shop);
 
-        return view('shop.promotion.show', compact('shop','promotion'));
+        return view('shops.promotion.show', compact('shop','promotion'));
     }
 
     public function createPromotion(Shop $shop){
         $this->isShopOwner($shop);
 
         $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id')->toArray();
-        return view('shop.promotion.create', compact('shop', 'cards'));
+        return view('shops.promotion.create', compact('shop', 'cards'));
     }
 
     public function storePromotion(Request $request, Shop $shop) {
@@ -142,7 +142,7 @@ class ShopController extends Controller
         $this->isShopOwner($shop);
 
         $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id');
-        return view('shop.promotion.edit', compact('shop','promotion', 'cards'));
+        return view('shops.promotion.edit', compact('shop','promotion', 'cards'));
     }
 
     public function updatePromotion(Request $request,Shop $shop, Promotion $promotion) {
