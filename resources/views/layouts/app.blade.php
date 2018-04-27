@@ -17,6 +17,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -39,19 +40,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
-                        <li class="nav-item">
-                          <a class="nav-link" href="{{ url('/maitahome') }}">Promotions</a>
-                        </li>
+
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Shop Category
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <a class="dropdown-item" href="">restaurant</a>
-                            <a class="dropdown-item" href="">cafe</a>
-                            <a class="dropdown-item" href="">salon</a>
-                            <a class="dropdown-item" href="">fitness</a>
-                            <a class="dropdown-item" href="">cinema</a>
+                            <a class="dropdown-item" href="{{ url('/maitahome/shops') }}">all shops</a>
+                            <a class="dropdown-item" href="{{ url('/maitahome/shops/restaurant')}}">restaurant</a>
+                            <a class="dropdown-item" href="{{ url('/maitahome/shops/cafe')}}">cafe</a>
+                            <a class="dropdown-item" href="{{ url('/maitahome/shops/salon')}}">salon</a>
+                            <a class="dropdown-item" href="{{ url('/maitahome/shops/fitness')}}">fitness</a>
+                            <a class="dropdown-item" href="{{ url('/maitahome/shops/cinema')}}">cinema</a>
+                            <a class="dropdown-item" href="{{ url('/maitahome/shops/mall')}}">mall</a>
 
                           </div>
                         </li>

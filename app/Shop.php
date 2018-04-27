@@ -22,6 +22,21 @@ class Shop extends Model
     public function scopeRestaurant($query){
       return $query->where("category", "restaurant");
     }
+    public function scopeCafe($query){
+      return $query->where("category", "cafe");
+    }
+    public function scopeSalon($query){
+      return $query->where("category", "salon");
+    }
+    public function scopeFitness($query){
+      return $query->where("category", "fitness");
+    }
+    public function scopeCinema($query){
+      return $query->where("category", "cinema");
+    }
+    public function scopeMall($query){
+        return $query->where("category", "mall");
+      }
 
     public function scopeAllEmployees($query, $shop_id){
         return DB::table("shops")

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Promotion;
+use App\Shop;
 use Illuminate\Http\Request;
 
 class MaitaHomeController extends Controller

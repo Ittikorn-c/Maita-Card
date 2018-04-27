@@ -32,6 +32,25 @@ Route::prefix("owner/report")->group(function(){
 Route::get('maitahome', 'MaitaHomeController@index');
 Route::get('/maitahome/{promotion}','MaitaHomeController@show')->where('promotion','[0-9]+');
 
+
+Route::get('/maitahome/shops', 'ShopController@index');
+Route::get('/maitahome/shops/{shop}', 'ShopController@show')->where('shop','[0-9]+');;
+Route::get('/maitahome/shops/allshops', 'ShopController@showAllShop');
+Route::get('/maitahome/shops/create', 'ShopController@create');
+Route::post('/maitahome/shops', 'ShopController@store');
+Route::get('/maitahome/shops/{shop}/edit', 'ShopController@edit')->where('shop','[0-9]+');;
+Route::put('/maitahome/shops/{shop}', 'ShopController@update');
+Route::delete('/maitahome/shops/{shop}', 'ShopController@destroy');
+Route::get('/maitahome/shops/restaurant', 'ShopController@showRestaurant');
+Route::get('/maitahome/shops/cafe', 'ShopController@showCafe');
+Route::get('/maitahome/shops/salon', 'ShopController@showSalon');
+Route::get('/maitahome/shops/fitness', 'ShopController@showFitness');
+Route::get('/maitahome/shops/cinema', 'ShopController@showCinema');
+Route::get('/maitahome/shops/mall', 'ShopController@showMall');
+Route::get('/maitahome/shops/{shop_id}/promotions', 'ShopController@showPromoBy')->where('shop_id','[0-9]+');
+
+
+
 Route::get('/qr-code/{uid}', 'QRController@showQR')->where('uid', '[0-9]+');
 
 Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
