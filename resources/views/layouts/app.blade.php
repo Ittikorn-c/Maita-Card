@@ -47,9 +47,11 @@
                             Shop Category
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <a class="dropdown-item" href="">food</a>
-                            <a class="dropdown-item" href="">barber</a>
-
+                            <a class="dropdown-item" href="">restaurant</a>
+                            <a class="dropdown-item" href="">cafe</a>
+                            <a class="dropdown-item" href="">salon</a>
+                            <a class="dropdown-item" href="">fitness</a>
+                            <a class="dropdown-item" href="">cinema</a>
 
                           </div>
                         </li>
@@ -64,10 +66,35 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->role === "customer")
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        My QR code
+                                    </a>
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        Check in
+                                    </a>
+                                    @elseif(Auth::user()->role === "owner")
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        Profile
+                                    </a>
+                                    @else
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        Working history
+                                    </a>
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        Scan QR code
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

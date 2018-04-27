@@ -26,5 +26,7 @@ mix.js('resources/assets/js/owner/reports/exchanges/age.js', 'public/js/owner/re
     .js('resources/assets/js/owner/reports/pointReceive/age.js', 'public/js/owner/reports/pointReceive')
     .js('resources/assets/js/owner/reports/pointReceive/gender.js', 'public/js/owner/reports/pointReceive')
     .js('resources/assets/js/owner/reports/pointReceive/time.js', 'public/js/owner/reports/pointReceive')
+    .js('resources/assets/js/owner/reports/pointAvailable/age.js', 'public/js/owner/reports/pointAvailable')
+    .js('resources/assets/js/owner/reports/pointAvailable/gender.js', 'public/js/owner/reports/pointAvailable')
     .js('resources/assets/js/owner/reports/home.js', 'public/js/owner/reports')
     .sass('resources/assets/sass/report.scss', 'public/css');

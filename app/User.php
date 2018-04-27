@@ -68,6 +68,14 @@ class User extends Authenticatable
     public function scopeEmployee($query){
         return $query->where("role", "employee");
     }
+    public function scopeCustomersOf($query, $shop_id){
+        return $query->join("cards", "cards.user_id", "=", "users.id")
+                        ->join("card_templates", "card_templates.id", "=", "cards.template_id")
+                        ->where("users.role", "customer")
+                        ->where("card_templates.shop_id", $shop_id)
+                        ->select("users.*")
+                        ->distinct();
+    }
 
     public function age(){
         $bdate = date_create($this->birth_date);

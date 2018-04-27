@@ -24,4 +24,8 @@ class UsageHistory extends Model
                     ->groupBy('Hour');
     }
 
+    public function scopeUsedBy($query) {
+        return $query->join('cards', 'cards.id', '=', 'usage_histories.card_id')->join('users', 'cards.user_id', '=', 'users.id')->orderBy('usage_histories.created_at', 'desc')->select('usage_histories.*', 'users.username');
+    }
+
 }

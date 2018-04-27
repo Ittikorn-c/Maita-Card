@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Promotion;
@@ -9,46 +10,70 @@ use App\UsageHistory;
 use App\Shop;
 use Illuminate\Support\Facades\DB;
 
+
 class ReportController extends Controller
 {
 
     public function home($shop_id=null){
-        $auth = $this->checkRoleAuth();
-        if(!is_null($auth))
-            return $auth;
+        // $auth = $this->checkRoleAuth();
+        // if(!is_null($auth))
+        //     return $auth;
 
-        $shops = $this->getShops();
-        if(!is_null($shop_id)){
-            $shop = $shops->find($shop_id);
+        // $shops = $this->getShops();
+        // if(!is_null($shop_id)){
+        //     $shop = $shops->find($shop_id);
+        //     if(is_null($shop))
+        //         return redirect("/home");   // this user is not owner of request shop
+        // }else{
+        //     $shop = $shops->first();
+        //     if(is_null($shop))
+        //         // TODO change redirect to owner management page
+        //         return redirect("/home");   // this user does not have any shop
+        // }
+        if(is_null($shop_id)){
+            $shop = Auth::user()->shops()->first();
             if(is_null($shop))
-                return redirect("/home");   // this user is not owner of request shop
+                return "not have any";    // TODO
         }else{
-            $shop = $shops->first();
-            if(is_null($shop))
-                // TODO change redirect to owner management page
-                return redirect("/home");   // this user does not have any shop
+            $shop = Shop::findOrFail($shop_id);
         }
+        
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+        $shops = $this->getShops();
+
+        
+
         $data = [12, 19, 10, 5, 2, 3];
         $exchangeData = $this->getBasicExchangeData($shop);
         $pointReceiveData = $this->getBasicPointReceiveData($shop);
         $pointAvailableData = $this->getBasicPointAvailableData($shop);
+        $totalCustomer = \App\User::customersOf($shop->id)->count();
+        $totalCard = \App\Card::cardsOf($shop->id)->count();
+        $totalExchange = \App\RewardHistory::ofShop($shop->id)->count();
         return view("owner.report.home")
                     ->with("shops", $shops)
                     ->with("shop", $shop)
                     ->with("exchangeData", $exchangeData)
                     ->with("pointReceiveData", $pointReceiveData)
-                    ->with("pointAvailableData", $pointAvailableData);
+                    ->with("pointAvailableData", $pointAvailableData)
+                    ->with("totalCustomer", $totalCustomer)
+                    ->with("totalCard", $totalCard)
+                    ->with("totalExchange", $totalExchange);
     }
 
     public function exchangePromotion($shop_id){
-        $auth = $this->checkRoleAuth();
-        if(!is_null($auth))
-            return $auth;
+        // $auth = $this->checkRoleAuth();
+        // if(!is_null($auth))
+        //     return $auth;
 
-        $shops = $this->getShops();
-        $shop = $shops->find($shop_id);
-        if(is_null($shop))
-            return redirect("/home"); 
+        // $shops = $this->getShops();
+        // $shop = $shops->find($shop_id);
+        // if(is_null($shop))
+        //     return redirect("/home"); 
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies('view-report', $shop))
+            return $this->redirectUnpermission();
 
         $promotions = $this->getPromotionsWithAvailable($shop_id);
         $label = [];
@@ -73,14 +98,17 @@ class ReportController extends Controller
     }
 
     public function exchangeAge($shop_id){
-        $auth = $this->checkRoleAuth();
-        if(!is_null($auth))
-            return $auth;
+        // $auth = $this->checkRoleAuth();
+        // if(!is_null($auth))
+        //     return $auth;
 
-        $shops = $this->getShops();
-        $shop = $shops->find($shop_id);
-        if(is_null($shop))
-            return redirect("/home"); 
+        // $shops = $this->getShops();
+        // $shop = $shops->find($shop_id);
+        // if(is_null($shop))
+        //     return redirect("/home"); 
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
 
         $promotions = $this->getPromotionsWithAvailable($shop_id);
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
@@ -119,14 +147,17 @@ class ReportController extends Controller
         return view("owner.report.exchanges.age", $bundle);
     }
     public function exchangeGender($shop_id){
-        $auth = $this->checkRoleAuth();
-        if(!is_null($auth))
-            return $auth;
+        // $auth = $this->checkRoleAuth();
+        // if(!is_null($auth))
+        //     return $auth;
 
-        $shops = $this->getShops();
-        $shop = $shops->find($shop_id);
-        if(is_null($shop))
-            return redirect("/home");  
+        // $shops = $this->getShops();
+        // $shop = $shops->find($shop_id);
+        // if(is_null($shop))
+        //     return redirect("/home");  
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
 
         $promotions = $this->getPromotionsWithAvailable($shop_id);
 
@@ -159,14 +190,17 @@ class ReportController extends Controller
     }
 
     public function pointReceiveTime($shop_id){
-        $auth = $this->checkRoleAuth();
-        if(!is_null($auth))
-            return $auth;
+        // $auth = $this->checkRoleAuth();
+        // if(!is_null($auth))
+        //     return $auth;
 
-        $shops = $this->getShops();
-        $shop = $shops->find($shop_id);
-        if(is_null($shop))
-            return redirect("/home");
+        // $shops = $this->getShops();
+        // $shop = $shops->find($shop_id);
+        // if(is_null($shop))
+        //     return redirect("/home");
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
 
         $label = [];
         for ($i=0; $i < 24; $i++) { 
@@ -178,6 +212,11 @@ class ReportController extends Controller
     }
 
     public function pointReceiveAge($shop_id){
+
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = $this->getPointReceiveAge($shop_id);
 
@@ -185,10 +224,38 @@ class ReportController extends Controller
     }
 
     public function pointReceiveGender($shop_id){
+
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+
         $label = ["male", "female"];
         $datasets = $this->getPointReceiveGender($shop_id);
 
         return view("owner.report.PointReceive.gender", compact("label", "datasets"));
+    }
+
+    public function pointAvailableAge($shop_id){
+
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+        
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $datasets = $this->getPointAvailableAge($shop_id);
+
+        return view("owner.report.pointAvailable.age",compact("label", "datasets"));
+    }
+
+    public function pointAvailableGender($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+        
+        $label = ["male", "female"];
+        $datasets = $this->getPointAvailableGender($shop_id);
+
+        return view("owner.report.pointAvailable.gender",compact("label", "datasets"));
     }
 
 
@@ -348,10 +415,44 @@ class ReportController extends Controller
     }
     public function getPointAvailableAge($shop_id){
         $shop = Shop::find($shop_id);
-        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
-        $result = [
-            ""
-        ];
+        $datasets = [];
+        $templates = $shop->cardTemplates;
+        foreach($templates as $template){
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => [0, 0, 0, 0, 0, 0]
+            ];
+            $cards = $template->cards;
+            foreach($cards as $card){
+                $user = $card->user;
+                $dataset["data"][$this->getAgeIndex($user->age())] += $card->point;
+            }
+            $datasets[$template->id] = $dataset;
+        }
+        return $datasets;
+    }
+    public function getPointAvailableGender($shop_id){
+        $shop = Shop::find($shop_id);
+        $datasets = [];
+        $templates = $shop->cardTemplates;
+        foreach ($templates as $template) {
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => [
+                    "male" => 0,
+                    "female" => 0
+                ]
+            ];
+            $cards = $template->cards;
+            foreach ($cards as $card ) {
+                $user = $card->user;
+                $dataset["data"][$user->gender] += $card->point;
+            }
+            $datasets[$template->id] = $dataset;
+        }
+        return $datasets;
     }
 
     private function getAgeIndex($age){
@@ -367,5 +468,9 @@ class ReportController extends Controller
             return 4;
         else
             return 5;
+    }
+
+    private function redirectUnpermission(){
+        return redirect("/home");
     }
 }
