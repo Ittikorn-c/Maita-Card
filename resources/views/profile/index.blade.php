@@ -15,7 +15,7 @@ All Users
   </thead>
   <tbody>
     @foreach($users as $user)
-    <tr class='table-dark'>
+    <tr class='table'>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>
         <a href="{{ url('/profile/' . $user->id) }}">
