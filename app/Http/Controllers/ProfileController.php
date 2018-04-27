@@ -60,7 +60,9 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('profile.edit' , [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -72,7 +74,17 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'fname' => 'required|max:255|min:4|unique:users,fname,'.$user->id,
+            'username' => 'required|max:255|min:4|unique:users,username,'.$user->id,
+            'email' => 'required|max:40|min:4|unique:users,email,'.$user->id
+        ]);
+        
+        $user->fname = $request->input('fname');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->save();
+        return redirect('/profile/' . $user->id);
     }
 
     /**

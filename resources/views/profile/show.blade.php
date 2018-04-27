@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-User Profile
-@endsection
-
 @section('content')
 <div class="container-fluid panel panel-default">
     <div class="panel-heading m-3 p-2">
