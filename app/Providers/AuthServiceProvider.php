@@ -27,5 +27,9 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
+
+        Gate::define("view-report", function($user, $shop){
+            return $user->id === $shop->owner_id;
+        });
     }
 }
