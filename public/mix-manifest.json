@@ -2,8 +2,6 @@
     "/js/owner/reports/pointReceive/time.js": "/js/owner/reports/pointReceive/time.js",
     "/js/owner/reports/pointReceive/gender.js": "/js/owner/reports/pointReceive/gender.js",
     "/js/owner/reports/pointReceive/age.js": "/js/owner/reports/pointReceive/age.js",
-    "/js/owner/reports/pointAvailable/gender.js": "/js/owner/reports/pointAvailable/gender.js",
-    "/js/owner/reports/pointAvailable/age.js": "/js/owner/reports/pointAvailable/age.js",
     "/js/owner/reports/home.js": "/js/owner/reports/home.js",
     "/js/owner/reports/exchanges/promotion.js": "/js/owner/reports/exchanges/promotion.js",
     "/js/owner/reports/exchanges/gender.js": "/js/owner/reports/exchanges/gender.js",
@@ -12,5 +10,6 @@
     "/css/maitahome.css": "/css/maitahome.css",
     "/css/app.css": "/css/app.css",
     "/css/report.css": "/css/report.css",
-    "/js/register.js": "/js/register.js"
+    "/js/register.js": "/js/register.js",
+    "/js/del.js": "/js/del.js"
 }
