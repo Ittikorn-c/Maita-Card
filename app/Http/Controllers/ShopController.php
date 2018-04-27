@@ -40,12 +40,12 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-    //   $validateData = $request->validate([
-    //       "shopname" => "min:6|max:20|unique:shop,name",
-    //       "shopphone" => "max:10",
-    //       "shopeamil" => "unique:shop,email|email",
-    //       "shopcategory" => "required"
-    //   ]);
+      $validateData = $request->validate([
+          "shopname" => "min:6|max:20|unique:shop,name",
+          "shopphone" => "max:10",
+          "shopeamil" => "unique:shop,email|email",
+          "shopcategory" => "required"
+      ]);
         try {
           $shop = new Shop;
           $shop->name = $request->input("shopname");
