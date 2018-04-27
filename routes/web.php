@@ -50,5 +50,11 @@ Route::get('/profile/{id}', 'ProfileController@show')
     ->where('id' ,'[0-9]+');
 
 
+Route::resource('/shops', 'ShopController');
+Route::put('/shops/{shop}/promotion/{promotion}', 'ShopController@updatePromotion');
+Route::delete('/shops/{shop}/promotion/{promotion}',  'ShopController@destroyPromotion');
+Route::post('/shops/{shop}/promotion', 'ShopController@storePromotion');
+
+
 Route::get('/reward_history', 'RewardHistoryController@index');
 Route::get('/card/{card}', 'CardController@show')->where('card', '[0-9]+');
