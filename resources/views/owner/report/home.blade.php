@@ -24,18 +24,21 @@
         
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <div class="card top-block">
-                    Customer of Day
+                <div id="total-customer" class="card top-block">
+                    <h5>Total Customer</h5>
+                    <h1>{{ $totalCustomer }}</h1>
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
-                <div class="card top-block">
-                    Points Earn
+                <div id="total-card" class="card top-block">
+                    <h5>Total Card</h5>
+                    <h1>{{ $totalCard }}</h1>
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
-                <div class="card top-block">
-                    Exchange Times
+                <div id="total-exchange" class="card top-block">
+                    <h5>Total Exchange</h5>
+                    <h1>{{ $totalExchange }}</h1>
                 </div>
             </div>
         </div>
@@ -45,7 +48,7 @@
         <div class="row chart-group">
             <div class="col-8">
                 <div class="card">
-                    <h5 class="card-header">Exchange Rate</h5>
+                    <h5 id="exchange" class="card-header">Exchange Rate</h5>
                     <canvas class="card-body" id="exchangeChart" width="400" max-height="100"></canvas>
                     <p style="text-align:center">
                         Exchange Rate per promotion
@@ -54,19 +57,19 @@
                 </div>
             </div>
             <div class="col-4 side-container">
-                <a href='{{ url("/owner/report/exchange/promotion/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="exchange-promotion" href='{{ url("/owner/report/exchange/promotion/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         PROMOTION
                     </p>
                 </a>
-                <a href='{{ url("/owner/report/exchange/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="exchange-age" href='{{ url("/owner/report/exchange/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         AGE
                     </p>
                 </a>
-                <a href='{{ url("/owner/report/exchange/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="exchange-gender" href='{{ url("/owner/report/exchange/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         EXCHANGE <br>
                         GENDER
@@ -79,19 +82,19 @@
         <hr>
         <div class="row chart-group">
             <div class="col-4 side-container">
-                <a href='{{ url("/owner/report/pointReceive/time/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="point-receive-time" href='{{ url("/owner/report/pointReceive/time/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         TIME
                     </p>
                 </a>
-                <a href='{{ url("/owner/report/pointReceive/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="point-receive-age" href='{{ url("/owner/report/pointReceive/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         AGE
                     </p>
                 </a>
-                <a href='{{ url("/owner/report/pointReceive/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="point-receive-gender" href='{{ url("/owner/report/pointReceive/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT RECEIVE <br>
                         GENDER
@@ -100,7 +103,7 @@
             </div>
             <div class="col-8">
                 <div class="card">
-                    <h5 class="card-header">Point Receive</h5>
+                    <h5 id="point-receive" class="card-header">Point Receive</h5>
                     <canvas class="card-body" id="pointReceiveChart" width="400" max-height="400"></canvas>
                     <p style="text-align:center">
                         Total point receive by time
@@ -114,7 +117,7 @@
         <div class="row chart-group">
             <div class="col-8">
                 <div class="card">
-                    <h5 class="card-header">Point Available</h5>
+                    <h5 id="point-available" class="card-header">Point Available</h5>
                     <canvas class="card-body" id="pointAvailableChart" width="400" max-height="100"></canvas>
                     <p style="text-align:center">
                         Point Available on card by user age
@@ -123,13 +126,13 @@
                 </div>
             </div>
             <div class="col-4 side-container">
-                <a href='{{ url("/owner/report/pointAvailable/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="point-available-age" href='{{ url("/owner/report/pointAvailable/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT AVAILABLE <br>
                         AGE
                     </p>
                 </a>
-                <a href='{{ url("/owner/report/pointAvailable/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="point-available-gender" href='{{ url("/owner/report/pointAvailable/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT AVAILABLE <br>
                         GENDER

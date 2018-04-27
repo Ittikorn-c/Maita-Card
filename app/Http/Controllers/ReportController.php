@@ -48,12 +48,18 @@ class ReportController extends Controller
         $exchangeData = $this->getBasicExchangeData($shop);
         $pointReceiveData = $this->getBasicPointReceiveData($shop);
         $pointAvailableData = $this->getBasicPointAvailableData($shop);
+        $totalCustomer = \App\User::customersOf($shop->id)->count();
+        $totalCard = \App\Card::cardsOf($shop->id)->count();
+        $totalExchange = \App\RewardHistory::ofShop($shop->id)->count();
         return view("owner.report.home")
                     ->with("shops", $shops)
                     ->with("shop", $shop)
                     ->with("exchangeData", $exchangeData)
                     ->with("pointReceiveData", $pointReceiveData)
-                    ->with("pointAvailableData", $pointAvailableData);
+                    ->with("pointAvailableData", $pointAvailableData)
+                    ->with("totalCustomer", $totalCustomer)
+                    ->with("totalCard", $totalCard)
+                    ->with("totalExchange", $totalExchange);
     }
 
     public function exchangePromotion($shop_id){

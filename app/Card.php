@@ -21,4 +21,10 @@ class Card extends Model
     public function usageHistories(){
         return $this->hasMany("App\UsageHistory", "card_id");
     }
+
+    public function scopeCardsOf($query, $shop_id){
+        return $query->join("card_templates", "card_templates.id", "=", "cards.template_id")
+                        ->where("card_templates.shop_id", $shop_id)
+                        ->select("cards.*");
+    }
 }
