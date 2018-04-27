@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card-header h3 font-weight-bold">
+    <div class="card-header h3 font-weight-bold bg-dark text-white">
         Reward History
     </div>
     <table class="table">
