@@ -13,8 +13,8 @@
                             {{ $shop->name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            @foreach($shops as $shop)
-                                <a class="dropdown-item" href='{{ url("owner/report/$shop->id") }}'> {{ $shop->name }}</a>
+                            @foreach($shops as $sh)
+                                <a class="dropdown-item" href='{{ url("owner/report/$sh->id") }}'> {{ $sh->name }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -123,18 +123,18 @@
                 </div>
             </div>
             <div class="col-4 side-container">
-                <div class="card simple-block" style="flex-grow:1">
+                <a href='{{ url("/owner/report/pointAvailable/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT AVAILABLE <br>
                         AGE
                     </p>
-                </div>
-                <div class="card simple-block" style="flex-grow:1">
+                </a>
+                <a href='{{ url("/owner/report/pointAvailable/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT AVAILABLE <br>
                         GENDER
                     </p>
-                </div>
+                </a>
             </div>
         </div>
     </div>

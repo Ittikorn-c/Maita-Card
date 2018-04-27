@@ -28,6 +28,9 @@ Route::prefix("owner/report")->group(function(){
     Route::get("pointReceive/time/{shop_id}", "ReportController@pointReceiveTime");
     Route::get("pointReceive/age/{shop_id}", "ReportController@pointReceiveAge");
     Route::get("pointReceive/gender/{shop_id}", "ReportController@pointReceiveGender");
+
+    Route::get("pointAvailable/age/{shop_id}", "ReportController@pointAvailableAge");
+    Route::get("pointAvailable/gender/{shop_id}", "ReportController@pointAvailableGender");
 });
 Route::get('maitahome', 'MaitaHomeController@index');
 Route::get('/maitahome/{promotion}','MaitaHomeController@show')->where('promotion','[0-9]+');

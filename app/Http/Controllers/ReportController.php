@@ -30,13 +30,14 @@ class ReportController extends Controller
         //         // TODO change redirect to owner management page
         //         return redirect("/home");   // this user does not have any shop
         // }
-        if(is_null($shop_id))
-            $shop = Auth::user()->shops->first();
-
-        if(is_null($shop))
-            return $this->redirect("owner/create/shop");    // TODO
-
-        $shop = Shop::findOrFail($shop_id);
+        if(is_null($shop_id)){
+            $shop = Auth::user()->shops()->first();
+            if(is_null($shop))
+                return "not have any";    // TODO
+        }else{
+            $shop = Shop::findOrFail($shop_id);
+        }
+        
         if(Gate::denies("view-report", $shop))
             return $this->redirectUnpermission();
         $shops = $this->getShops();
@@ -228,6 +229,29 @@ class ReportController extends Controller
         return view("owner.report.PointReceive.gender", compact("label", "datasets"));
     }
 
+    public function pointAvailableAge($shop_id){
+
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+        
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $datasets = $this->getPointAvailableAge($shop_id);
+
+        return view("owner.report.pointAvailable.age",compact("label", "datasets"));
+    }
+
+    public function pointAvailableGender($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+        
+        $label = ["male", "female"];
+        $datasets = $this->getPointAvailableGender($shop_id);
+
+        return view("owner.report.pointAvailable.gender",compact("label", "datasets"));
+    }
+
 
     // ----------- helper method -----------
     private function checkRoleAuth(){
@@ -385,10 +409,44 @@ class ReportController extends Controller
     }
     public function getPointAvailableAge($shop_id){
         $shop = Shop::find($shop_id);
-        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
-        $result = [
-            ""
-        ];
+        $datasets = [];
+        $templates = $shop->cardTemplates;
+        foreach($templates as $template){
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => [0, 0, 0, 0, 0, 0]
+            ];
+            $cards = $template->cards;
+            foreach($cards as $card){
+                $user = $card->user;
+                $dataset["data"][$this->getAgeIndex($user->age())] += $card->point;
+            }
+            $datasets[$template->id] = $dataset;
+        }
+        return $datasets;
+    }
+    public function getPointAvailableGender($shop_id){
+        $shop = Shop::find($shop_id);
+        $datasets = [];
+        $templates = $shop->cardTemplates;
+        foreach ($templates as $template) {
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => [
+                    "male" => 0,
+                    "female" => 0
+                ]
+            ];
+            $cards = $template->cards;
+            foreach ($cards as $card ) {
+                $user = $card->user;
+                $dataset["data"][$user->gender] += $card->point;
+            }
+            $datasets[$template->id] = $dataset;
+        }
+        return $datasets;
     }
 
     private function getAgeIndex($age){
