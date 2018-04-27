@@ -38,9 +38,9 @@ Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where
 
 Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
 
-// Route::get('/scan', function () {
-// 	return view('qr/scan');
-// });
+Route::get('/scan', function () {
+	return view('qr/scan');
+});
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/{id}', 'ProfileController@show')
