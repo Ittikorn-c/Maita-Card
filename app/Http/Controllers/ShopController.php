@@ -255,7 +255,8 @@ class ShopController extends Controller
     public function editPromotion(Shop $shop, Promotion $promotion) {
         $this->isShopOwner($shop);
 
-        return view('shop.promotion.edit', compact('shop','promotion'));
+        $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id');
+        return view('shop.promotion.edit', compact('shop','promotion', 'cards'));
     }
 
     public function updatePromotion(Request $request,Shop $shop, Promotion $promotion) {

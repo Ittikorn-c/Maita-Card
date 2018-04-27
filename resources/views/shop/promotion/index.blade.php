@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="d-flex flex-column justify-content-end w-75 mx-auto">
-        <div class="h3 card-header font-weight-bold ">
+        <div class="h3 card-header font-weight-bold bg-dark text-white">
             {{$shop->name}} All Promotion
         </div>
 

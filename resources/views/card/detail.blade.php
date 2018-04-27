@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row m-2">
-        <div class="card-header h3 font-weight-bold">Card</div>
+        <div class="card-header h3 font-weight-bold bg-dark text-white">Card</div>
         <div class="col-sm-5 card m-2 p-0">
             <div class="h2 card-header">
                 {{$card->cardTemplate->name}}
