@@ -9,6 +9,11 @@
             <h2>Edit Profile : {{ $user->username }}</h2>
             <p>[ <i class="fa fa-user-circle"></i> {{ $user->role }} ]</p>
         </div>
+        <div class="row m-3 p-2">
+        <div class="col-sm-3 m-1 p-2 bg-white card">
+            <img src="/images/profile/{{ $user->profile_img }}" style="width:100%;max-width:400px"/>
+        </div>
+        <div class="col-sm-8 m-1 p-2 bg-white card">
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="username">Username: </label>
             <div class="col-sm-4">
@@ -101,6 +106,8 @@
                 </ul>
             </div>
         @endif
+        </div>
+        </div>
     <br>
     <div class="row col-sm-1 m-3 p-2">
         <button class="btn btn-info m-3 p-2" tyoe="submit">Submit</button>
