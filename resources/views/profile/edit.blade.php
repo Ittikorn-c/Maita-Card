@@ -11,10 +11,10 @@
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="username">Username: </label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input type="text" class="form-control" id="username" name="username" value="{{ old('username') ??  $user->username }}" />
             </div>
-            @if($errors->any())
+            @if($errors->first('username'))
                 <div class="row m-3 p-2 text-danger">
                     {{ $errors->first('username') }}
                 </div>
@@ -22,25 +22,26 @@
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="fname">First Name: </label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input type="text" class="form-control" id="fname" name="fname" value="{{ old('fname') ?? $user->fname }}" />
             </div>
-            @if($errors->any())
-                <div class="row m-3 p-2 text-danger">
-                    {{ $errors->first('fname') }}
-                </div>
-            @endif
-        </div>
-        <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="lname">Last Name: </label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input type="text" class="form-control" id="lname" name="lname" value="{{ old('lname') ?? $user->lname }}" />
             </div>
-            @if($errors->any())
+            @if($errors->first('fname') || $errors->first('lname'))
                 <div class="row m-3 p-2 text-danger">
-                    {{ $errors->first('lname') }}
+                    @if($errors->first('fname'))
+                        {{ $errors->first('fname') }}
+                    @endif
+                    @if($errors->first('fname') and $errors->first('lname'))
+                        and
+                    @endif
+                    @if($errors->first('lname'))
+                        {{ $errors->first('lname') }}
+                    @endif
                 </div>
-            @endif
+            @endif          
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="gender">Gender: </label>
@@ -51,9 +52,8 @@
                 <label class="radio-inline">
                     <input type="radio" name="gender" value="{{ old('gender') ?? $user->gender }}" @if(old('gender',$user->gender)=="female") checked @endif>Female
                 </label>
-                <!-- <input type="text" class="form-control" id="gender" name="gender"  /> -->
             </div>
-            @if($errors->any())
+            @if($errors->first('gender'))
                 <div class="row m-3 p-2 text-danger">
                     {{ $errors->first('gender') }}
                 </div>
@@ -64,7 +64,7 @@
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}" />
             </div>
-            @if($errors->any())
+            @if($errors->first('email'))
                 <div class="row m-3 p-2 text-danger">
                     {{ $errors->first('email') }}
                 </div>
@@ -75,7 +75,7 @@
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ?? $user->address }}" />
             </div>
-            @if($errors->any())
+            @if($errors->first('address'))
                 <div class="row m-3 p-2 text-danger">
                     {{ $errors->first('address') }}
                 </div>
