@@ -37,7 +37,7 @@ class UsageController extends Controller
     {
         //
 
-        return view('qr/scan', ['role' => 'employee']);
+        // return view('qr/scan', ['role' => 'employee']);
     }
 
     /**
@@ -50,23 +50,36 @@ class UsageController extends Controller
     {
         //
 
+        // Get the currently authenticated user...
+        // $user = Auth::user();
+        // $role = $user->role;
+
+        // still can't test fix first
+        $user = \App\User::where('id', '=', 1)->first();
         $role = $request->input('role');
 
         //case employee scan
         if ($role === 'employee'){
 
-            $card_id = \App\Card::where('user_id', '=', $request->input('uid'))->first();
+            $em = \App\Employee::where('user_id', '=', $user->id)->first();
+            $em->branch;
+
+            // $branch = \App\Branch::where('id', '=', $em->branch_id)->first();
+
+            $card = \App\Shop::where('shops.id', '=', $em->branch->shop_id)->usedCard($request->input('uid'))->first();
+
+            //$card_id = \App\Card::where('user_id', '=', $request->input('uid'))->where()->first();
 
             // fix 
-            $employee_id = 1;
+            $employee_id = $em->id;
 
             $usage = new UsageHistory;
-            $usage->card_id = $card_id->id;
+            $usage->card_id = $card->id;
             $usage->point = $request->input('point');
             $usage->employee_id = $employee_id;
 
             $usage->save();
-            return redirect('/' . $employee_id . '/scan');            
+            return redirect('/' . $user->id . '/scan');            
         }
 
 
