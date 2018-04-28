@@ -71,7 +71,7 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @if(Auth::user()->role === "customer")
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
                                     <a class="dropdown-item" href='{{ url("") }}'>
@@ -81,11 +81,11 @@
                                         Check in
                                     </a>
                                     @elseif(Auth::user()->role === "owner")
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
                                     @else
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
                                     <a class="dropdown-item" href='{{ url("") }}'>
