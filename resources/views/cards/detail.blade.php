@@ -11,29 +11,38 @@
                     {{$card->cardTemplate->style}}
                 </div>
             </div>
-            <div class="card-body">
-                <div class="">
-                    <img src="" alt="[image here]">
+            <div class="card-body d-flex flex-column align-items-center">
+                <div class="d-flex justify-content-around">
+                    <img src="{{ url('storage/cards/'.$card->CardTemplate->img) }}"
+                         width="350" height="200" alt="{{ $card->CardTemplate->img }}">
                 </div>
+
                 @if($card->cardTemplate->style === 'point')
-                <label class="mt-1"> Checkin Point [ + {{$card->checkin_point}} ]</label>
-                <div class="input-group my-2">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Remaining Point : </span>
-                    </div>
-                    <input disabled class="text-center font-weight-bold" value="{{$card->point}}">
+                <div>
+                    <label class="mt-1"> Checkin Point [ + {{$card->checkin_point}} ]</label>
                 </div>
-                @else
-                <label class="mt-1"> Stamp mode *</label>
-                <div class="input-group my-2">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Stamp : </span>
+                <div>
+                    <div class="input-group my-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text font-weight-bold">Remaining Point : </span>
+                        </div>
+                        <input disabled class="text-center font-weight-bold bg-white" value="{{$card->point}}">
                     </div>
-                    <input disabled class="text-center font-weight-bold" value="{{$card->point}}">
+                </div>
+
+                @else
+                <div>
+                    <div class="input-group my-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text font-weight-bold ">Stamp : </span>
+                        </div>
+                        <input disabled class="text-center font-weight-bold  bg-white" value="{{$card->point}}">
+                    </div>
                 </div>
                 @endif
 
             </div>
+            <a href="" class="btn btn-light w-100">Redeem Point</a>
         </div>
 
 

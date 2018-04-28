@@ -9,7 +9,7 @@
             <div class="">
                 <div class="m-2 card-header">
 
-                    <label class="font-weight-bold">{{ $promotion->reward_name }}</label>
+                    <label class="h5 font-weight-bold">{{ $promotion->reward_name }}</label>
                 </div>
                 <div class="m-2 card-header bg-light">
                     <label class="font-weight-bold"><ins>Condition</ins></label>
@@ -19,7 +19,10 @@
                 <div class="m-2 card-header bg-light">
                     <label class="font-weight-bold"><ins>Reward Image</ins></label>
                     <br>
-                    <label class="">{{ $promotion->reward_img }}</label>
+                    <div class="d-flex justify-content-around">
+                        <img src="{{ url('storage/promotions/'.$promotion->reward_img) }}"
+                             width="350" height="200" alt="{{ $promotion->reward_img }}">
+                    </div>
                 </div>
                 <div class="d-flex align-items-baseline justify-content-around m-2 card-header">
                     <div>

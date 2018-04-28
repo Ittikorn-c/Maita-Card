@@ -5,7 +5,7 @@
         <div class="h3 card-header font-weight-bold bg-dark text-white">
             Edit Promotion
         </div>
-        <form action="/shops/{{$shop->id}}/promotion/{{$promotion->id}}"
+        <form action="/shops/{{$shop->id}}/promotion/{{$promotion->id}}" enctype="multipart/form-data"
               method="post">
             @method('PUT')
             @csrf
@@ -55,7 +55,7 @@
                     </div>
                     <div>
                         <label class="font-weight-bold">Point </label>
-                        <input class="text-center h4" type="text" name="point" value="{{ old('point') ?? $promotion->point }}">
+                        <input class="text-center h4" type="number" name="point" value="{{ old('point') ?? $promotion->point }}">
                     </div>
                 </div>
                 <div class="m-2 card-header text-center">

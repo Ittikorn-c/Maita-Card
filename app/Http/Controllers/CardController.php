@@ -93,7 +93,7 @@ class CardController extends Controller
             return redirect('/');
         }*/
 
-        return view('card.detail', compact('card'));
+        return view('cards.detail', compact('card'));
     }
 
     /**
