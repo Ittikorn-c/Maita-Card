@@ -18,7 +18,7 @@
         			<td>
 			            <div class="panel-body" align="center">
 			            	<h5>Result</h5>
-							<form action="/escan" method="post">
+							<form action="/scan" method="post">
 								
 								@csrf
 								<!-- CSRF Cross-Site Request Forgery -->
@@ -41,33 +41,6 @@
         				</div>   
 
         			</td>
-        			@elseif ($role === 'customer')
-	         			<td>
-				            <div class="panel-body" align="center">
-				            	<h5>Result</h5>
-								<form action="/cscan" method="post">
-									
-									@csrf
-									<!-- CSRF Cross-Site Request Forgery -->
-									{{ csrf_field() }}
-
-									<!-- role don't show but pass to store -->
-									<input hidden="true" type="text" name="role" value="{{ $role }}">
-
-									<label>Branch: </label>
-									<input id="result" type="number" name="bid" value="">
-									<br>
-
-									<label>Point: </label>
-									<input type="number" name="checkinPoint" value="{{ old('checkinPoint') }}">
-									<br>
-
-									<button class="btn btn-primary" type="submit">Submit</button>
-								</form>
-		            
-	        				</div>   
-
-	        			</td>       			
         			@endif
         		</tr>
         	</table>

@@ -3,9 +3,8 @@
 @section('content')
 
     <div class="d-flex flex-column justify-content-end w-75 mx-auto">
-        <div class="h3 d-flex justify-content-between card-header font-weight-bold bg-dark text-white">
+        <div class="h3 card-header font-weight-bold bg-dark text-white">
             {{$shop->name}} All Promotion
-            <a href="/shops/{{$shop->id}}/promotion/create" class="btn btn-primary font-weight-bold"> Make Promotion</a>
         </div>
 
         @foreach($promotions as $promotion)
@@ -13,7 +12,7 @@
                 <div class="card-header">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-7 h5 m-0">
-                            <a href="/shops/{{$shop->id}}/promotion/{{$promotion->id}}" class="font-weight-bold text-dark" >{{$promotion->reward_name}}</a>
+                            <label>{{$promotion->reward_name}}</label>
                             <br>
                             <label>{{$promotion->CardTemplate->name}}</label>
                         </div>
@@ -47,12 +46,8 @@
                 <div class="card-body">
                     <label>[{{$promotion->reward_img}}]</label>
                     <br>
-                    <label class="font-weight-bold">Condition:</label>
-                    <br>
+                    <label>Condition:</label>
                     <label>{{$promotion->condition}}</label>
-                    <br>
-                    <label class="font-weight-bold">Expiry Date:</label>
-                    <label class="h5 font-weight-bold text-danger">{{$promotion->exp_date}}</label>
                 </div>
 
             </div>

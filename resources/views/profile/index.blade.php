@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+All Users
+@endsection
+
 @section('content')
 <table class="table table-hover">
   <thead>
