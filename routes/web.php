@@ -65,19 +65,25 @@ Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where
 
 Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
 
-Route::get('/{user}/scan', 'UsageController@create')->where('user', '[0-9]+');
+Route::get('/{user}/scan', 'QRController@scanQR')->where('user', '[0-9]+');
 
-Route::post('/scan', 'UsageController@store');
+Route::post('/escan', 'UsageController@store');
+
+Route::post('/cscan', 'CardController@checkin');
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/{id}', 'ProfileController@show')
     ->where('id' ,'[0-9]+');
+Route::get('/profile/{user}/edit', 'ProfileController@edit')
+    ->where('user' ,'[0-9]+');
+Route::put('/profile/{user}', 'ProfileController@update')
+    ->where('user' ,'[0-9]+');
 
 
 Route::resource('/shops', 'ShopController');
 Route::get('/shops/{shop}/promotion', 'ShopController@indexPromotion');
 Route::get('/shops/{shop}/promotion/{promotion}', 'ShopController@showPromotion')->where('promotion','[0-9]+');
-Route::get('/shops/{shop}/create', 'ShopController@createPromotion');
+Route::get('/shops/{shop}/promotion/create', 'ShopController@createPromotion');
 Route::get('/shops/{shop}/promotion/{promotion}/edit', 'ShopController@editPromotion');
 Route::put('/shops/{shop}/promotion/{promotion}', 'ShopController@updatePromotion');
 Route::delete('/shops/{shop}/promotion/{promotion}',  'ShopController@destroyPromotion');
