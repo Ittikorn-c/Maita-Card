@@ -6,6 +6,7 @@ use App\User;
 use App\Employee;
 use Illuminate\Http\Request;
 
+
 class ProfileController extends Controller
 {
     public function __construct() {
@@ -100,10 +101,9 @@ class ProfileController extends Controller
         ],[ 'fname.required' => 'The first name field is required.',
             'lname.required' => 'The last name field is required.'
         ]);
-        $user = Auth::user();
 
         $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
-        $request->avatar->storeAs('/public/images/profile',$avatarName);
+        request()->avatar->move(public_path('/images/profile'), $avatarName);
 
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
@@ -112,7 +112,7 @@ class ProfileController extends Controller
         $user->gender = $request->input('gender');
         $user->username = $request->input('username');
         $user->email = $request->input('email');
-        $user->profile_img = $request->input('avatar');
+        $user->profile_img = $avatarName;
  
         $user->save();
         return redirect('/profile/' . $user->id);

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form class="form-horizontal" action="/profile/{{ $user->id }}" method="post">
+<form class="form-horizontal" action="/profile/{{ $user->id }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     {{ csrf_field() }}
     <div class="container panel panel-default card">
@@ -17,7 +17,6 @@
                     <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Change</button>
             </div>
         </div>
         <div class="col-sm-8 p-2 bg-white card">
