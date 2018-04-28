@@ -15,7 +15,7 @@
                 <input type="text" class="form-control" id="username" name="username" value="{{ old('username') ??  $user->username }}" />
             </div>
             @if($errors->first('username'))
-                <div class="row m-3 p-2 text-danger">
+                <div class="row m-1 p-1 text-danger">
                     {{ $errors->first('username') }}
                 </div>
             @endif
@@ -30,7 +30,7 @@
                 <input type="text" class="form-control" id="lname" name="lname" value="{{ old('lname') ?? $user->lname }}" />
             </div>
             @if($errors->first('fname') || $errors->first('lname'))
-                <div class="row m-3 p-2 text-danger">
+                <div class="row m-1 p-1 text-danger">
                     @if($errors->first('fname'))
                         {{ $errors->first('fname') }}
                     @endif
@@ -45,39 +45,50 @@
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="gender">Gender: </label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <label class="radio-inline">
-                    <input type="radio" name="gender" value="{{ old('gender') ?? $user->gender }}"@if(old('gender',$user->gender)=="male") checked @endif>Male
+                    <input type="radio" name="gender" value="male"@if(old('gender',$user->gender)=="male") checked @endif>Male
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="gender" value="{{ old('gender') ?? $user->gender }}" @if(old('gender',$user->gender)=="female") checked @endif>Female
+                    <input type="radio" name="gender" value="female" @if(old('gender',$user->gender)=="female") checked @endif>Female
                 </label>
             </div>
             @if($errors->first('gender'))
-                <div class="row m-3 p-2 text-danger">
+                <div class="row m-1 p-1 text-danger">
                     {{ $errors->first('gender') }}
                 </div>
             @endif
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="email">Email:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input type="text" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}" />
             </div>
             @if($errors->first('email'))
-                <div class="row m-3 p-2 text-danger">
+                <div class="row m-1 p-1 text-danger">
                     {{ $errors->first('email') }}
                 </div>
             @endif
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="address">Address: </label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ?? $user->address }}" />
+            <div class="col-sm-6">
+                <textarea class="form-control" rows="2" id="address" onKeyPress name="address" value="{{ old('address') ?? $user->address }}" />{{ old('address') ?? $user->address }}</textarea>
             </div>
             @if($errors->first('address'))
-                <div class="row m-3 p-2 text-danger">
+                <div class="row m-1 p-1 text-danger">
                     {{ $errors->first('address') }}
+                </div>
+            @endif
+        </div>
+        <div class="row m-3 p-2 form-group">
+            <label class="control-label col-sm-2" for="phone">Phone Number:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') ?? $user->phone }}" />
+            </div>
+            @if($errors->first('phone'))
+                <div class="row m-1 p-1 text-danger">
+                    {{ $errors->first('phone') }}
                 </div>
             @endif
         </div>
