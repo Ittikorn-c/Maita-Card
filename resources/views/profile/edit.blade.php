@@ -11,7 +11,7 @@
         </div>
         <div class="row m-3 p-2">
         <div class="col-sm-4 p-2 bg-white card">
-            <img src="/images/profile/{{ $user->profile_img }}" style="width:100%;max-width:400px"/>
+            <img src="{{ asset($user->profile_img ? 'images/profile/' . $user->profile_img : 'noimg.png') }}" style="width:100%;max-width:400px"/>
             <div class="row justify-content-center">
                 <div class="form-group m-1 p-2">
                     <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
