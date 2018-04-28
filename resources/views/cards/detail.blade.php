@@ -18,11 +18,12 @@
                         {{$card->cardTemplate->style}}
                     </div>
                 </div>
-                <div>
-                    <a class="h4 text-primary"
-                       href="/">
+                <div id="social-links">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=
+                            {{url('/')}}"
+                       class="social-button my-class" id="my-id">
                         Share
-                        <i class="fa fa-facebook-square fa-1x" aria-hidden="true"></i>
+                        <span class="fa fa-facebook-official fa-1x"></span>
                     </a>
                 </div>
             </div>
@@ -108,3 +109,7 @@
 
     </div>
 @endsection
+
+@push('js')
+    <script src="{{ asset('js/share.js') }}"></script>
+@endpush
