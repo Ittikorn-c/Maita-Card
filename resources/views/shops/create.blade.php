@@ -11,7 +11,7 @@
       <div class="card">
         <div class="card-header">create</div>
         <div class="card-body">
-          <form class="" action="/maitahome/shops" method="post">
+          <form class="" action="/maitahome/shops" enctype="multipart/form-data" method="post">
             @csrf
             <div class="form-group row">
               <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-user-circle"></i> Owner</label>
@@ -57,8 +57,8 @@
               <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-desktop"></i>Shop logo</label>
               <div class="col-md-6">
                 <div class="custom-file">
-                    <input v-on:change="onSelectProfileUploadImage($event)" class="custom-file-input" type="file" id="profile" name="shoplogo">
-                    <label class="custom-file-label" for="shoplogo">Choose file</label>
+                    <input class="custom-file-input" type="file" id="profile" name="shoplogo">
+                    <label class="custom-file-label" id="profile-label" for="shoplogo">Choose file</label>
 
                 </div>
 
@@ -89,3 +89,7 @@
 
 </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('js/shops/create.js') }}" defer></script>
+@endpush

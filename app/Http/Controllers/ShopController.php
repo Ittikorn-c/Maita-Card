@@ -40,8 +40,9 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
+      
       $validateData = $request->validate([
-          "shopname" => "min:6|max:20|unique:shop,name",
+          "shopname" => "min:6|max:20|unique:shops,name",
           "shopphone" => "max:10",
           "shopeamil" => "unique:shop,email|email",
           "shopcategory" => "required"
@@ -52,11 +53,12 @@ class ShopController extends Controller
           $shop->phone = $request->input("shopphone");
           $shop->email = $request->input("shopemail");
           $shop->category = $request->input("shopcategory");
-          $shop->email = "shop.test@example.com";
-          $shop->category = "cafe";
-
-          $shop->owner_id = 1;
-          $shop->logo_img = "test-logo.jpg";
+          $shop->logo_img = "";
+          $shop->owner_id = \Auth::user()->id;
+          $shop->save();
+          $image_name = $shop->id . "." . $request->shoplogo->extension();
+          \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
+          $shop->logo_img = $image_name;
           $shop->save();
           return redirect("/maitahome/shops/allshops");
         } catch (\Exception $e) {
@@ -99,20 +101,21 @@ class ShopController extends Controller
     {
         //
         $validateData = $request->validate([
-            "shopname" => "min:6|max:20|unique:shop,name",
+            "shopname" => "min:6|max:20|unique:shops,name",
             "shopphone" => "max:10",
             "shopeamil" => "unique:shop,email|email",
             "shopcategory" => "required"
         ]);
           try {
             $shop->name = $request->input("shopname");
-            $shop->phone = $request->intput("shopphone");
+            $shop->phone = $request->input("shopphone");
             $shop->email = $request->input("shopemail");
             $shop->category = $request->input("shopcategory");
-            $shop->owner_id = 1;
-            $shop->logo_img = "test-logo.jpg";
-            // $shop->save();
-            return redirect("/maitahome/allshops");
+            $image_name = $shop->id . "." . $request->shoplogo->extension();
+            \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
+            $shop->logo_img = $image_name;
+            $shop->save();
+            return redirect("/maitahome/shops/allshops");
           } catch (\Exception $e) {
 
           }

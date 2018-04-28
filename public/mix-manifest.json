@@ -13,5 +13,6 @@
     "/css/app.css": "/css/app.css",
     "/css/report.css": "/css/report.css",
     "/js/register.js": "/js/register.js",
+    "/js/shops/create.js": "/js/shops/create.js",
     "/js/del.js": "/js/del.js"
 }
