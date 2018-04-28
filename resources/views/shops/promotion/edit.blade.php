@@ -30,8 +30,15 @@
                     <textarea class="w-100" name="condition" rows="5" cols="20" >{{ old('condition') ?? $promotion->condition }}</textarea>
                 </div>
                 <div class="m-2 card-header">
-                    <label class="font-weight-bold">Reward Image</label>
-                    <input class="w-100" type="text" name="reward_img" value="{{ old('reward_img') ?? $promotion->reward_img }}">
+                    <div class="custom-file-container" data-upload-id="reward_img">
+                        <label class="font-weight-bold">Reward Image <a href="javascript:void(0)" class="text-danger custom-file-container__image-clear" title="Clear Image">x</a></label>
+                        <label class="custom-file-container__custom-file" >
+                            <input name="reward_img" type="file" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                            <span class="custom-file-container__custom-file__custom-file-control">{{ $promotion->reward_img }}</span>
+                        </label>
+                        <div class="custom-file-container__image-preview"></div>
+                    </div>
                 </div>
                 <div class="d-flex align-items-baseline justify-content-around m-2 card-header">
                     <div>
@@ -62,4 +69,14 @@
             </div>
         </form>
     </div>
-@endsection   
+    <script>
+        var upload = new FileUploadWithPreview('reward_img')
+    </script>
+@endsection
+
+@push("js")
+    <script src="{{ asset('js/file-upload-with-preview.min.js') }}"></script>
+@endpush
+@push("css")
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/file-upload-with-preview.min.css') }}">
+@endpush
