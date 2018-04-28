@@ -46,7 +46,7 @@
 				            <div class="panel-body" align="center">
 				            	<h5>Result</h5>
 								<form action="/cscan" method="post">
-									
+									@method('PUT')
 									@csrf
 									<!-- CSRF Cross-Site Request Forgery -->
 									{{ csrf_field() }}

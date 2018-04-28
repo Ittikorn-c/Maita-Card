@@ -54,9 +54,13 @@ Route::get('/maitahome/shops/{shop_id}/promotions', 'ShopController@showPromoBy'
 
 
 
-Route::get('/qr-code/{uid}', 'QRController@showQR')->where('uid', '[0-9]+');
+Route::get('/{uid}/qr-code', 'QRController@showQR')->where('uid', '[0-9]+');
 
-Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
+Route::get('/{template_id}/rewards', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
+
+Route::get('/{template_id}/rewards/{promotion_id}', 'PromotionController@show')->where('template_id', '[0-9]+')->where('promotion_id', '[0-9]+');
+
+Route::post('/{template_id}/rewards/{promotion_id}', 'RewardHistoryController@store')->where('template_id', '[0-9]+')->where('promotion_id', '[0-9]+');
 
 Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
 
@@ -64,7 +68,7 @@ Route::get('/{user}/scan', 'QRController@scanQR')->where('user', '[0-9]+');
 
 Route::post('/escan', 'UsageController@store');
 
-Route::post('/cscan', 'CardController@checkin');
+Route::put('/cscan', 'CardController@checkin');
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/{id}', 'ProfileController@show')
