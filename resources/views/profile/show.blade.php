@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid panel panel-default">
+<div class="container panel panel-default card">
     <div class="panel-heading m-3 p-2">
         <h2>Profile : {{ $user->username }}</h2>
         <p>[ <i class="fa fa-user-circle"></i> {{ $user->role }} ]</p>

@@ -69,8 +69,13 @@ class ProfileController extends Controller
         //     return $this->authorize('update', $user);
         // }
 
+        $gender = [ 
+            'male', 
+            'female'];
+
         return view('profile.edit' , [
-            'user' => $user
+            'user' => $user,
+            'gender' => $gender
         ]);
     }
 
@@ -84,12 +89,20 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'fname' => 'required|max:255|min:4|unique:users,fname,'.$user->id,
+            'fname' => 'required|max:255',
+            'lname' => 'required|max:255',
+            'address' => 'required|max:255|min:10',
+            'phone' => 'required|max:20',
+            'gender' => 'required',
             'username' => 'required|max:255|min:4|unique:users,username,'.$user->id,
-            'email' => 'required|max:40|min:4|unique:users,email,'.$user->id
+            'email' => 'required|email|unique:users,email,'.$user->id
         ]);
         
         $user->fname = $request->input('fname');
+        $user->lname = $request->input('lname');
+        $user->address = $request->input('address');
+        $user->phone = $request->input('phone');
+        $user->gender = $request->input('gender');
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->save();
