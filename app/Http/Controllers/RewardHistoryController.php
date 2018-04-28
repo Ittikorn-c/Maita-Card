@@ -14,6 +14,6 @@ class RewardHistoryController extends Controller
         $id = 10;
         $hand = Card::where('id', $id)->pluck('id')->toArray();
         $histories = RewardHistory::whereIn('card_id', $hand)->get();
-        return view('customer.reward_history', compact('histories'));
+        return view('customers.reward_history', compact('histories'));
     }
 }

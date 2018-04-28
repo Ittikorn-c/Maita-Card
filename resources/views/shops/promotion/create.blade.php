@@ -54,7 +54,7 @@
                     </div>
                     <div>
                         <label class="font-weight-bold">Point </label>
-                        <input class="text-center h4" type="text" name="point" value="{{ old('point') }}">
+                        <input class="text-center h4" type="number" name="point" value="{{ old('point') }}">
                     </div>
                 </div>
                 <div class="m-2 card-header text-center">

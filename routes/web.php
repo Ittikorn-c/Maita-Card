@@ -86,4 +86,4 @@ Route::post('/shops/{shop}/promotion', 'ShopController@storePromotion');
 
 
 Route::get('/reward_history', 'RewardHistoryController@index');
-Route::get('/card/{card}', 'CardController@show')->where('card', '[0-9]+');
+Route::get('/cards/{card}', 'CardController@show')->where('card', '[0-9]+');
