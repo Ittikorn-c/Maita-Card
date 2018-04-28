@@ -95,11 +95,16 @@ class ProfileController extends Controller
             'phone' => 'required|max:20',
             'gender' => 'required',
             'username' => 'required|max:255|min:4|unique:users,username,'.$user->id,
-            'email' => 'required|email|unique:users,email,'.$user->id
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ],[ 'fname.required' => 'The first name field is required.',
             'lname.required' => 'The last name field is required.'
         ]);
-        
+        $user = Auth::user();
+
+        $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+        $request->avatar->storeAs('/public/images/profile',$avatarName);
+
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
         $user->address = $request->input('address');
@@ -107,6 +112,8 @@ class ProfileController extends Controller
         $user->gender = $request->input('gender');
         $user->username = $request->input('username');
         $user->email = $request->input('email');
+        $user->profile_img = $request->input('avatar');
+ 
         $user->save();
         return redirect('/profile/' . $user->id);
     }

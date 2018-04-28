@@ -12,6 +12,13 @@
         <div class="row m-3 p-2">
         <div class="col-sm-4 p-2 bg-white card">
             <img src="/images/profile/{{ $user->profile_img }}" style="width:100%;max-width:400px"/>
+            <div class="row justify-content-center">
+                <div class="form-group m-1 p-2">
+                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Change</button>
+            </div>
         </div>
         <div class="col-sm-8 p-2 bg-white card">
         <div class="row m-3 p-2 form-group">
@@ -110,7 +117,7 @@
         </div>
     <br>
     <div class="row col-sm-1 m-3 p-2">
-        <button class="btn btn-info m-3 p-2" tyoe="submit">Submit</button>
+        <button class="btn btn-info m-3 p-2" tyoe="submit">Save</button>
     </div>
     
 </form>
