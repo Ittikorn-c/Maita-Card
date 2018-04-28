@@ -8,14 +8,26 @@
              Card
         </div>
         <div class="col-lg-5 card m-2 p-0">
-            <div class="h2 card-header">
-                {{$card->cardTemplate->name}}
-                <div class="h4">
-                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                    {{$card->cardTemplate->style}}
+            <div class="h2 card-header d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="h2">
+                        {{$card->cardTemplate->name}}
+                    </div>
+                    <div class="h4">
+                        <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                        {{$card->cardTemplate->style}}
+                    </div>
+                </div>
+                <div>
+                    <a class="h4 text-primary"
+                       href="/">
+                        Share
+                        <i class="fa fa-facebook-square fa-1x" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
-            <div class="card-body d-flex flex-row align-items-center justify-content-around">
+
+            <div class="card-body d-flex flex-row flex-wrap align-items-center justify-content-around">
                 <div class="d-flex justify-content-around">
                     <img src="{{ url('storage/cards/'.$card->CardTemplate->img) }}"
                          width="350" height="200" alt="{{ $card->CardTemplate->img }}">
@@ -23,14 +35,18 @@
                 </div>
                 <div class="d-flex flex-column align-items-center">
                     @if($card->cardTemplate->style === 'point')
-                        <div class="">
+                        <div class="m-2">
                             <p class="h1 py-2 card-body bg-dark text-white font-weight-bold">
                                 <i class="fa fa-product-hunt" aria-hidden="true"></i>
                                 {{$card->point}}
                             </p>
                         </div>
                         <div>
-                            <label class="my-2 font-weight-bold"> Checkin <i class="fa fa-plus"></i> {{$card->checkin_point}}  </label>
+                            <label class="my-2 font-weight-bold">
+                                Checkin
+                                <i class="fa fa-plus"></i>
+                                {{$card->checkin_point}}
+                            </label>
                         </div>
                     @else
                         <div class="">
@@ -39,12 +55,19 @@
                                 {{$card->point}}
                             </p>
                         </div>
+                        <div>
+                            <label class="my-2 font-weight-bold">
+                                <i class="fa fa-stop-circle" aria-hidden="true"></i>
+                                Stamp
+                            </label>
+                        </div>
                     @endif
                 </div>
 
 
             </div>
-            <a href="" class="btn btn-dark font-weight-bold w-100">
+            <a href="/rewards/{{$card->template_id}}"
+               class="btn btn-dark font-weight-bold w-100">
                 Redeem Point
                 <i class="fa fa-gift" aria-hidden="true"></i>
             </a>

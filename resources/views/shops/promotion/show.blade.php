@@ -60,7 +60,7 @@
             </form>
             <script>
                 function doubleCheck() {
-                    if (confirm("Want to Delete?")) {
+                    if (confirm("WANT TO DELETE ?")) {
                         return true;
                     }
                     else {

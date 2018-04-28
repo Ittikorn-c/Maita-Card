@@ -33,7 +33,7 @@
                             </form>
                             <script>
                                 function doubleCheck() {
-                                    if (confirm("Want to Delete?")) {
+                                    if (confirm("WANT TO DELETE ?")) {
                                         return true;
                                     }
                                     else {
@@ -65,7 +65,7 @@
                         <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
                         Expiry Date:
                     </label>
-                    <label class="h5 font-weight-bold text-danger">{{$promotion->exp_date}}</label>
+                    <label class="h5 font-weight-bold text-danger">{{\Carbon\Carbon::parse($promotion->exp_date)->diffForHumans()}}</label>
                 </div>
 
             </div>
