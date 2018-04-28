@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmRegistration;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/after-register';
 
     /**
      * Create a new controller instance.
@@ -70,7 +72,7 @@ class RegisterController extends Controller
         // Storage::put("public/profile/$image_name", $data["profile"]);
         Storage::disk('public')->put("profile/$image_name", file_get_contents($data["profile"]));
 
-        return User::create([
+        $user =  User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -85,5 +87,11 @@ class RegisterController extends Controller
             "status" => "active",
             "facebook" => $data["facebook"]
         ]);
+        $this->sendConfirmMail($user);
+        return $user;
+    }
+
+    public function sendConfirmMail($user){
+        return Mail::to($user)->send(new ConfirmRegistration($user));
     }
 }
