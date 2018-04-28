@@ -66,6 +66,10 @@ Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9
 
 Route::get('/{user}/scan', 'QRController@scanQR')->where('user', '[0-9]+');
 
+Route::post('/scanforuser/{user}', 'ProfileController@getUName')->where('user', '[0-9]+');
+
+Route::post('/scanforbranch/{branch}', 'BranchController@getBName')->where('branch', '[0-9]+');
+
 Route::post('/escan', 'UsageController@store');
 
 Route::put('/cscan', 'CardController@checkin');
