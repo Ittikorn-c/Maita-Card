@@ -8,16 +8,18 @@
         <form>
             <div class="">
                 <div class="m-2 card-header">
-
+                    <i class="fa fa-gift" aria-hidden="true"></i>
                     <label class="h5 font-weight-bold">{{ $promotion->reward_name }}</label>
                 </div>
                 <div class="m-2 card-header bg-light">
-                    <label class="font-weight-bold"><ins>Condition</ins></label>
+                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                    <label class="font-weight-bold">Condition</label>
                     <br>
                     <label class="">{{ $promotion->condition }}</label>
                 </div>
                 <div class="m-2 card-header bg-light">
-                    <label class="font-weight-bold"><ins>Reward Image</ins></label>
+                    <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    <label class="font-weight-bold">Reward Image</label>
                     <br>
                     <div class="d-flex justify-content-around">
                         <img src="{{ url('storage/promotions/'.$promotion->reward_img) }}"
@@ -26,14 +28,23 @@
                 </div>
                 <div class="d-flex align-items-baseline justify-content-around m-2 card-header">
                     <div>
-                        <label class="h5 p-3 font-weight-bold bg-light"><ins>Card</ins> : {{ $promotion->CardTemplate->name }}</label>
+                        <label class="h5 p-3 font-weight-bold bg-light">
+                            <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                            Card : {{ $promotion->CardTemplate->name }}
+                        </label>
                     </div>
                     <div>
-                        <label class="h5 p-3 font-weight-bold bg-light"><ins>Point</ins> : {{ $promotion->point }}</label>
+                        <label class="h5 p-3 font-weight-bold bg-light">
+                            <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                            Point : {{ $promotion->point }}
+                        </label>
                     </div>
                 </div>
                 <div class="m-2 card-header bg-light text-center">
-                    <label class="font-weight-bold">Expiry Date:</label>
+                    <label class="font-weight-bold">
+                        <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+                        Expiry Date:
+                    </label>
                     <label class="h5 font-weight-bold text-danger">{{$promotion->exp_date}}</label>
                 </div>
             </div>
@@ -49,7 +60,7 @@
             </form>
             <script>
                 function doubleCheck() {
-                    if (confirm("Want to Delete?")) {
+                    if (confirm("WANT TO DELETE ?")) {
                         return true;
                     }
                     else {
