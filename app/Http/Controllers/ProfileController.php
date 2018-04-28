@@ -96,6 +96,8 @@ class ProfileController extends Controller
             'gender' => 'required',
             'username' => 'required|max:255|min:4|unique:users,username,'.$user->id,
             'email' => 'required|email|unique:users,email,'.$user->id
+        ],[ 'fname.required' => 'The first name field is required.',
+            'lname.required' => 'The last name field is required.'
         ]);
         
         $user->fname = $request->input('fname');
