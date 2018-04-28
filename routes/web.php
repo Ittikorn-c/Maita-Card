@@ -60,9 +60,11 @@ Route::get('/rewards/{template_id}', 'PromotionController@showCardPromo')->where
 
 Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
 
-Route::get('/{user}/scan', 'UsageController@create')->where('user', '[0-9]+');
+Route::get('/{user}/scan', 'QRController@scanQR')->where('user', '[0-9]+');
 
-Route::post('/scan', 'UsageController@store');
+Route::post('/escan', 'UsageController@store');
+
+Route::post('/cscan', 'CardController@checkin');
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/{id}', 'ProfileController@show')
