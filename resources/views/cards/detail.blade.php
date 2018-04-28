@@ -4,7 +4,7 @@
 
     <div class="row m-2">
         <div class="card-header h3 font-weight-bold bg-dark text-white">Card</div>
-        <div class="col-sm-5 card m-2 p-0">
+        <div class="col-lg-5 card m-2 p-0">
             <div class="h2 card-header">
                 {{$card->cardTemplate->name}}
                 <div class="h5">
@@ -42,11 +42,11 @@
                 @endif
 
             </div>
-            <a href="" class="btn btn-light w-100">Redeem Point</a>
+            <a href="" class="btn btn-light font-weight-bold w-100">Redeem Point</a>
         </div>
 
 
-        <div class="col-sm-5 card m-2 p-0">
+        <div class="col-lg-5 card m-2 p-0">
             <div class="card-header h4 font-weight-light">Shop</div>
             <div class="h2 card-body mb-0">
                 {{$card->cardTemplate->shop->name}}
@@ -54,11 +54,12 @@
                     {{$card->cardTemplate->shop->category}}
                 </div>
             </div>
-            <div class="row card-body">
-                <div class="col-4">
-                    [logo here]
+            <div class="d-flex flex-wrap justify-content-around  align-items-center card-body">
+                <div class="">
+                    <img src="{{ url('storage/logos/'.$card->CardTemplate->shop->logo_img) }}"
+                         width="120" height="120" alt="{{ $card->CardTemplate->shop->logo_img }}">
                 </div>
-                <div class="col-8">
+                <div class="h4">
                     <label class="">
                         {{$card->cardTemplate->shop->owner->fname .' '. $card->cardTemplate->shop->owner->lname}}
                     </label>
