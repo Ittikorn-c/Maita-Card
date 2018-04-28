@@ -32,6 +32,34 @@
             @endif
         </div>
         <div class="row m-3 p-2 form-group">
+            <label class="control-label col-sm-2" for="lname">Last Name: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lname" name="lname" value="{{ old('lname') ?? $user->lname }}" />
+            </div>
+            @if($errors->any())
+                <div class="row m-3 p-2 text-danger">
+                    {{ $errors->first('lname') }}
+                </div>
+            @endif
+        </div>
+        <div class="row m-3 p-2 form-group">
+            <label class="control-label col-sm-2" for="gender">Gender: </label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="{{ old('gender') ?? $user->gender }}"@if(old('gender',$user->gender)=="male") checked @endif>Male
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="{{ old('gender') ?? $user->gender }}" @if(old('gender',$user->gender)=="female") checked @endif>Female
+                </label>
+                <!-- <input type="text" class="form-control" id="gender" name="gender"  /> -->
+            </div>
+            @if($errors->any())
+                <div class="row m-3 p-2 text-danger">
+                    {{ $errors->first('gender') }}
+                </div>
+            @endif
+        </div>
+        <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="email">Email:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}" />
@@ -39,6 +67,17 @@
             @if($errors->any())
                 <div class="row m-3 p-2 text-danger">
                     {{ $errors->first('email') }}
+                </div>
+            @endif
+        </div>
+        <div class="row m-3 p-2 form-group">
+            <label class="control-label col-sm-2" for="address">Address: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ?? $user->address }}" />
+            </div>
+            @if($errors->any())
+                <div class="row m-3 p-2 text-danger">
+                    {{ $errors->first('address') }}
                 </div>
             @endif
         </div>
