@@ -3,15 +3,14 @@
 @section('content')
 <div class="container-fluid panel panel-default">
     <div class="panel-heading m-3 p-2">
-        <h2>User Profile : {{ $user->username }}</h2>
-        <p>[ <i class="fa fa-user-circle"></i> 
-           {{ $user->role }} ]</p>
+        <h2>Profile : {{ $user->username }}</h2>
+        <p>[ <i class="fa fa-user-circle"></i> {{ $user->role }} ]</p>
     </div>
-    <div class="row m-3 p-2" style="background-color:lightblue">
+    <div class="row m-3 p-2 bg-secondary">
         <div class="col-sm-1">
             
         </div>
-        <div class="col-sm-4 m-1 p-2" style="background-color:white">
+        <div class="col-sm-4 m-1 p-2 bg-white">
             {{ $user->profile_img }}
         </div>
         <div class="col-sm-6 m-1 p-2">
