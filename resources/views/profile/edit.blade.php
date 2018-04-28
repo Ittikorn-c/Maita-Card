@@ -66,7 +66,7 @@
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="email">Email:</label>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <input type="text" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}" />
             </div>
             @if($errors->first('email'))
