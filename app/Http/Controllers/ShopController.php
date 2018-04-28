@@ -90,10 +90,10 @@ class ShopController extends Controller
 
         if($request->hasFile('reward_img')) {
             $image_name = $request->file('reward_img')->getClientOriginalName();
-            $upload_name = $image_name.'.'.$request->file('reward_img')->getClientOriginalExtension();
-            Storage::disk('public')->put("promotions/$image_name", $upload_name);
+            $request->reward_img->storeAs('promotions', $image_name, 'public');
             $promotion->reward_img = $image_name;
         }
+
         $promotion->reward_name = $request->input('reward_name');
         $promotion->condition = $request->input('condition');
         $promotion->template_id = $request->input('template_id');
