@@ -92,7 +92,7 @@ class ProfileController extends Controller
         $request->validate([
             'fname' => 'required|max:255',
             'lname' => 'required|max:255',
-            'address' => 'required|max:255|min:10',
+            'address' => 'required|max:255|min:4',
             'phone' => 'required|max:20',
             'gender' => 'required',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -103,7 +103,7 @@ class ProfileController extends Controller
             $image_name = $user->username . "." . request()->avatar->getClientOriginalExtension();
             request()->avatar->storeAs('/public/profile/', $image_name);
             $user->profile_img = $image_name;
-        } 
+        }
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
         $user->address = $request->input('address');

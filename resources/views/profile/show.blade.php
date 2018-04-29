@@ -18,6 +18,7 @@
                 <li class="list-group-item">First Name: {{ $user->fname }}</li>
                 <li class="list-group-item">Last Name: {{ $user->lname }}</li>
                 <li class="list-group-item">Email: {{ $user->email }}</li>
+                <li class="list-group-item">Status: {{ $user->status }}</li>
                 <li class="list-group-item">Phone: {{ $user->phone }}</li>
                 <li class="list-group-item">Gender: {{ $user->gender }}</li>
                 <li class="list-group-item">Address: {{ $user->address }}</li>
