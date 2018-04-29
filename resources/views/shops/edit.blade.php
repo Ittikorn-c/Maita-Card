@@ -86,7 +86,7 @@
 
                 </div>
 
-                <img style="max-width:100%;height:auto;margin-top:10px" class="img img-responsive" id="profile-preview" alt="">
+                <img style="max-width:100%;height:auto;margin-top:10px" class="img img-responsive" id="profile-preview" alt="" src="{{old('shoplogo') ?? $shop->logo_img}}">
               </div>
             </div>
 
