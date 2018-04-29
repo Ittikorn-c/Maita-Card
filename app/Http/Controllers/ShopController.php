@@ -57,7 +57,7 @@ class ShopController extends Controller
           // $shop->save();
           return redirect("/maitahome/allshops");
         } catch (\Exception $e) {
-
+            return back()->withInput();
         }
 
     }
