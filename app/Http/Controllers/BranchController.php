@@ -16,6 +16,19 @@ class BranchController extends Controller
         return $branch->name;
 
     }
+
+    public function embranch(){
+
+        if(\Gate::denies("employee-only"))
+            return $this->redirectUnpermission();
+        // Get the currently authenticated user...
+        $user = \Auth::user();
+        
+        $branches = \App\Employee::where('user_id', '=', $user->id)->allBranch()->get();
+
+        return view('employees/work_place', ['branches' => $branches]);
+
+    }
     /**
      * Display a listing of the resource.
      *

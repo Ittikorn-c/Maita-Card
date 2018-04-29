@@ -72,14 +72,14 @@ class RewardHistoryController extends Controller
     {
         //
         // Get the currently authenticated user...
-        // $user = Auth::user();
+        $user = \Auth::user();
         // $role = $user->role;
 
         //fix first
         // case customer
         // $user = \App\User::where('id', '=', 7)->first();
         // case employee
-        $user = \App\User::where('id', '=', 28)->first();
+        // $user = \App\User::where('id', '=', 28)->first();
 
         $reward_history = RewardHistory::where('id', '=', $request->input('uid'))->first();
 
@@ -103,6 +103,9 @@ class RewardHistoryController extends Controller
 
     //case already check but not scan yet
     public function checkHis($template_id){
+
+        if(\Gate::denies("view-reward", $template_id))
+            return $this->redirectUnpermission();
 
     	// $card = Card::where('template_id', '=', $template_id)->where('user_id', '=', $user->id)->first();
     	// $card->cardTemplate;

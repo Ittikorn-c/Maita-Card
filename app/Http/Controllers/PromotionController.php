@@ -11,6 +11,11 @@ class PromotionController extends Controller
 {
 
     public function showCardPromo($template_id){
+
+        //check user that login is owner of this card
+        if(\Gate::denies("view-reward", $template_id))
+            return $this->redirectUnpermission();
+
         $promo = Promotion::where('template_id', '=', $template_id)->get();
         $today = new Carbon;
         return view('rewards/show', ['promos' => $promo, 'template_id' => $template_id, 'today' => $today]);
@@ -60,12 +65,14 @@ class PromotionController extends Controller
     {
 
         // Get the currently authenticated user...
-        // $user = Auth::user();
-        // $role = $user->role;
+        $user = \Auth::user();
+
+        if(\Gate::denies("view-reward", $template_id))
+            return $this->redirectUnpermission();
 
         //fix first
         // case customer
-        $user = \App\User::where('id', '=', 30)->first();
+        // $user = \App\User::where('id', '=', 30)->first();
         // case employee
         // $user = \App\User::where('id', '=', 1)->first();
         //

@@ -24,8 +24,16 @@ class UsageHistory extends Model
                     ->groupBy('Hour');
     }
 
-    public function scopeUsedBy($query) {
-        return $query->join('cards', 'cards.id', '=', 'usage_histories.card_id')->join('users', 'cards.user_id', '=', 'users.id')->orderBy('usage_histories.created_at', 'desc')->select('usage_histories.*', 'users.username');
+    public function scopeCheckedBy($query, $uid) {
+        return $query->join('cards', 'cards.id', '=', 'usage_histories.card_id')
+                        ->join('users', 'cards.user_id', '=', 'users.id')
+                        ->join('employees', 'employees.id', '=', 'usage_histories.employee_id')
+                        ->join('users as emusers', 'emusers.id', '=', 'employees.user_id')
+                        ->join('branches', 'branches.id' ,'=', 'employees.branch_id')
+                        ->join('shops', 'shops.id' ,'=', 'branches.shop_id')
+                        ->where('emusers.id', '=', $uid)
+                        ->orderBy('usage_histories.created_at', 'desc')
+                        ->select('usage_histories.*', 'branches.name as branch_name', 'users.username', 'shops.name');
     }
 
 }

@@ -5,6 +5,11 @@
             <h1 style="text-align: center;">SCAN QR<br>
            
             </h1>
+            <br>
+            @if ($role === 'employee')
+            <center><a href="/{{ $id }}/qr-code/Branch"><button class="btn btn-primary" >Branch's QR</button></a></center>
+            @endif
+            <br><br>
         </div>
         <div  class="container" style="width:100%">
         	<table>
