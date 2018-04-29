@@ -8,7 +8,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">edit</div>
+        <div class="card-header" style="background-color: #002E2E;color: white;">edit</div>
         <div class="card-body">
           <form class="" enctype="multipart/form-data" action="/maitahome/shops/{{$shop->id}}" method="post">
             @csrf

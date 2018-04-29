@@ -17,6 +17,7 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -91,10 +92,10 @@
                                     <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/work-his") }}'>
+                                    <a class="dropdown-item" href='{{ url("/work-his") }}'>
                                         Working history
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
+                                    <a class="dropdown-item" href='{{ url("/employee-work-branch") }}'>
                                         Scan QR code
                                     </a>
                                     @endif

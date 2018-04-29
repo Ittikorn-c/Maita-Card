@@ -9,10 +9,16 @@ use Illuminate\Http\Request;
 class UsageController extends Controller
 {
 
-    public function emWorkHis($emid)
+    public function emWorkHis()
     {
-        //
-        $works = UsageHistory::where('employee_id', '=', $emid)->usedBy()->get();
+
+        //check gate for owner
+        if(\Gate::denies("not-owner"))
+            return $this->redirectUnpermission();
+        // Get the currently authenticated user...
+        $user = \Auth::user();
+
+        $works = UsageHistory::checkedBy($user->id)->get();
 
         return view('employees/work_his', ['works' => $works]);
 
@@ -50,13 +56,23 @@ class UsageController extends Controller
     {
         //
 
+        $request->validate([
+            'bid' => 'required',
+            'uid' => 'required',
+            'point' => 'required,numeric'],
+            [ 'bid.required' => 'Please Scan QR first',
+            'uid.required' => 'Please Scan QR first',
+            'point.required' => 'Please Enter Point',
+            'point.numeric' => 'Please Enter Point as Number'
+        ]);
+
         // Get the currently authenticated user...
-        // $user = Auth::user();
-        // $role = $user->role;
+        $user = \Auth::user();
+        $role = $user->role;
 
         // still can't test fix first
-        $user = \App\User::where('id', '=', 1)->first();
-        $role = $request->input('role');
+        // $user = \App\User::where('id', '=', 1)->first();
+        // $role = $request->input('role');
 
         //case employee scan
         if ($role === 'employee'){

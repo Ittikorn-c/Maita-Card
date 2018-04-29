@@ -5,6 +5,11 @@
   background-size: 100%;
 }
 
+.col-md-5 {
+  font-family: 'Varela Round', sans-serif;
+  letter-spacing: 2px;
+}
+
 .portfolio-item {
   margin-bottom: 30px;
 }
