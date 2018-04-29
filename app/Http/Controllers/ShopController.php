@@ -214,6 +214,9 @@ class ShopController extends Controller
             $shop->phone = $request->input("shopphone");
             $shop->email = $request->input("shopemail");
             $shop->category = $request->input("shopcategory");
+            $shop->logo_img = "";
+            $shop->owner_id = \Auth::user()->id;
+            $shop->save();
             $image_name = $shop->id . "." . $request->shoplogo->extension();
             \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
             $shop->logo_img = $image_name;

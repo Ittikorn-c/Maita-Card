@@ -50,11 +50,11 @@
 
             </div>
             <div class="form-group row">
-              <label for="" class="col-sm-4 col-form-label text-md-center"><i class="fa fa-desktop"></i>    Shop logo</label>
+              <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-desktop"></i>Shop logo</label>
               <div class="col-md-6">
                 <div class="custom-file">
-                    <input v-on:change="onSelectProfileUploadImage($event)" class="custom-file-input" type="file" id="profile" name="shoplogo">
-                    <label class="custom-file-label" for="shoplogo">Choose file</label>
+                    <input class="custom-file-input" type="file" id="profile" name="shoplogo">
+                    <label class="custom-file-label" id="profile-label" for="shoplogo">Choose file</label>
 
                 </div>
 
@@ -70,9 +70,6 @@
                 </div>
             </div>
 
-
-
-        </div>
       </div>
     </div>
 
