@@ -146,7 +146,7 @@ class ShopController extends Controller
       $validateData = $request->validate([
           "shopname" => "min:6|max:20|unique:shops,name",
           "shopphone" => "max:10",
-          "shopeamil" => "unique:shop,email|email",
+          "shopemail" => "unique:shops,email|email",
           "shopcategory" => "required"
       ]);
         try {
@@ -164,7 +164,7 @@ class ShopController extends Controller
           $shop->save();
           return redirect("/maitahome/shops/allshops");
         } catch (\Exception $e) {
-            return $e;
+            return back()->withInput();
 
         }
 
@@ -206,7 +206,7 @@ class ShopController extends Controller
         $validateData = $request->validate([
             "shopname" => "min:6|max:20|unique:shops,name",
             "shopphone" => "max:10",
-            "shopeamil" => "unique:shop,email|email",
+            "shopemail" => "unique:shops,email|email",
             "shopcategory" => "required"
         ]);
           try {
@@ -223,7 +223,7 @@ class ShopController extends Controller
             $shop->save();
             return redirect("/maitahome/shops/allshops");
           } catch (\Exception $e) {
-
+              return back()->withInput();
           }
     }
 

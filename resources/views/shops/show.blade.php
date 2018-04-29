@@ -90,5 +90,5 @@
 @endsection
 
 @push('js')
-  <script type="text/javascript" src="{{asset('js/del.js') }}"></script>
+  <script type="text/javascript" src="{{asset('js/shops/del.js') }}"></script>
 @endpush
