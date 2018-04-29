@@ -11,14 +11,14 @@
             
         </div>
         <div class="col-sm-4 p-2 bg-white card">
-            <img src="{{ asset($user->profile_img ? 'images/profile/' . $user->profile_img : 'noimg.png') }} " style="width:100%;max-width:400px"/>
-
+            <img src='{{ asset("storage/profile/$user->profile_img") }}' style="width:100%;max-width:400px">
         </div>
         <div class="col-sm-6 m-1 p-2">
             <ul class="list-group">
                 <li class="list-group-item">First Name: {{ $user->fname }}</li>
                 <li class="list-group-item">Last Name: {{ $user->lname }}</li>
                 <li class="list-group-item">Email: {{ $user->email }}</li>
+                <li class="list-group-item">Status: {{ $user->status }}</li>
                 <li class="list-group-item">Phone: {{ $user->phone }}</li>
                 <li class="list-group-item">Gender: {{ $user->gender }}</li>
                 <li class="list-group-item">Address: {{ $user->address }}</li>

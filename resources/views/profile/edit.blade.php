@@ -11,7 +11,7 @@
         </div>
         <div class="row m-3 p-2">
         <div class="col-sm-4 p-2 bg-white card">
-            <img src="{{ asset($user->profile_img ? 'images/profile/' . $user->profile_img : 'noimg.png') }}" style="width:100%;max-width:400px"/>
+            <img src='{{ asset("storage/profile/$user->profile_img") }}' style="width:100%;max-width:400px">
             <div class="row justify-content-center">
                 <div class="form-group m-1 p-2">
                     <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
@@ -23,7 +23,7 @@
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="username">Username: </label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="username" name="username" value="{{ old('username') ??  $user->username }}" />
+                <input type="text" class="form-control" id="username" name="username" value="{{ old('username') ??  $user->username }}" disabled/>
             </div>
             @if($errors->first('username'))
                 <div class="row m-1 p-1 text-danger">
@@ -73,7 +73,7 @@
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="email">Email:</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}" />
+                <input type="text" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}" disabled/>
             </div>
             @if($errors->first('email'))
                 <div class="row m-1 p-1 text-danger">

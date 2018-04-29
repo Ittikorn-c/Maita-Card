@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Employee;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');        
+    }
+
+    //use for scan to get username
+    public function getUName($uid){
+        $user = User::where('id', '=', $_POST['uid'])->first();
+
+        return $user->username;
     }
     
     /**
@@ -92,27 +99,24 @@ class ProfileController extends Controller
         $request->validate([
             'fname' => 'required|max:255',
             'lname' => 'required|max:255',
-            'address' => 'required|max:255|min:10',
+            'address' => 'required|max:255|min:4',
             'phone' => 'required|max:20',
             'gender' => 'required',
-            'username' => 'required|max:255|min:4|unique:users,username,'.$user->id,
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ],[ 'fname.required' => 'The first name field is required.',
             'lname.required' => 'The last name field is required.'
         ]);
-
-        $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
-        request()->avatar->move(public_path('/images/profile'), $avatarName);
-
+        if($request->avatar){
+            $image_name = $user->username . "." . request()->avatar->getClientOriginalExtension();
+            request()->avatar->storeAs('/public/profile/', $image_name);
+            $user->profile_img = $image_name;
+        }
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
         $user->gender = $request->input('gender');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->profile_img = $avatarName;
+        
  
         $user->save();
         return redirect('/profile/' . $user->id);

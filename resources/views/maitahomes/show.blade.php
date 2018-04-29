@@ -25,7 +25,7 @@
           <div class="condition">
             <h4>Condition</h4>
             <p>{{ $promotion->condition }}</p>
-            <small class="text-muted">Exp:   {{ $promotion->exp_date }}</small>
+            <small class="text-muted">Exp:   {{\Carbon\Carbon::parse($promotion->exp_date)->diffForHumans() }}</small>
             <hr>
             <form class="" action="index.html" method="post">
               <a href="#" class="btn btn-success">do something</a>
