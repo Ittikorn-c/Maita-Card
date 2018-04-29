@@ -42,7 +42,7 @@
                     @foreach($datasets as $dataset)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $dataset['template_name']}}</td>
+                        <td><a href="">{{ $dataset['template_name']}}</a></td>
                         @foreach($dataset['data'] as $time)
                             <td>{{ $time }}</td>
                         @endforeach

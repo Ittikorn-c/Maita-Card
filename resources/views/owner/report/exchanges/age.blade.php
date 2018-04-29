@@ -37,6 +37,7 @@
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Promotion Name</th>
+                    <th scope="col">Template Name</th>
                     @foreach($label as $age)
                         <th scope="col">{{$age}} years</th>
                     @endforeach
@@ -49,7 +50,8 @@
                     @php($data = $dataset[$promotion->id]["data"])
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $promotion->reward_name }}</td>
+                        <td><a href="">{{ $promotion->reward_name }}</a></td>
+                        <td><a href="">{{ $promotion->cardTemplate->name }}</a></td>
                         @foreach($data as $time)
                             <td>{{ $time }}</td>
                         @endforeach
