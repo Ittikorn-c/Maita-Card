@@ -26,3 +26,6 @@
 
     </div>
 @endsection
+@push('css')
+<link href="{{ asset('css/maitahome.css') }}" rel="stylesheet">
+@endpush

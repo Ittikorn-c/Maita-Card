@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+  <div class="card-header"><strong><h4>Your Shops</h4></strong><hr>
+    <div class="">
+      <a href="/owner/report"><button type="button" name="button" class="btn btn-default">report</button></a>
+
+      <button type="button" name="button" class="btn btn-warning">employees</button>
+      <button type="button" name="button" class="btn btn-success">promotions</button>
+    </div>
+
+  </div>
   <table class="table">
     <thead class="thead-light">
       <tr>

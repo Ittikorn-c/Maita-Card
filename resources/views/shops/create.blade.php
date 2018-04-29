@@ -9,14 +9,14 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">create</div>
+        <div class="card-header" style="background-color: #002E2E;color: white;">create</div>
         <div class="card-body">
           <form class="" action="/maitahome/shops" enctype="multipart/form-data" method="post">
             @csrf
             <div class="form-group row">
               <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-user-circle"></i> Owner</label>
               <div class="col-md-6">
-                  <p>someone</p>
+                  <p>{{\Auth::user()->fname}}  {{\Auth::user()->lname}}</p>
               </div>
 
             </div>

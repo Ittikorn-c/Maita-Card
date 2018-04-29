@@ -9,7 +9,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">detail</div>
+        <div class="card-header" style="background-color: #002E2E;color: white;">detail</div>
         <div class="card-body">
           <form class="" action="/maitahome/shops/{{$shop->id}}" method="post">
             @csrf
