@@ -95,8 +95,6 @@ class ProfileController extends Controller
             'address' => 'required|max:255|min:10',
             'phone' => 'required|max:20',
             'gender' => 'required',
-            'username' => 'required|max:255|min:4|unique:users,username,'.$user->id,
-            'email' => 'required|email|unique:users,email,'.$user->id,
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ],[ 'fname.required' => 'The first name field is required.',
             'lname.required' => 'The last name field is required.'
@@ -109,8 +107,6 @@ class ProfileController extends Controller
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
         $user->gender = $request->input('gender');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
         $user->profile_img = $image_name;
  
         $user->save();
