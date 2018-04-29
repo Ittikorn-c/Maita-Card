@@ -142,11 +142,11 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-      
+
       $validateData = $request->validate([
           "shopname" => "min:6|max:20|unique:shops,name",
           "shopphone" => "max:10",
-          "shopeamil" => "unique:shop,email|email",
+          "shopemail" => "unique:shops,email|email",
           "shopcategory" => "required"
       ]);
         try {
@@ -165,6 +165,7 @@ class ShopController extends Controller
           return redirect("/maitahome/shops/allshops");
         } catch (\Exception $e) {
             return back()->withInput();
+
         }
 
     }
@@ -203,9 +204,9 @@ class ShopController extends Controller
     {
         //
         $validateData = $request->validate([
-            "shopname" => "min:6|max:20|unique:shops,name",
+            "shopname" => "min:6|max:20|unique:shops,name,$shop->id",
             "shopphone" => "max:10",
-            "shopeamil" => "unique:shop,email|email",
+            "shopemail" => "unique:shops,email,$shop->id|email",
             "shopcategory" => "required"
         ]);
           try {
@@ -213,13 +214,16 @@ class ShopController extends Controller
             $shop->phone = $request->input("shopphone");
             $shop->email = $request->input("shopemail");
             $shop->category = $request->input("shopcategory");
+            $shop->logo_img = "";
+            $shop->owner_id = \Auth::user()->id;
+            $shop->save();
             $image_name = $shop->id . "." . $request->shoplogo->extension();
             \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
             $shop->logo_img = $image_name;
             $shop->save();
             return redirect("/maitahome/shops/allshops");
           } catch (\Exception $e) {
-
+              return back()->withInput();
           }
     }
 
@@ -237,7 +241,7 @@ class ShopController extends Controller
 
     public function showAllShop()
     {
-      $shops = Shop::all();
+      $shops = Shop::ShopOwner(\Auth::user()->id)->get();
       return view('shops.allShop',['shops'=>$shops]);
     }
     public function showRestaurant()
