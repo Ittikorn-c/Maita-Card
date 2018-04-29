@@ -9,9 +9,9 @@ class BranchController extends Controller
 {
 
     // return for scan to get branch name
-    public function getBName($bid){
+    public function getBName($code){
 
-        $branch = Branch::where('id', '=', $_POST['bid'])->first();
+        $branch = Branch::where('checkin_code', '=', $_POST['code'])->first();
 
         return $branch->name;
 

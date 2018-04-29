@@ -74,10 +74,10 @@
                                     <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/". Auth::user()->id) . "/qr-code/My"}}'>
                                         My QR code
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
                                         Check in
                                     </a>
                                     @elseif(Auth::user()->role === "owner")
@@ -88,10 +88,10 @@
                                     <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/work-his") }}'>
                                         Working history
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
                                         Scan QR code
                                     </a>
                                     @endif

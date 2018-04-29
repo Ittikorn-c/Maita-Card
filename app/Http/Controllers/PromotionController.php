@@ -65,7 +65,7 @@ class PromotionController extends Controller
 
         //fix first
         // case customer
-        $user = \App\User::where('id', '=', 7)->first();
+        $user = \App\User::where('id', '=', 30)->first();
         // case employee
         // $user = \App\User::where('id', '=', 1)->first();
         //

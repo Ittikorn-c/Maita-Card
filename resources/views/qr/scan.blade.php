@@ -26,17 +26,18 @@
 								{{ csrf_field() }}
 
 								<!-- role don't show but pass to store -->
+								<input hidden="true" type="number" name="bid" value="{{ $id }}">
 
-								<label>Username: </label>
+								<label">Username: </label>
 								<label id="result"></label>
 								<input id="rid" hidden="true" type="number" name="uid" value="">
 								<br>
 
-								<label>Point: </label>
-								<input type="number" name="point" value="{{ old('point') }}">
+								<label id="adcol">Point: </label>
+								<input id="point" type="number" name="point" value="{{ old('point') }}">
 								<br>
 
-								<button class="btn btn-primary" type="submit">Submit</button>
+								<button class="btn btn-primary" type="submit">Confirm</button>
 							</form>
 	            
         				</div>   
@@ -56,7 +57,7 @@
 
 									<label>Branch: </label>
 									<label id="result"></label>
-									<input id="rid" hidden="true" type="number" name="bid" value="">
+									<input id="rid" hidden="true" type="text" name="code" value="">
 									<br>
 
 <!-- 									<label>Point: </label>
@@ -83,7 +84,24 @@
       scanner.addListener('scan', function (content) {
         // console.log(content);
         if (content.startsWith("R")){
-        	$('#em').attr('action', '#');
+			$.ajax({
+				url: '/scanforreward/' + content,
+				type:"POST",
+				data: { _token: '{!! csrf_token() !!}', code: content },
+				success:function(data){
+
+			        $("#result").text(data['username']);
+			        $('#rid').val(data['reward_id']);
+			        $('#adcol').text('Reward Name: ' + data['reward_name']);
+			        $('#point').hide();
+			        $('#point').val(data['point']);
+			        $('#em').attr('action', '/rscan');
+				},
+				error:function(){
+					console.log("No data returned");
+				}
+			});   
+
         }
         else {
         	if ($('#role').text() === 'employee'){
@@ -107,7 +125,7 @@
 				$.ajax({
 				    url: '/scanforbranch/' + content,
 				    type:"POST",
-				    data: { _token: '{!! csrf_token() !!}', bid: content },
+				    data: { _token: '{!! csrf_token() !!}', code: content },
 				    success:function(data){
 
 		              $("#result").text(data);

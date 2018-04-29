@@ -2,6 +2,14 @@
 
 @section('content')
 
+<div class="page-header">
+    <h1 style="text-align: center;">
+    	Rewards
+    </h1>
+    <a href="/{{ $template_id }}/rewards/myrewardsQR"><button class="btn btn-primary" style="position: absolute; right: 10px;">My Rewards QR</button></a>
+    <br><br>
+</div>
+
 <div class="row">
 	@foreach($promos as $promo)
 

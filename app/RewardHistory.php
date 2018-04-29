@@ -25,5 +25,13 @@ class RewardHistory extends Model
                         ->where("card_templates.shop_id", $shop_id)
                         ->select("reward_histories.*");
     }
+
+    public function scopePromotionDetail($query, $template_id){
+        return $query->join("promotions", "promotions.id", "=", "reward_histories.promotion_id")
+                        ->join('card_templates', 'card_templates.id', '=', 'promotions.template_id')
+                        ->join('shops', 'shops.id', '=', 'card_templates.shop_id')
+                        ->where('card_templates.id', $template_id)
+                        ->select("reward_histories.*", 'promotions.reward_name', 'shops.name');
+    }
     
 }

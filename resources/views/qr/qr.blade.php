@@ -2,7 +2,7 @@
 
 @section('content')
         <div class="page-header">
-            <h1 style="text-align: center;">My QR<br>
+            <h1 style="text-align: center;">{{ $title }} QR<br>
            
             </h1>
         </div>
