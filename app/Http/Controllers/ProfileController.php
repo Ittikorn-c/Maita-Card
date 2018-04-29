@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Employee;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -102,9 +102,8 @@ class ProfileController extends Controller
             'lname.required' => 'The last name field is required.'
         ]);
 
-        $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
-        request()->avatar->move(public_path('/images/profile'), $avatarName);
-
+        $image_name = $user->username . "." . request()->avatar->getClientOriginalExtension();
+        request()->avatar->storeAs('/public/profile/', $image_name);
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
         $user->address = $request->input('address');
@@ -112,7 +111,7 @@ class ProfileController extends Controller
         $user->gender = $request->input('gender');
         $user->username = $request->input('username');
         $user->email = $request->input('email');
-        $user->profile_img = $avatarName;
+        $user->profile_img = $image_name;
  
         $user->save();
         return redirect('/profile/' . $user->id);
