@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->role === 'owner')
 <table class="table table-hover">
   <thead>
     <tr>
@@ -36,4 +37,10 @@
     @endforeach
   </tbody>
 </table>
+@else
+        <div class="container panel panel-default card">
+            <h1>You are not owner</h1>
+            <a class="btn btn-danger" href="/profile/{{ Auth::user()->id }}">My profile</a>
+        </div>
+@endif
 @endsection
