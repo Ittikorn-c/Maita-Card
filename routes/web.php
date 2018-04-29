@@ -16,9 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get("/confirmed/{user_id}", function($user_id){
-    return view("auth.confirmed");
-});
+Route::get("/confirmed/{user_id}", "Auth\RegisterController@confirmRegister");
 Route::get("/after-register", function(){
     return view("auth.after-register");
 });
