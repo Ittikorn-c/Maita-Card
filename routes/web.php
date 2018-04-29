@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MaitaHomeController@index');
 
 Auth::routes();
 Route::get("/confirmed/{user_id}", "Auth\RegisterController@confirmRegister");

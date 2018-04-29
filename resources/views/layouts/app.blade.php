@@ -80,6 +80,9 @@
                                     <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
                                         Check in
                                     </a>
+                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                        My Cards
+                                    </a>
                                     @elseif(Auth::user()->role === "owner")
                                     <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
