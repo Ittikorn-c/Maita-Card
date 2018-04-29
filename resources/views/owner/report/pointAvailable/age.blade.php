@@ -8,7 +8,7 @@
             </div>
             <div class="col-xs-12 col-md-4 side-menu" style="height:300px">
                 <h4>
-                    Select Promotion
+                    Select Card Template
                 </h4>
                 <div class="side-scroll">
                     @foreach($datasets as $dataset)
@@ -30,7 +30,7 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Promotion Name</th>
+                    <th scope="col">Template Name</th>
                     @foreach($label as $age)
                         <th scope="col">{{$age}} years</th>
                     @endforeach

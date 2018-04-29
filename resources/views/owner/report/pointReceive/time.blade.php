@@ -25,31 +25,94 @@
         </div>
 
         <div class="row">
+            
             <div class="col-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Promotion Name</th>
-                    @foreach($label as $hour)
-                        <th scope="col">{{$hour}}</th>
-                    @endforeach
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    @foreach($datasets as $dataset)
-                    <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $dataset['template_name']}}</td>
-                        @foreach($dataset['data'] as $time)
-                            <td>{{ $time }}</td>
-                        @endforeach
-                    </tr>
-                    @endforeach
-                </tbody>
-                </table>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="page1-tab" data-toggle="tab" href="#page1" role="tab" aria-controls="home" aria-selected="true">08:00 - 15:00</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="page2-tab" data-toggle="tab" href="#page2" role="tab" aria-controls="profile" aria-selected="false">16:00 - 23:00</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="page3-tab" data-toggle="tab" href="#page3" role="tab" aria-controls="contact" aria-selected="false">00:00 - 07:00</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="page1" role="tabpanel" aria-labelledby="home-tab">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Template Name</th>
+                                    @for ($i = 8; $i < 16; $i++)
+                                        <th scope="col">{{$i}}:00 - {{$i+1}}:00</th>
+                                    @endfor
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($datasets as $dataset)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $dataset['template_name'] }}</td>
+                                    @for ($i = 8; $i < 16; $i++)
+                                        <td>{{ $dataset['data'][$i] }}</td>
+                                    @endfor
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="page2" role="tabpanel" aria-labelledby="profile-tab">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Template Name</th>
+                                    @for ($i = 16; $i < 24; $i++)
+                                        <th scope="col">{{$i}}:00 - {{$i+1}}:00</th>
+                                    @endfor
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($datasets as $dataset)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $dataset['template_name'] }}</td>
+                                    @for ($i = 16; $i < 24; $i++)
+                                        <td>{{ $dataset['data'][$i] }}</td>
+                                    @endfor
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="page3" role="tabpanel" aria-labelledby="contact-tab">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Template Name</th>
+                                    @for ($i = 0; $i < 8; $i++)
+                                        <th>{{$i}}:00 - {{$i+1}}:00</th>
+                                    @endfor
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($datasets as $dataset)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $dataset['template_name'] }}</td>
+                                    @for ($i = 0; $i < 8; $i++)
+                                        <td>{{ $dataset['data'][$i] }}</td>
+                                    @endfor
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+               
             </div>
         </div>
     </div>
