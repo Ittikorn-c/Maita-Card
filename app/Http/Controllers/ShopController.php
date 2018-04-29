@@ -204,9 +204,9 @@ class ShopController extends Controller
     {
         //
         $validateData = $request->validate([
-            "shopname" => "min:6|max:20|unique:shops,name",
+            "shopname" => "min:6|max:20|unique:shops,name,$shop->id",
             "shopphone" => "max:10",
-            "shopemail" => "unique:shops,email|email",
+            "shopemail" => "unique:shops,email,$shop->id|email",
             "shopcategory" => "required"
         ]);
           try {
