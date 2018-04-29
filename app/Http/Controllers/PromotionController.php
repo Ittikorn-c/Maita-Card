@@ -14,7 +14,7 @@ class PromotionController extends Controller
 
         //check user that login is owner of this card
         if(\Gate::denies("view-reward", $template_id))
-            return $this->redirectUnpermission();
+            return redirect('/');
 
         $promo = Promotion::where('template_id', '=', $template_id)->get();
         $today = new Carbon;
@@ -68,7 +68,7 @@ class PromotionController extends Controller
         $user = \Auth::user();
 
         if(\Gate::denies("view-reward", $template_id))
-            return $this->redirectUnpermission();
+            return redirect('/');
 
         //fix first
         // case customer

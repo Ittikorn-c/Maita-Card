@@ -105,7 +105,7 @@ class RewardHistoryController extends Controller
     public function checkHis($template_id){
 
         if(\Gate::denies("view-reward", $template_id))
-            return $this->redirectUnpermission();
+            return redirect('/');
 
     	// $card = Card::where('template_id', '=', $template_id)->where('user_id', '=', $user->id)->first();
     	// $card->cardTemplate;

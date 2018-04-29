@@ -10,7 +10,7 @@ class QRController extends Controller
     public function showQR($id, $title){
         //check gate for owner
         if(\Gate::denies("not-owner"))
-            return $this->redirectUnpermission();
+            return redirect('/');
     	// qr as userid for reading
 
         //case em = branch qr
@@ -24,7 +24,7 @@ class QRController extends Controller
     public function scanQR($id) {
 
         if(\Gate::denies("not-owner"))
-            return $this->redirectUnpermission();
+            return redirect('/');
 
         // Get the currently authenticated user...
         $user = \Auth::user();
