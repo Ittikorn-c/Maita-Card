@@ -21,11 +21,15 @@ class CardController extends Controller
         //
 
         // Get the currently authenticated user...
-        // $user = Auth::user();
-        // $role = $user->role;
+        $user = \Auth::user();
+
+        $request->validate([
+            'code' => 'required',],
+            [ 'code.required' => 'Please Scan QR first'
+        ]);
 
         // still can't test fix first
-        $user = User::where('id', '=', 17)->first();
+        // $user = User::where('id', '=', 17)->first();
 
         // case customer scan for check in branch
         if ($user->role === 'customer'){
