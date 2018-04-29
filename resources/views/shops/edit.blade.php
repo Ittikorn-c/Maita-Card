@@ -10,7 +10,7 @@
       <div class="card">
         <div class="card-header">edit</div>
         <div class="card-body">
-          <form class="" action="/maitahome/shops/{{$shop->id}}" method="post">
+          <form class="" enctype="multipart/form-data" action="/maitahome/shops/{{$shop->id}}" method="post">
             @csrf
             @method("PUT")
             <div class="form-group row">
@@ -107,3 +107,7 @@
 
 </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('js/shops/create.js') }}" defer></script>
+@endpush

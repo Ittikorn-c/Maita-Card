@@ -54,7 +54,7 @@
               <div class="col-md-6">
 
 
-                <img style="max-width:100%;height:auto;margin-top:10px" class="img img-responsive" id="profile-preview" alt="">
+                <img src='{{ asset("/storage/shop/$shop->logo_img")}}' style="max-width:100%;height:auto;margin-top:10px" class="img img-responsive" id="profile-preview" alt="">
               </div>
             </div>
 
