@@ -88,6 +88,7 @@ Route::get('/profile/{user}/edit', 'ProfileController@edit')
     ->where('user' ,'[0-9]+');
 Route::put('/profile/{user}', 'ProfileController@update')
     ->where('user' ,'[0-9]+');
+Route::get('/employees', 'EmployeeController@index');
 
 
 Route::resource('/shops', 'ShopController');

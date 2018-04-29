@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Employee;
+use App\Card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -61,7 +62,8 @@ class ProfileController extends Controller
     public function show($id)
     {
         $user_profile = User::findOrFail($id);
-        return view('profile.show', ['user' => $user_profile]);
+        $user_cards = Card::where('user_id',$id)->get();
+        return view('profile.show', ['user' => $user_profile,'cards' => $user_cards]);
     }
 
     /**
