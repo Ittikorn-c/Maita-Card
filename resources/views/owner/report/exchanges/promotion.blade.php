@@ -41,6 +41,7 @@
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Promotion Name</th>
+                    <th scope="col">Template Name</th>
                     <th scope="col">Expired Date</th>
                     <th scope="col">Exchange Times</th>
                     </tr>
@@ -51,7 +52,8 @@
                     <tr>
                         <th scope="row">{{ $i++ }}</th>
                         <td>{{ $promotion->reward_name }}</td>
-                        <td>{{ $promotion->exp_date }}</td>
+                        <td>{{ $promotion->cardTemplate->name }}</td>
+                        <td>{{ \Carbon\Carbon::parse($promotion->exp_date)->format('d/m/Y') }} ({{ \Carbon\Carbon::parse($promotion->exp_date)->diffForHumans() }})</td>
                         <td>{{ $promotion->rewardHistories()->count() }}</td>
                     </tr>
                     @endforeach

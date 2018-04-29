@@ -15,11 +15,11 @@
           <a href="{{url('/maitahome/' . $promotion->id)}}"><img class="card-img-top" src="http://placehold.it/700x400" alt="{{$promotion->logo_img}}"></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="{{url('/maitahome/' . $promotion->id)}}">{{$promotion->cardTemplate->shop->name}}</a>
+              <a href="{{url('/maitahome/' . $promotion->id)}}">{{$promotion->reward_name}}</a>
             </h4>
 
             <strong><p class="card-text">Point: {{$promotion->point}}</p></strong>
-            <p class="card-text">expired date: {{$promotion->exp_date}}</p>
+            <p class="card-text">expired date: {{\Carbon\Carbon::parse($promotion->exp_date)->diffForHumans() }}</p>
           </div>
         </div>
       </div>

@@ -24,6 +24,13 @@
               <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-address-book"></i>Shop Name</label>
               <div class="col-md-6">
                   <input type="text"  class="form-control" placeholder="shop name.." name="shopname" value="">
+                  @if ($errors->has('shopname'))
+                  <div class="alert alert-danger">
+                      @foreach($errors->get('shopname') as $message)
+                          {{ $message }}
+                      @endforeach
+                  </div>
+                  @endif
               </div>
 
             </div>
@@ -32,6 +39,13 @@
               <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-phone"></i> Phone</label>
               <div class="col-md-6">
                   <input type="text"  class="form-control" placeholder="phone number.." name="shopphone" value="">
+                  @if ($errors->has('shopphone'))
+                  <div class="alert alert-danger">
+                      @foreach($errors->get('shopphone') as $message)
+                          {{ $message }}
+                      @endforeach
+                  </div>
+                  @endif
               </div>
 
             </div>
@@ -39,6 +53,13 @@
               <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-envelope"></i> Email</label>
               <div class="col-md-6">
                   <input type="email"  class="form-control" placeholder="email.." name="shopemail" value="">
+                  @if ($errors->has('shopemail'))
+                  <div class="alert alert-danger">
+                      @foreach($errors->get('shopemail') as $message)
+                          {{ $message }}
+                      @endforeach
+                  </div>
+                  @endif
               </div>
 
             </div>
@@ -50,6 +71,13 @@
                     <option value="{{$category}}" class="form-control">{{$category}}</option>
                     @endforeach
                   </select>
+                  @if ($errors->has('shopcategory'))
+                  <div class="alert alert-danger">
+                      @foreach($errors->get('shopcategory') as $message)
+                          {{ $message }}
+                      @endforeach
+                  </div>
+                  @endif
               </div>
 
             </div>

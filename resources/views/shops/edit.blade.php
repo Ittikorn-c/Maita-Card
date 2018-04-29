@@ -10,7 +10,7 @@
       <div class="card">
         <div class="card-header">edit</div>
         <div class="card-body">
-          <form class="" action="/maitahome/shops/{{$shop->id}}" method="post">
+          <form class="" enctype="multipart/form-data" action="/maitahome/shops/{{$shop->id}}" method="post">
             @csrf
             @method("PUT")
             <div class="form-group row">
@@ -24,6 +24,13 @@
               <label for="" class="col-sm-4 col-form-label text-md-center"><i class="fa fa-address-book"></i>   Shop Name</label>
               <div class="col-md-6">
               <input type="text"  class="form-control" placeholder="shop name.." name="shopname" value="{{old('shopname') ?? $shop->name}}">
+              @if ($errors->has('shopname'))
+              <div class="alert alert-danger">
+                  @foreach($errors->get('shopname') as $message)
+                      {{ $message }}
+                  @endforeach
+              </div>
+              @endif
               </div>
 
             </div>
@@ -32,33 +39,54 @@
               <label for="" class="col-sm-4 col-form-label text-md-center"><i class="fa fa-phone"></i>   Phone</label>
               <div class="col-md-6">
                 <input type="text"  class="form-control" placeholder="phone number.." name="shopphone" value="{{old('shopphone') ?? $shop->phone}}">
+                @if ($errors->has('shopphone'))
+                <div class="alert alert-danger">
+                    @foreach($errors->get('shopphone') as $message)
+                        {{ $message }}
+                    @endforeach
+                </div>
+                @endif
               </div>
 
             </div>
             <div class="form-group row">
               <label for="" class="col-sm-4 col-form-label text-md-center"><i class="fa fa-envelope"></i>   Email</label>
               <div class="col-md-6">
-                  <input type="email"  class="form-control" placeholder="" name="shopphone" value="{{old('shopemail') ?? $shop->email}}">
+                  <input type="email"  class="form-control" placeholder="" name="shopemail" value="{{old('shopemail') ?? $shop->email}}">
+                  @if ($errors->has('shopemail'))
+                  <div class="alert alert-danger">
+                      @foreach($errors->get('shopemail') as $message)
+                          {{ $message }}
+                      @endforeach
+                  </div>
+                  @endif
               </div>
 
             </div>
             <div class="form-group row">
               <label for="" class="col-sm-4 col-form-label text-md-center"><i class="fa fa-server"></i>   Category</label>
               <div class="col-md-6">
-                  <input type="text"  class="form-control" placeholder="phone number.." name="shopphone" value="{{old('shopcategory') ?? $shop->category}}">
+                  <input type="text"  class="form-control" placeholder="phone number.." name="shopcategory" value="{{old('shopcategory') ?? $shop->category}}">
+                  @if ($errors->has('shopcategory'))
+                  <div class="alert alert-danger">
+                      @foreach($errors->get('shopcategory') as $message)
+                          {{ $message }}
+                      @endforeach
+                  </div>
+                  @endif
               </div>
 
             </div>
             <div class="form-group row">
-              <label for="" class="col-sm-4 col-form-label text-md-center"><i class="fa fa-desktop"></i>    Shop logo</label>
+              <label for="" class="col-sm-4 col-form-label text-md-right"><i class="fa fa-desktop"></i>Shop logo</label>
               <div class="col-md-6">
                 <div class="custom-file">
-                    <input v-on:change="onSelectProfileUploadImage($event)" class="custom-file-input" type="file" id="profile" name="shoplogo">
-                    <label class="custom-file-label" for="shoplogo">Choose file</label>
+                    <input class="custom-file-input" type="file" id="profile" name="shoplogo">
+                    <label class="custom-file-label" id="profile-label" for="shoplogo">Choose file</label>
 
                 </div>
 
-                <img style="max-width:100%;height:auto;margin-top:10px" class="img img-responsive" id="profile-preview" alt="">
+                <img style="max-width:100%;height:auto;margin-top:10px" class="img img-responsive" id="profile-preview" alt="" src="{{old('shoplogo') ?? $shop->logo_img}}">
               </div>
             </div>
 
@@ -70,9 +98,6 @@
                 </div>
             </div>
 
-
-
-        </div>
       </div>
     </div>
 
@@ -82,3 +107,7 @@
 
 </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('js/shops/create.js') }}" defer></script>
+@endpush

@@ -37,7 +37,11 @@ class Shop extends Model
     public function scopeMall($query){
         return $query->where("category", "mall");
       }
-
+    public function scopeShopOwner($query, $user_id){
+        return $query->join("users", "shops.owner_id", "=", "users.id")
+                      ->where("shops.owner_id","=",$user_id)
+                      ->select("shops.*");
+    }
     public function scopeAllEmployees($query, $shop_id){
         return DB::table("shops")
                     ->join("branches", "shops.id", "=", "branches.shop_id")

@@ -61,7 +61,7 @@ class UsageController extends Controller
         //case employee scan
         if ($role === 'employee'){
 
-            $em = \App\Employee::where('user_id', '=', $user->id)->first();
+            $em = \App\Employee::where('user_id', '=', $user->id)->where('branch_id', '=', $request->input('bid'))->first();
             $em->branch;
 
             // $branch = \App\Branch::where('id', '=', $em->branch_id)->first();
