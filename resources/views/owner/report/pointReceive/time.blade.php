@@ -54,7 +54,7 @@
                             @foreach($datasets as $dataset)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $dataset['template_name'] }}</td>
+                                    <td><a href="">{{ $dataset['template_name'] }}</a></td>
                                     @for ($i = 8; $i < 16; $i++)
                                         <td>{{ $dataset['data'][$i] }}</td>
                                     @endfor
