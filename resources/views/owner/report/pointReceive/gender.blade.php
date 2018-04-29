@@ -13,7 +13,7 @@
                 <div class="side-scroll">
                     @foreach($datasets as $dataset)
                     <div class="form-check">
-                        <input v-on:change="onCheckPromotion({{$dataset['template_id']}})" name="template" class="form-check-input" type="radio" value="" id="promotion-select-{{$dataset['template_id']}}">
+                        <input v-on:change="onCheckPromotion({{$dataset['template_id']}})" name="template" class="form-check-input" type="radio" value="" id="promotion-select-{{$dataset['template_id']}}" @if($loop->first) checked @endif>
                         <label class='form-check-label' for="promotion-select-{{$dataset['template_id']}}">
                             {{ $dataset['template_name'] }}
                         </label>

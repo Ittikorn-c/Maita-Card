@@ -13,7 +13,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     @stack("js")
-    <script src="{{ asset('js/pagination.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -72,27 +71,27 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @if(Auth::user()->role === "customer")
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/". Auth::user()->id) . "/qr-code/My"}}'>
                                         My QR code
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
                                         Check in
                                     </a>
                                     @elseif(Auth::user()->role === "owner")
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
                                     @else
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/work-his") }}'>
                                         Working history
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("") }}'>
+                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
                                         Scan QR code
                                     </a>
                                     @endif

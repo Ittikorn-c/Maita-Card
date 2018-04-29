@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');        
+    }
+
+    //use for scan to get username
+    public function getUName($uid){
+        $user = User::where('id', '=', $_POST['uid'])->first();
+
+        return $user->username;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +72,19 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        // if (\Auth::user()->cant('update', $user)) {
+        //     return redirect('/profile');
+        //     return $this->authorize('update', $user);
+        // }
+
+        $gender = [ 
+            'male', 
+            'female'];
+
+        return view('profile.edit' , [
+            'user' => $user,
+            'gender' => $gender
+        ]);
     }
 
     /**
@@ -72,7 +96,30 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'fname' => 'required|max:255',
+            'lname' => 'required|max:255',
+            'address' => 'required|max:255|min:4',
+            'phone' => 'required|max:20',
+            'gender' => 'required',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ],[ 'fname.required' => 'The first name field is required.',
+            'lname.required' => 'The last name field is required.'
+        ]);
+        if($request->avatar){
+            $image_name = $user->username . "." . request()->avatar->getClientOriginalExtension();
+            request()->avatar->storeAs('/public/profile/', $image_name);
+            $user->profile_img = $image_name;
+        }
+        $user->fname = $request->input('fname');
+        $user->lname = $request->input('lname');
+        $user->address = $request->input('address');
+        $user->phone = $request->input('phone');
+        $user->gender = $request->input('gender');
+        
+ 
+        $user->save();
+        return redirect('/profile/' . $user->id);
     }
 
     /**

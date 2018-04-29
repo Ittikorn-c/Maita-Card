@@ -11,6 +11,56 @@ use Illuminate\Http\Request;
 class CardController extends Controller
 {
     /**
+     * Check In a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkin(Request $request) 
+    {
+        //
+
+        // Get the currently authenticated user...
+        // $user = Auth::user();
+        // $role = $user->role;
+
+        // still can't test fix first
+        $user = User::where('id', '=', 17)->first();
+
+        // case customer scan for check in branch
+        if ($user->role === 'customer'){
+
+            $check_code = $request->input('code');
+
+            $shop = \App\Branch::where('checkin_code', '=', $check_code)->first()->shop;
+
+            $card = Card::where('user_id', '=', $user->id)->cardsOf($shop->id)->first();
+
+            // $card_id = \App\Card::where('user_id', '=', $user->id)->first();
+
+            // // fix 
+            // $employee_id = 1;
+
+            $card->checkin_point = $card->checkin_point + 1;
+
+            $card->save();
+
+            //case create transaction of this checkin
+            $cusin = new \App\CustomerCheckin;
+            $cusin->user_id = $user->id;
+            $cusin->checkin_code = $check_code;
+
+            $cusin->save();
+
+            return redirect('/' . $user->id . '/scan');               
+        }
+    }
+
+    public function share(Card $card) {
+
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -53,7 +103,7 @@ class CardController extends Controller
             return redirect('/');
         }*/
 
-        return view('card.detail', compact('card'));
+        return view('cards.detail', compact('card'));
     }
 
     /**

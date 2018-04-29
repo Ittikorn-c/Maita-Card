@@ -67,7 +67,10 @@ function initExchangeChart(){
             datasets: [
                 {
                     label: 'exchage rate',
-                    data: [10, 1],
+                    data: (datasets.length==0)?[0,0]:[
+                        datasets[Object.keys(datasets)[0]].data.male,
+                        datasets[Object.keys(datasets)[0]].data.female
+                    ],
                     backgroundColor: [ mcolor, fcolor],
                     borderColor: [ bmcolor, bfcolor ] ,
                     borderWidth: 1

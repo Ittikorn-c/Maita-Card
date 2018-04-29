@@ -2,12 +2,114 @@
 
 namespace App\Http\Controllers;
 
-use App\Shop;
+use App\CardTemplate;
 use App\Promotion;
+use App\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
+    /*------------ Promotion-combined Controller -----------*/
+    public function isShopOwner($shop) {
+        return true; //<<------------------------------- TRAP STATE FOR TEST
+        if (\Auth::user()->id !== $shop->owner_id){
+            return redirect('/');
+        }
+    }
+
+    public function indexPromotion(Shop $shop){
+        $this->isShopOwner($shop);
+
+        $templates = CardTemplate::where('shop_id', $shop->id)->pluck('id')->toArray();
+        $promotions = Promotion::whereIn('template_id', $templates)->get();
+
+        return view('shops.promotion.index', compact('shop', 'promotions'));
+    }
+
+    public function showPromotion(Shop $shop, Promotion $promotion){
+        $this->isShopOwner($shop);
+
+        return view('shops.promotion.show', compact('shop','promotion'));
+    }
+
+    public function createPromotion(Shop $shop){
+        $this->isShopOwner($shop);
+
+        $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id')->toArray();
+        return view('shops.promotion.create', compact('shop', 'cards'));
+    }
+
+    public function storePromotion(Request $request, Shop $shop) {
+        $request->validate([
+            'reward_name' => ['required'],
+            'reward_img' => ['required'],
+            'condition' => ['required'],
+            'template_id' => ['required'],
+            'point' => ['required'],
+            'exp_date' => ['required'],
+            'exp_time' => ['required'],
+        ]);
+
+        if(!$request->hasFile('reward_img')){
+            return redirect("/shops/{$shop->id}/promotion/create");
+        }
+
+        $image_name = $request->file('reward_img')->getClientOriginalName();
+        $request->reward_img->storeAs('promotions', $image_name, 'public');
+
+        $promotion = new Promotion;
+        $promotion->reward_img = $image_name;
+        $promotion->reward_name = $request->input('reward_name');
+        $promotion->condition = $request->input('condition');
+        $promotion->template_id = $request->input('template_id');
+        $promotion->point = $request->input('point');
+        $promotion->exp_date = $request->input('exp_date').' '.$request->input('exp_time');
+        $promotion->save();
+        return redirect("/shops/{$shop->id}/promotion/{$promotion->id}");
+    }
+
+    public function editPromotion(Shop $shop, Promotion $promotion) {
+        $this->isShopOwner($shop);
+
+        $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id');
+        return view('shops.promotion.edit', compact('shop','promotion', 'cards'));
+    }
+
+    public function updatePromotion(Request $request,Shop $shop, Promotion $promotion) {
+        $this->isShopOwner($shop);
+
+        $request->validate([
+            'reward_name' => ['required'],
+            'condition' => ['required'],
+            'template_id' => ['required'],
+            'point' => ['required'],
+            'exp_date' => ['required'],
+            'exp_time' => ['required'],
+        ]);
+
+        if($request->hasFile('reward_img')) {
+            $image_name = $request->file('reward_img')->getClientOriginalName();
+            $request->reward_img->storeAs('promotions', $image_name, 'public');
+            $promotion->reward_img = $image_name;
+        }
+
+        $promotion->reward_name = $request->input('reward_name');
+        $promotion->condition = $request->input('condition');
+        $promotion->template_id = $request->input('template_id');
+        $promotion->point = $request->input('point');
+        $promotion->exp_date = $request->input('exp_date').' '.$request->input('exp_time');
+        $promotion->save();
+        return redirect("/shops/{$shop->id}/promotion/{$promotion->id}");
+    }
+
+    public function destroyPromotion(Shop $shop, $promotion) {
+        $this->isShopOwner($shop);
+
+        $promotion->delete();
+        return redirect("/shops/{$shop->id}");
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,8 +142,9 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
+      
       $validateData = $request->validate([
-          "shopname" => "min:6|max:20|unique:shop,name",
+          "shopname" => "min:6|max:20|unique:shops,name",
           "shopphone" => "max:10",
           "shopeamil" => "unique:shop,email|email",
           "shopcategory" => "required"
@@ -49,15 +152,23 @@ class ShopController extends Controller
         try {
           $shop = new Shop;
           $shop->name = $request->input("shopname");
-          $shop->phone = $request->intput("shopphone");
+          $shop->phone = $request->input("shopphone");
           $shop->email = $request->input("shopemail");
           $shop->category = $request->input("shopcategory");
-          $shop->owner_id = 1;
-          $shop->logo_img = "test-logo.jpg";
-          // $shop->save();
-          return redirect("/maitahome/allshops");
+          $shop->logo_img = "";
+          $shop->owner_id = \Auth::user()->id;
+          $shop->save();
+          $image_name = $shop->id . "." . $request->shoplogo->extension();
+          \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
+          $shop->logo_img = $image_name;
+          $shop->save();
+          return redirect("/maitahome/shops/allshops");
         } catch (\Exception $e) {
+<<<<<<< HEAD
             return back()->withInput();
+=======
+            return $e;
+>>>>>>> bf1b36a9216c08d9b57fa0974753739aca2a2eb0
         }
 
     }
@@ -96,20 +207,21 @@ class ShopController extends Controller
     {
         //
         $validateData = $request->validate([
-            "shopname" => "min:6|max:20|unique:shop,name",
+            "shopname" => "min:6|max:20|unique:shops,name",
             "shopphone" => "max:10",
             "shopeamil" => "unique:shop,email|email",
             "shopcategory" => "required"
         ]);
           try {
             $shop->name = $request->input("shopname");
-            $shop->phone = $request->intput("shopphone");
+            $shop->phone = $request->input("shopphone");
             $shop->email = $request->input("shopemail");
             $shop->category = $request->input("shopcategory");
-            $shop->owner_id = 1;
-            $shop->logo_img = "test-logo.jpg";
-            // $shop->save();
-            return redirect("/maitahome/allshops");
+            $image_name = $shop->id . "." . $request->shoplogo->extension();
+            \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
+            $shop->logo_img = $image_name;
+            $shop->save();
+            return redirect("/maitahome/shops/allshops");
           } catch (\Exception $e) {
 
           }

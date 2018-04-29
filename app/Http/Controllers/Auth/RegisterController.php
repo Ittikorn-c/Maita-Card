@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmRegistration;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/after-register';
 
     /**
      * Create a new controller instance.
@@ -38,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except("confirmRegister");
     }
 
     /**
@@ -70,7 +72,7 @@ class RegisterController extends Controller
         // Storage::put("public/profile/$image_name", $data["profile"]);
         Storage::disk('public')->put("profile/$image_name", file_get_contents($data["profile"]));
 
-        return User::create([
+        $user =  User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -82,8 +84,23 @@ class RegisterController extends Controller
             "gender" => $data["gender"],
             "profile_img" => $image_name,
             "role" => $data["role"],
-            "status" => "active",
+            "status" => "inactive",
             "facebook" => $data["facebook"]
         ]);
+        $this->sendConfirmMail($user);
+        return $user;
+    }
+
+    private function sendConfirmMail($user){
+        return Mail::to($user)->send(new ConfirmRegistration($user));
+    }
+
+    public function confirmRegister($user_id){
+        $user = User::findOrFail($user_id);
+        if($user->status === "inactive")
+            \Auth::login($user, true);
+        $user->status = "active";
+        $user->save();
+        return view("auth.confirmed", ["user"=>$user]);
     }
 }

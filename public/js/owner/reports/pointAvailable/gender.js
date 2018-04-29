@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 245);
+/******/ 	return __webpack_require__(__webpack_require__.s = 249);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43327,14 +43327,18 @@ module.exports = {
 /* 242 */,
 /* 243 */,
 /* 244 */,
-/* 245 */
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(246);
+module.exports = __webpack_require__(250);
 
 
 /***/ }),
-/* 246 */
+/* 250 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43403,7 +43407,7 @@ function initExchangeChart() {
             labels: label,
             datasets: [{
                 label: 'exchage rate',
-                data: [10, 1],
+                data: datasets.length == 0 ? [0, 0] : [datasets[Object.keys(datasets)[0]].data.male, datasets[Object.keys(datasets)[0]].data.female],
                 backgroundColor: [mcolor, fcolor],
                 borderColor: [bmcolor, bfcolor],
                 borderWidth: 1

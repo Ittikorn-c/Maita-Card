@@ -14,6 +14,7 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/register.js', 'public/js')
     .js('resources/assets/js/del.js', 'public/js')
+    .js('resources/assets/js/shops/create.js', 'public/js/shops')
     .sass('resources/assets/sass/maitahome.scss', 'public/css')
     .sass('resources/assets/sass/app.scss', 'public/css');
 
