@@ -30,7 +30,9 @@ class CardController extends Controller
         // case customer scan for check in branch
         if ($user->role === 'customer'){
 
-            $shop = \App\Branch::where('id', '=', $request->input('bid'))->first()->shop;
+            $check_code = $request->input('code');
+
+            $shop = \App\Branch::where('checkin_code', '=', $check_code)->first()->shop;
 
             $card = Card::where('user_id', '=', $user->id)->cardsOf($shop->id)->first();
 
@@ -39,14 +41,17 @@ class CardController extends Controller
             // // fix 
             // $employee_id = 1;
 
-            $card->checkin_point = $card->checkin_point + $request->input('checkinPoint');
-
-            // $usage = new UsageHistory;
-            // $usage->card_id = $card_id->id;
-            // $usage->point = $request->input('point');
-            // $usage->employee_id = $employee_id;
+            $card->checkin_point = $card->checkin_point + 1;
 
             $card->save();
+
+            //case create transaction of this checkin
+            $cusin = new \App\CustomerCheckin;
+            $cusin->user_id = $user->id;
+            $cusin->checkin_code = $check_code;
+
+            $cusin->save();
+
             return redirect('/' . $user->id . '/scan');               
         }
     }

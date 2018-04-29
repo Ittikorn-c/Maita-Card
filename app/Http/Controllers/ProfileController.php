@@ -12,6 +12,13 @@ class ProfileController extends Controller
     public function __construct() {
         $this->middleware('auth');        
     }
+
+    //use for scan to get username
+    public function getUName($uid){
+        $user = User::where('id', '=', $_POST['uid'])->first();
+
+        return $user->username;
+    }
     
     /**
      * Display a listing of the resource.
