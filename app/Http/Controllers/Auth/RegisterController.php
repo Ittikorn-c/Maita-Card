@@ -40,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except("confirmRegister");
     }
 
     /**
@@ -84,14 +84,23 @@ class RegisterController extends Controller
             "gender" => $data["gender"],
             "profile_img" => $image_name,
             "role" => $data["role"],
-            "status" => "active",
+            "status" => "inactive",
             "facebook" => $data["facebook"]
         ]);
         $this->sendConfirmMail($user);
         return $user;
     }
 
-    public function sendConfirmMail($user){
+    private function sendConfirmMail($user){
         return Mail::to($user)->send(new ConfirmRegistration($user));
+    }
+
+    public function confirmRegister($user_id){
+        $user = User::findOrFail($user_id);
+        if($user->status === "inactive")
+            \Auth::login($user, true);
+        $user->status = "active";
+        $user->save();
+        return view("auth.confirmed", ["user"=>$user]);
     }
 }

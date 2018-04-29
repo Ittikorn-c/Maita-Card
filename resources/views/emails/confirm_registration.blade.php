@@ -1,20 +1,17 @@
-<!-- Fonts -->
-<link rel="dns-prefetch" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    
+</style>
+<div class="body">
+    <h3><b>Confirm your email address on Maita card</b></h3>
+    <p>
+    Hi! We just need to verify <span style="color:blue"><b>{{ $user->email }}</b></span> is your email address. <br>
+    Click the button below to confirm <br>
+    <a href='{{ url("confirmed/$user->id") }}'>
+        <button>Confirm</button>
+    </a>
+    <br><br>
 
-<!-- Styles -->
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-6" style="margin:0 auto">
-            <div class="card-header">
-                <h3><b>Confirm your registration</b></h3>
-            </div>
-            <div class="card-body">
-                Hi {{ $user->fname . " " . $user->lname}}
-            </div>
-        </div>
-    </div>
+    <b>Didn’t request this email?</b> <br>
+    No worries! Your address may have been entered by mistake. If you ignore or delete this email, nothing further will happen.
+    </p>
 </div>
