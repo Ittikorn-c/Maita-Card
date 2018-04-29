@@ -95,19 +95,21 @@ class ProfileController extends Controller
             'address' => 'required|max:255|min:10',
             'phone' => 'required|max:20',
             'gender' => 'required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ],[ 'fname.required' => 'The first name field is required.',
             'lname.required' => 'The last name field is required.'
         ]);
-
-        $image_name = $user->username . "." . request()->avatar->getClientOriginalExtension();
-        request()->avatar->storeAs('/public/profile/', $image_name);
+        if($request->avatar){
+            $image_name = $user->username . "." . request()->avatar->getClientOriginalExtension();
+            request()->avatar->storeAs('/public/profile/', $image_name);
+            $user->profile_img = $image_name;
+        } 
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
         $user->gender = $request->input('gender');
-        $user->profile_img = $image_name;
+        
  
         $user->save();
         return redirect('/profile/' . $user->id);
