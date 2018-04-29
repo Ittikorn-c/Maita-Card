@@ -164,11 +164,8 @@ class ShopController extends Controller
           $shop->save();
           return redirect("/maitahome/shops/allshops");
         } catch (\Exception $e) {
-<<<<<<< HEAD
             return $e;
-=======
-            return back()->withInput();
->>>>>>> 8ba84e99b899a4d4286a82df2a5d1a285a305ff8
+
         }
 
     }
@@ -241,7 +238,7 @@ class ShopController extends Controller
 
     public function showAllShop()
     {
-      $shops = Shop::all();
+      $shops = Shop::ShopOwner(\Auth::user()->id)->get();
       return view('shops.allShop',['shops'=>$shops]);
     }
     public function showRestaurant()
