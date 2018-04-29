@@ -63,7 +63,7 @@
             </h4>
 
             <strong><p class="card-text">Point: {{$promotion->point}}</p></strong>
-            <p class="card-text">expired date: {{$promotion->exp_date}}</p>
+            <p class="card-text">expired date: {{ 'Expire: ' . \Carbon\Carbon::parse($promo->exp_date)->diffForHumans() }}</p>
           </div>
         </div>
       </div>
