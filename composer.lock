@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "db3ffa22c7fce6d15daeb5b4dd2e442d",
-=======
-    "content-hash": "7b3a17a799ebb55daff0cfaf126bdb33",
->>>>>>> ab884ff8c06ef7fd4b5261ad199b7a4a8e654de1
+    "content-hash": "e1a7334d0f46ceccceba258b35f060a6",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3059,7 +3055,7 @@
             ],
             "authors": [
                 {
-                    "name": "Pádraic Brady",
+                    "name": "Padraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
