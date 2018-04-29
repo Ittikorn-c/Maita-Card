@@ -38,6 +38,16 @@
             <div class="m-1 p-1">    
                 <a class="btn btn-success" href='{{ url("/". Auth::user()->id) . "/qr-code/My"}}'>QR code</a>
             </div>
+            <div class="m-1 p-1 dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Card
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach($cards as $card)
+                        <a class="dropdown-item" value="{{ $card->id }}" href='/cards/{{ $card->id }}'>{{ $card->cardTemplate->name }} {{ $card->point }} point</a>
+                    @endforeach
+                </div>
+            </div>
             @endif
             @if(Auth::user()->role === 'owner' )
             <div class="m-1 p-1"> 
@@ -47,16 +57,7 @@
                 <a class="btn btn-success" href='/maitahome/shops/create'>Create Shop</a>
             </div>
             @endif
-        <div class="m-1 p-1 dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Card
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            @foreach($cards as $card)
-                <a class="dropdown-item" value="{{ $card->id }}" href='/cards/{{ $card->id }}'>{{ $card->cardTemplate->name }} {{ $card->point }} point</a>
-            @endforeach
-            </div>
-        </div>
+        
         @endif
         
         
