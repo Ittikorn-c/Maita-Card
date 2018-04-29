@@ -52,16 +52,15 @@ class ShopController extends Controller
         ]);
 
         if(!$request->hasFile('reward_img')){
-            return redirect("/shops/{$shop->id}/promotion");
+            return redirect("/shops/{$shop->id}/promotion/create");
         }
 
         $image_name = $request->file('reward_img')->getClientOriginalName();
-        Storage::disk('public')->put("promotions/$image_name", $image_name);
-
+        $request->reward_img->storeAs('promotions', $image_name, 'public');
 
         $promotion = new Promotion;
-        $promotion->reward_name = $request->input('reward_name');
         $promotion->reward_img = $image_name;
+        $promotion->reward_name = $request->input('reward_name');
         $promotion->condition = $request->input('condition');
         $promotion->template_id = $request->input('template_id');
         $promotion->point = $request->input('point');
@@ -82,7 +81,6 @@ class ShopController extends Controller
 
         $request->validate([
             'reward_name' => ['required'],
-            'reward_img' => ['required'],
             'condition' => ['required'],
             'template_id' => ['required'],
             'point' => ['required'],
@@ -90,8 +88,10 @@ class ShopController extends Controller
             'exp_time' => ['required'],
         ]);
 
-        if($request->input('reward_img') !== $promotion->reward_img) {
-            //upload image here
+        if($request->hasFile('reward_img')) {
+            $image_name = $request->file('reward_img')->getClientOriginalName();
+            $request->reward_img->storeAs('promotions', $image_name, 'public');
+            $promotion->reward_img = $image_name;
         }
 
         $promotion->reward_name = $request->input('reward_name');

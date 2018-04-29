@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form class="form-horizontal" action="/profile/{{ $user->id }}" method="post">
+<form class="form-horizontal" action="/profile/{{ $user->id }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     {{ csrf_field() }}
     <div class="container panel panel-default card">
@@ -9,6 +9,17 @@
             <h2>Edit Profile : {{ $user->username }}</h2>
             <p>[ <i class="fa fa-user-circle"></i> {{ $user->role }} ]</p>
         </div>
+        <div class="row m-3 p-2">
+        <div class="col-sm-4 p-2 bg-white card">
+            <img src="{{ asset($user->profile_img ? 'images/profile/' . $user->profile_img : 'noimg.png') }}" style="width:100%;max-width:400px"/>
+            <div class="row justify-content-center">
+                <div class="form-group m-1 p-2">
+                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 p-2 bg-white card">
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="username">Username: </label>
             <div class="col-sm-4">
@@ -61,7 +72,7 @@
         </div>
         <div class="row m-3 p-2 form-group">
             <label class="control-label col-sm-2" for="email">Email:</label>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <input type="text" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}" />
             </div>
             @if($errors->first('email'))
@@ -101,9 +112,11 @@
                 </ul>
             </div>
         @endif
+        </div>
+        </div>
     <br>
     <div class="row col-sm-1 m-3 p-2">
-        <button class="btn btn-info m-3 p-2" tyoe="submit">Submit</button>
+        <button class="btn btn-info m-3 p-2" tyoe="submit">Save</button>
     </div>
     
 </form>

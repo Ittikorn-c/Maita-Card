@@ -50,6 +50,11 @@ class CardController extends Controller
             return redirect('/' . $user->id . '/scan');               
         }
     }
+
+    public function share(Card $card) {
+
+    }
+
     /**
      * Display a listing of the resource.
      *

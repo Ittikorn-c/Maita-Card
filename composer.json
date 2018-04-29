@@ -9,6 +9,7 @@
         "doctrine/dbal": "^2.7",
         "fedeisas/laravel-mail-css-inliner": "^2.2",
         "fideloper/proxy": "^4.0",
+        "jorenvanhocht/laravel-share": "^2.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "simplesoftwareio/simple-qrcode": "~2"
