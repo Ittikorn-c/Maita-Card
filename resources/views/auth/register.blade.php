@@ -56,9 +56,10 @@
 
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
+                            
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                
                             </div>
                         </div>
 
@@ -67,6 +68,11 @@
 
                             <div class="col-md-6">
                                 <input id="fname" value="{{ old('fname') }}" type="text" class="form-control" name="fname" required>
+                                @if ($errors->has('fname'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('fname') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -75,6 +81,11 @@
 
                             <div class="col-md-6">
                                 <input id="lname" value="{{ old('lname') }}" type="text" class="form-control" name="lname" required>
+                                @if ($errors->has('lname'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('lname') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -84,6 +95,11 @@
                             <div class="col-md-6">
                                 <input id="address" value="{{ old('address') }}" type="text" class="form-control" name="address" required>
                             </div>
+                            @if ($errors->has('address'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('address') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="form-group row">
@@ -161,7 +177,7 @@
 
                             <div class="col-md-6" style="height:auto">
                                 <div class="custom-file">
-                                    <input v-on:change="onSelectProfileUploadImage($event)" class="custom-file-input" type="file" id="profile" name="profile">
+                                    <input accept="image/*" v-on:change="onSelectProfileUploadImage($event)" class="custom-file-input" type="file" id="profile" name="profile">
                                     <label class="custom-file-label" for="profile">@{{ profile_upload_filename }}</label>
                                     
                                 </div>
