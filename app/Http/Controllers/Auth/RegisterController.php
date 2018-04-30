@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'address' => 'required|string',
             'phone' => 'required|digits:10',
             'birth_date' => 'required|date',
-            'profile' => 'mimes:jpeg,bmp,png'
+            'profile' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
     }
 
