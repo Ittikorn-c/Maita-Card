@@ -57,6 +57,7 @@ class ShopController extends Controller
         }
 
         $image_name = $request->file('reward_img')->getClientOriginalName();
+        $image_name = time().$shop->id.'p.'.$request->file('reward_img')->getClientOriginalExtension();
         $request->reward_img->storeAs('promotions', $image_name, 'public');
 
         $promotion = new Promotion;
@@ -88,7 +89,8 @@ class ShopController extends Controller
         ]);
 
         if($request->hasFile('reward_img')) {
-            $image_name = $request->file('reward_img')->getClientOriginalName();
+    /*        $image_name = $request->file('reward_img')->getClientOriginalName();*/
+            $image_name = time().$shop->id.'p.'.$request->file('reward_img')->getClientOriginalExtension();
             $request->reward_img->storeAs('promotions', $image_name, 'public');
             $promotion->reward_img = $image_name;
         }
@@ -102,11 +104,9 @@ class ShopController extends Controller
         return redirect("/shops/{$shop->id}/promotion/{$promotion->id}");
     }
 
-    public function destroyPromotion(Shop $shop, $promotion) {
-        $this->isShopOwner($shop);
-
+    public function destroyPromotion(Shop $shop,Promotion $promotion) {
         $promotion->delete();
-        return redirect("/shops/{$shop->id}");
+        return redirect("/shops/{$shop->id}/promotion");
     }
 
     /**

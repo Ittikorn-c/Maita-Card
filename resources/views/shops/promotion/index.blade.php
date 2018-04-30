@@ -29,19 +29,9 @@
                                     action="/shops/{{$shop->id}}/promotion/{{$promotion->id}}" method="post">
                                 @csrf
                                 @method("DELETE")
-                            <button class="btn btn-danger" type="submit" onclick="doubleCheck()">delete</button>
+                                <button hidden id="del-btn" class="btn btn-danger" type="submit"></button>
+                                <button class="btn btn-danger" onclick="confirmDelete()">delete</button>
                             </form>
-                            <script>
-                                function doubleCheck() {
-                                    if (confirm("WANT TO DELETE ?")) {
-                                        return true;
-                                    }
-                                    else {
-                                        event.preventDefault();
-                                        return false;
-                                    }
-                                }
-                            </script>
                         </div>
 
                     </div>
@@ -72,4 +62,8 @@
         @endforeach
     </div>
 
-@endsection   
+@endsection
+@push("js")
+    <script src="{{ asset('js/sweetalert2.all.js') }}"></script>
+    <script src="{{ asset('js/confirm-delete.js') }}"></script>
+@endpush
