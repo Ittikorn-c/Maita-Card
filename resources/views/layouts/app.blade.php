@@ -89,7 +89,13 @@
                                         Profile
                                     </a>
                                     <a class="dropdown-item" href='{{ url("/". Auth::user()->id) . "/qr-code/My"}}'>
-                                        My QR code
+                                        My QR code 
+                                    </a>
+                                    <a class="dropdown-item" href='{{ url("/my-usage-history")}}'>
+                                        My Usage History 
+                                    </a>
+                                    <a class="dropdown-item" href='{{ url("/my-checkin-history")}}'>
+                                        My Check In History 
                                     </a>
                                     <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
                                         Check in

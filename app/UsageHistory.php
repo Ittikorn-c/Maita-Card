@@ -36,4 +36,15 @@ class UsageHistory extends Model
                         ->select('usage_histories.*', 'branches.name as branch_name', 'users.username', 'shops.name');
     }
 
+    public function scopeUsed($query, $uid) {
+        return $query->join('cards', 'cards.id', '=', 'usage_histories.card_id')
+                        ->join('users', 'cards.user_id', '=', 'users.id')
+                        ->join('employees', 'employees.id', '=', 'usage_histories.employee_id')
+                        ->join('branches', 'branches.id' ,'=', 'employees.branch_id')
+                        ->join('shops', 'shops.id' ,'=', 'branches.shop_id')
+                        ->where('users.id', '=', $uid)
+                        ->orderBy('usage_histories.created_at', 'desc')
+                        ->select('usage_histories.*', 'branches.name as branch_name', 'users.username', 'shops.name');
+    }
+
 }

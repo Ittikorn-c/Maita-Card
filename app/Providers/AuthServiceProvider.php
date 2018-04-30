@@ -58,5 +58,11 @@ class AuthServiceProvider extends ServiceProvider
             //
             return $user->role === 'employee';
         });
+
+        // gate for employee only
+        Gate::define('customer-only', function ($user) {
+            //
+            return $user->role === 'customer';
+        });
     }
 }
