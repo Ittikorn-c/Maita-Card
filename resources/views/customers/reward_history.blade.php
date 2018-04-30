@@ -29,7 +29,7 @@
             </tbody>
         </table>
         @if(count($histories) === 0)
-            <div class="text-center">
+            <div class="h4 text-center">
                 No content Available
             </div>
         @endif

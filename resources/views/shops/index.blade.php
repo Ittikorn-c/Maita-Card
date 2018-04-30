@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="container">
-
+    <div class="h3 mb-4 card-header font-weight-bold bg-dark text-white">
+        Shop
+    </div>
+    @if(count($shops) === 0)
+        <div class="h4 text-center">
+            No content Available
+        </div>
+    @endif
 
     @foreach($shops as $shop)
       <div class="row">
