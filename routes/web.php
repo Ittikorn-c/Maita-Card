@@ -79,6 +79,8 @@ Route::post('/scanforreward/{code}', 'RewardHistoryController@checkoutRewardDeta
 
 Route::put('/cscan', 'CardController@checkin')->middleware('auth');
 
+Route::get('/my-usage-history', 'UsageController@index')->middleware('auth');
+
 //employee
 Route::get('/work-his', 'UsageController@emWorkHis')->middleware('auth');
 

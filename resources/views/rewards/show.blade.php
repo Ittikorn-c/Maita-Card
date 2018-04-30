@@ -16,7 +16,7 @@
 	@if($today < $promo->exp_date)
 	    <div class="col-lg-4 col-sm-6 portfolio-item">
 	        <div class="card h-100">
-	            <a href="{{ url('/' . $template_id . '/rewards' . '/' . $promo->id) }}"><img class="card-img-top" src="{{URL::asset('/images/'. $promo->reward_img)}}" alt=""></a>
+	            <a href="{{ url('/' . $template_id . '/rewards' . '/' . $promo->id) }}"><img class="card-img-top" src="{{ asset('storage/promotions/'. $promo->reward_img) }}" alt=""></a>
 	            <div class="card-body">
 	              <h4 class="card-title">
 	                <a href="{{ url('/' . $template_id . '/rewards' . '/' . $promo->id) }}">{{ $promo->reward_name }}</a>

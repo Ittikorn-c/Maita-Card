@@ -32,7 +32,7 @@ class RewardHistoryController extends Controller
         $reward_point = \App\Promotion::where('id', '=', $promotion_id)->first()->point;
         //point
 
-        $card = \App\Card::where('id', '=', $reward_history->card_id)->first();
+        $card = \App\Card::where('id', '=', $request->input('card_id'))->first();
 
         if ($card->point < $reward_point){
             return "NOt ENOUGH POINT";
@@ -45,7 +45,7 @@ class RewardHistoryController extends Controller
 
         $reward_history = new RewardHistory;
         $reward_history->reward_code = $reward_code;
-        $reward_history->card_id = $request->input('card_id');
+        $reward_history->card_id = $card->id;
         $reward_history->promotion_id = $promotion_id;
 
         $reward_history->save();

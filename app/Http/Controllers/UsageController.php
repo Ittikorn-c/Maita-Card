@@ -13,7 +13,7 @@ class UsageController extends Controller
     {
 
         //check gate for owner
-        if(\Gate::denies("not-owner"))
+        if(\Gate::denies("employee-only"))
             return redirect('/');
         // Get the currently authenticated user...
         $user = \Auth::user();
@@ -32,6 +32,17 @@ class UsageController extends Controller
     public function index()
     {
         //
+        //check gate for owner
+        if(\Gate::denies("customer-only"))
+            return redirect('/');
+        // Get the currently authenticated user...
+        $user = \Auth::user();
+
+        $uses = UsageHistory::used($user->id)->get();
+
+        return view('customers/usage_his', ['uses' => $uses]);
+
+
     }
 
     /**
