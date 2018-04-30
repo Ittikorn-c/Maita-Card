@@ -29,6 +29,9 @@
             @if(Auth::user()->role === "customer")
               <a style="margin-top:10px" class="btn btn-success" href='{{ url("/joinCard/$shop->id") }}'>Join Card</a>
             @endif
+            @if(Auth::user()->role === "employee")
+              <a style="margin-top:10px" class="btn btn-success" href='{{ url("/$shop->id/branches") }}'>Join work</a>
+            @endif
           @endif
         </div>
       </div>
