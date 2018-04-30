@@ -149,7 +149,8 @@ class ShopController extends Controller
           "shopname" => "min:6|max:20|unique:shops,name",
           "shopphone" => "max:10",
           "shopemail" => "unique:shops,email|email",
-          "shopcategory" => "required"
+          "shopcategory" => "required",
+          "shoplog" => "required"
       ]);
         try {
           $shop = new Shop;
@@ -223,10 +224,12 @@ class ShopController extends Controller
             $shop->logo_img = "";
             $shop->owner_id = \Auth::user()->id;
             $shop->save();
-            $image_name = $shop->id . "." . $request->shoplogo->extension();
-            \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
-            $shop->logo_img = $image_name;
-            $shop->save();
+            if($request->file("shoplogo")){
+                $image_name = $shop->id . "." . $request->shoplogo->extension();
+                \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
+                $shop->logo_img = $image_name;
+                $shop->save();
+            }
             return redirect("/maitahome/shops/allshops");
           } catch (\Exception $e) {
               return back()->withInput();
@@ -293,5 +296,24 @@ class ShopController extends Controller
 
       return view('shops.showPromo',['promotions'=>$promotions,
                                     'shop'=>$shop]);
+    }
+
+    public function joinCard($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $templates = $shop->cardTemplates;
+        
+        return view("customers.join_card", compact("templates", "shop"));
+    }
+
+    public function joinCardRegis(Request $request){
+        $template_id = $request->input("template_id");
+        $card = new \App\Card;
+        $card->user_id = \Auth::user()->id;
+        $card->template_id = $template_id;
+        $card->point = 0;
+        $card->checkin_point = 0;
+        $card->exp_date = \Carbon\Carbon::now()->addYear(2);
+        $card->save();
+        return redirect("/profile/". \Auth::user()->id);
     }
 }

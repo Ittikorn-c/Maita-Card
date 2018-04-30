@@ -18,8 +18,8 @@ class CardTemplateController extends Controller
     {
         $shop = Shop::findOrFail($shop_id);
 
-        if(Gate::denies("view-report", $shop))
-            return $this->redirect("profile/Auth::user()->id");
+        if(Gate::denies("view-shop", $shop))
+            return redirect("profile/".\Auth::user()->id);
 
         $templates = $shop->cardTemplates;
         

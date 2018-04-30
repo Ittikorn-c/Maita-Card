@@ -130,3 +130,7 @@ Route::get("/templates/edit/{template_id}", "CardTemplateController@edit");
 Route::put("/templates/{template_id}", "CardTemplateController@update");
 Route::post("/templates", "CardTemplateController@store");
 Route::delete("/templates/{template_id}", "CardTemplateController@destroy");
+
+Route::get("/joinCard/{shop_id}", "ShopController@joinCard");
+// Route::post("/joinCard/card", "ShopController@joinCardRegis");
+Route::post("/joinCard/card", "ShopController@joinCardRegis");
