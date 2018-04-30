@@ -150,7 +150,7 @@ class ShopController extends Controller
           "shopphone" => "max:10",
           "shopemail" => "unique:shops,email|email",
           "shopcategory" => "required",
-          "shoplog" => "required"
+          "shoplogo" => "required"
       ]);
         try {
           $shop = new Shop;
@@ -317,7 +317,7 @@ class ShopController extends Controller
         $card->save();
         return redirect("/profile/". \Auth::user()->id);
 
-    public function showBranches($shop_id){
+  }  public function showBranches($shop_id){
       //
       $branches = Shop::allBranch($shop_id)->get();
 
