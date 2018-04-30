@@ -9,7 +9,7 @@ use App\Promotion;
 use App\UsageHistory;
 use App\Shop;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 
 class ReportController extends Controller
 {
@@ -243,7 +243,7 @@ class ReportController extends Controller
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = $this->getPointReceiveAge($shop_id);
 
-        return view("owner.report.pointReceive.age",compact("label", "datasets"));
+        return view("owner.report.pointReceive.age",compact("label", "datasets", "shop_id"));
     }
 
     public function pointReceiveGender($shop_id){
@@ -255,7 +255,7 @@ class ReportController extends Controller
         $label = ["male", "female"];
         $datasets = $this->getPointReceiveGender($shop_id);
 
-        return view("owner.report.PointReceive.gender", compact("label", "datasets"));
+        return view("owner.report.PointReceive.gender", compact("label", "datasets", "shop_id"));
     }
 
     public function pointAvailableAge($shop_id){
@@ -267,7 +267,7 @@ class ReportController extends Controller
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = $this->getPointAvailableAge($shop_id);
 
-        return view("owner.report.pointAvailable.age",compact("label", "datasets"));
+        return view("owner.report.pointAvailable.age",compact("label", "datasets", "shop_id"));
     }
 
     public function pointAvailableGender($shop_id){
@@ -278,7 +278,7 @@ class ReportController extends Controller
         $label = ["male", "female"];
         $datasets = $this->getPointAvailableGender($shop_id);
 
-        return view("owner.report.pointAvailable.gender",compact("label", "datasets"));
+        return view("owner.report.pointAvailable.gender",compact("label", "datasets", "shop_id"));
     }
 
     public function checkinPointAvailableAge($shop_id){
@@ -290,7 +290,7 @@ class ReportController extends Controller
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
         $datasets = $this->getCheckinPointAvailableAge($shop_id);
 
-        return view("owner.report.pointAvailable.age",compact("label", "datasets"));
+        return view("owner.report.pointAvailable.age",compact("label", "datasets", "shop_id"));
     }
 
     public function checkinPointAvailableGender($shop_id){
@@ -301,10 +301,63 @@ class ReportController extends Controller
         $label = ["male", "female"];
         $datasets = $this->getCheckinPointAvailableGender($shop_id);
 
-        return view("owner.report.pointAvailable.gender",compact("label", "datasets"));
+        return view("owner.report.pointAvailable.gender",compact("label", "datasets", "shop_id"));
     }
 
-
+    public function exportPointReceiveAge($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $datasets = $this->getPointReceiveAge($shop_id);
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $for = $shop->name;
+        $pdf = PDF::loadView('pdf.pointReceive.age', compact('shop', 'datasets', 'label', 'for'));
+        $pdf->setPaper("A4", "landscape");
+        return $pdf->download('point-receive-age.pdf');
+    }
+    public function exportPointReceiveGender($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $datasets = $this->getPointReceiveGender($shop_id);
+        $label = ["male", "female"];
+        $for = $shop->name;
+        $pdf = PDF::loadView('pdf.pointReceive.gender', compact('shop', 'datasets', 'label', 'for'));
+        $pdf->setPaper("A4", "landscape");
+        return $pdf->download('point-receive-gender.pdf');
+    }
+    public function exportPointAvailableAge($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $datasets = $this->getPointAvailableAge($shop_id);
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $for = $shop->name;
+        $pdf = PDF::loadView('pdf.pointAvailable.age', compact('shop', 'datasets', 'label', 'for'));
+        $pdf->setPaper("A4", "landscape");
+        return $pdf->download('point-available-age.pdf');
+    }
+    public function exportPointAvailableGender($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $datasets = $this->getPointAvailableGender($shop_id);
+        $label = ["male", "female"];
+        $for = $shop->name;
+        $pdf = PDF::loadView('pdf.pointAvailable.gender', compact('shop', 'datasets', 'label', 'for'));
+        $pdf->setPaper("A4", "landscape");
+        return $pdf->download('point-available-gender.pdf');
+    }
+    public function exportCheckinPointAvailableAge($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $datasets = $this->getCheckinPointAvailableAge($shop_id);
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $for = $shop->name;
+        $pdf = PDF::loadView('pdf.checkin.age', compact('shop', 'datasets', 'label', 'for'));
+        $pdf->setPaper("A4", "landscape");
+        return $pdf->download('checkin-point-available-age.pdf');
+    }
+    public function exportCheckinPointAvailableGender($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $datasets = $this->getCheckinPointAvailableGender($shop_id);
+        $label = ["male", "female"];
+        $for = $shop->name;
+        $pdf = PDF::loadView('pdf.checkin.gender', compact('shop', 'datasets', 'label', 'for'));
+        $pdf->setPaper("A4", "landscape");
+        return $pdf->download('checkin-point-available-gender.pdf');
+    }
     // ----------- helper method -----------
     private function checkRoleAuth(){
         if(!Auth::check())

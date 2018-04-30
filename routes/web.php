@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', 'MaitaHomeController@index');
 
 Auth::routes();
@@ -39,6 +38,17 @@ Route::prefix("owner/report")->group(function(){
     Route::get("customers/{shop_id}", "ReportController@listCustomers");
     Route::get("customers/{shop_id}/{customer_id}", "ReportController@showCustomer");
 });
+Route::prefix("owner/export")->group(function(){
+    Route::get("pointReceive/age/{shop_id}", "ReportController@exportPointReceiveAge");
+    Route::get("pointReceive/gender/{shop_id}", "ReportController@exportPointReceiveGender");
+
+    Route::get("pointAvailable/age/{shop_id}", "ReportController@exportPointAvailableAge");
+    Route::get("pointAvailable/gender/{shop_id}", "ReportController@exportPointAvailableGender");
+
+    Route::get("checkinPointAvailable/age/{shop_id}", "ReportController@exportCheckinPointAvailableAge");
+    Route::get("checkinPointAvailable/gender/{shop_id}", "ReportController@exportCheckinPointAvailableGender");
+});
+
 Route::get('maitahome', 'MaitaHomeController@index');
 Route::get('/maitahome/{promotion}','MaitaHomeController@show')->where('promotion','[0-9]+');
 

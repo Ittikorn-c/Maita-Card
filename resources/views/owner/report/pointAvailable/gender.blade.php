@@ -22,6 +22,11 @@
                 </div>
                 
             </div>
+            <div class="col-12"style="flex-grow:0.3">
+                <a href='{{ url("owner/export/pointAvailable/age/$shop_id")}}'>
+                <button style="float:right" class="btn btn-outline-warning">Export PDF</button>
+                </a>
+            </div>
         </div>
 
         <div class="row">
