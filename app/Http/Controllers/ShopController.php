@@ -150,7 +150,7 @@ class ShopController extends Controller
           "shopphone" => "max:10",
           "shopemail" => "unique:shops,email|email",
           "shopcategory" => "required",
-          "shoplog" => "required"
+          "shoplogo" => "required"
       ]);
         try {
           $shop = new Shop;
@@ -298,10 +298,11 @@ class ShopController extends Controller
                                     'shop'=>$shop]);
     }
 
+
     public function joinCard($shop_id){
         $shop = Shop::findOrFail($shop_id);
         $templates = $shop->cardTemplates;
-        
+
         return view("customers.join_card", compact("templates", "shop"));
     }
 
@@ -315,8 +316,8 @@ class ShopController extends Controller
         $card->exp_date = \Carbon\Carbon::now()->addYear(2);
         $card->save();
         return redirect("/profile/". \Auth::user()->id);
-    }
-    public function showBranches($shop_id){
+
+  }  public function showBranches($shop_id){
       //
       $branches = Shop::allBranch($shop_id)->get();
 

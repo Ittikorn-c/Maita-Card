@@ -20,7 +20,7 @@
 				{{ csrf_field() }}
 				
 		        <div class="card h-100">
-		            <img class="card-img-top" src="{{URL::asset('/images/'. $branch->logo_img)}}" alt="">
+		            <img class="card-img-top" src="{{ asset('storage/shop/'. $branch->logo_img) }}" alt="">
 		            <div class="card-body">
 		              <h4 class="card-title">
 		              	<input hidden="true" type="number" name="bid" value="{{ $branch->id }}">
