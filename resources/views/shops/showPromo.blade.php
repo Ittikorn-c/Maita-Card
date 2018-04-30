@@ -12,7 +12,7 @@
       @foreach($promotions as $promotion)
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="{{url('/maitahome/' . $promotion->id)}}"><img class="card-img-top" src="http://placehold.it/700x400" alt="{{$promotion->logo_img}}"></a>
+          <a href="{{url('/maitahome/' . $promotion->id)}}"><img class="card-img-top" src="{{ asset('storage/promotions/'. $promotion->reward_img) }}" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="{{url('/maitahome/' . $promotion->id)}}">{{$promotion->reward_name}}</a>
