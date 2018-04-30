@@ -17,7 +17,9 @@ class MaitaHomeController extends Controller
     {
         //
         $promotions = Promotion::all();
-        return view('maitahomes.index',['promotions'=>$promotions]);
+        $faker = \Faker\Factory::create();
+        $promotionHighlight = $faker->randomElements($array=$promotions->toArray(), $count=3);
+        return view('maitahomes.index',['promotions'=>$promotions, 'promotionHighlight'=>$promotionHighlight]);
     }
 
     /**

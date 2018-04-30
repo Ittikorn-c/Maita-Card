@@ -13,7 +13,7 @@
 
       </div>
       <div class="card mt-4">
-        <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+        <img class="card-img-top img-fluid" src='{{ url("storage/promotions/$promotion->reward_img") }}'style="width:100%;height:100%;max-width:900px" alt="">
         <div class="card-body">
           <div class="">
             <h2>reward :  {{ $promotion->reward_name }}</h2>

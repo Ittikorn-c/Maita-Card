@@ -11,29 +11,21 @@
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
 
-          <div class="carousel-item active" style="background-image: url( {{ url('/storage/promotions/kfc.jpg') }})">
+          
+          @foreach($promotionHighlight as $promotionH)
+
+          <div 
+          @if($loop->first)
+          class="carousel-item active" 
+          @else
+          class="carousel-item" 
+          @endif
+          style='background-image: url({{ url("storage/promotions/".$promotionH["reward_img"]) }})'>
             <div class="carousel-caption d-none d-md-block">
-              <h3>First Slide</h3>
-              <p>This is a description for the first slide.</p>
+              <h3 ><span style="background:rgba(0, 0, 0, 0.4)">{{ $promotionH["reward_name"]}}</span></h3>
             </div>
           </div>
-
-        <!-- Slide Two - Set the background image for this slide in the line below -->
-
-          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-            <div class="carousel-caption d-none d-md-block">
-              <h3>Second Slide</h3>
-              <p>This is a description for the second slide.</p>
-            </div>
-          </div>
-
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-            <div class="carousel-caption d-none d-md-block">
-              <h3>Third Slide</h3>
-              <p>This is a description for the third slide.</p>
-            </div>
-          </div>
+          @endforeach
 
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -56,7 +48,7 @@
       @foreach($promotions as $promotion)
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="{{url('/maitahome/' . $promotion->id)}}"><img class="card-img-top" src="http://placehold.it/700x400" alt="{{$promotion->logo_img}}"></a>
+          <a href="{{url('/maitahome/' . $promotion->id)}}"><img class="card-img-top" src='{{ url("storage/promotions/$promotion->reward_img") }}' alt="{{$promotion->logo_img}}" style="width:100%;max-width:400px;height:300px"></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="{{url('/maitahome/' . $promotion->id)}}">{{$promotion->reward_name}}</a>
