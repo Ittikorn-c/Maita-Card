@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use App\CardTemplate;
 use App\Promotion;
 use App\Shop;
@@ -179,7 +180,7 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        if(Gate::accepts("view-shop", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirect("/maitahome");
       return view('shops.show',['shop'=>$shop]);
     }
@@ -192,7 +193,8 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        if(Gate::denies("view-shop", $shop))
+            return $this->redirect("/maitahome");
         return view('shops.edit',['shop'=>$shop]);
     }
 
@@ -205,7 +207,7 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        if(Gate::accepts("view-shop", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirect("/maitahome");
         $validateData = $request->validate([
             "shopname" => "min:6|max:20|unique:shops,name,$shop->id",
@@ -239,7 +241,7 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
-        if(Gate::accepts("view-shop", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirect("/maitahome");
       $shop->delete();
       return redirect("/maitahome/shops/allshops");
