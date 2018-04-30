@@ -23,7 +23,7 @@ class CardTemplateController extends Controller
 
         $templates = $shop->cardTemplates;
         
-        return view("templates.index", compact("shop", "templates"));
+        return view("owner.templates.index", compact("shop", "templates"));
         
     }
 
@@ -38,7 +38,7 @@ class CardTemplateController extends Controller
             "stamp", "point"
         ];
         $shops = \App\Shop::shopOwner(\Auth::user()->id)->get();
-        return view("templates.create", compact("style", "shop_id", "shops"));
+        return view("owner.templates.create", compact("style", "shop_id", "shops"));
     }
 
     /**
@@ -70,7 +70,7 @@ class CardTemplateController extends Controller
     public function show($template_id)
     {
         $cardTemplate = CardTemplate::findOrFail($template_id);
-        return view("templates.show", ["template"=>$cardTemplate]);
+        return view("owner.templates.show", ["template"=>$cardTemplate]);
     }
 
     /**
@@ -86,7 +86,7 @@ class CardTemplateController extends Controller
         ];
         $shops = \App\Shop::shopOwner(\Auth::user()->id)->get();
         $template = CardTemplate::findOrFail($template_id);
-        return view("templates.edit", compact("style", "template", "shops"));
+        return view("owner.templates.edit", compact("style", "template", "shops"));
     }
 
     /**
