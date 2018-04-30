@@ -7,7 +7,7 @@
             </h1>
             <br>
             @if ($role === 'employee')
-            <center><a href="/{{ $id }}/qr-code/Branch"><button class="btn btn-primary" >Branch's QR</button></a></center>
+            <center><a href="/{{ $id }}/qr-code/Branch"><button class="btn btn-info" >Branch's QR</button></a></center>
             @endif
             <br><br>
         </div>

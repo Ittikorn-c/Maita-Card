@@ -91,6 +91,14 @@ Route::post('/rscan', 'RewardHistoryController@update')->middleware('auth');
 Route::post('/scanforuser/{user}', 'ProfileController@getUName')->where('user', '[0-9]+')->middleware('auth');
 
 
+//owner
+Route::get('/employees/job-applied', 'EmployeeController@inactiveEm')->middleware('auth');
+
+Route::put('/employees/job-applied/{id}', 'EmployeeController@edit')->where('id', '[0-9]+')->middleware('auth');
+
+Route::delete('/employees/job-applied/{id}', 'EmployeeController@destroy')->where('id', '[0-9]+')->middleware('auth');
+
+
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/{id}', 'ProfileController@show')
