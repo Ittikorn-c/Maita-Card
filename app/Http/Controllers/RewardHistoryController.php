@@ -35,7 +35,7 @@ class RewardHistoryController extends Controller
         $card = \App\Card::where('id', '=', $request->input('card_id'))->first();
 
         if ($card->point < $reward_point){
-            return "NOt ENOUGH POINT";
+            return view('rewards.no-point');
         }
 
         $card->point = $card->point - $reward_point;

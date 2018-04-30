@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v2.12';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <div class="row m-2">
         <div class="card-header h3 font-weight-bold bg-dark text-white">
@@ -8,7 +17,7 @@
              Card
         </div>
         <div class="col-lg-5 card m-2 p-0">
-            <div class="h2 card-header d-flex align-items-center justify-content-between">
+            <div class="h2 card-header d-flex justify-content-between">
                 <div>
                     <div class="h2">
                         {{$card->cardTemplate->name}}
@@ -19,12 +28,17 @@
                     </div>
                 </div>
                 <div id="social-links">
-                    <a target="_blank"
+                    <div class="fb-share-button"
+                         data-href="{{ url('/').'/'.$card->cardTemplate->id.'/rewards' }}"
+                         data-layout="button">
+                    </div>
+        {{--            <a target="_blank"
                        onclick="shareToFB()"
-                       class="social-button my-class text-primary" id="my-id">
+                       class="h3 social-button my-class text-primary font-weight-bold" id="my-id">
                         Share
                         <span class="fa fa-facebook-official fa-1x"></span>
                     </a>
+
                     <script>
                         function shareToFB() {
                             let left = (screen.width/2)-(500/2);
@@ -34,8 +48,7 @@
                                 'facebook-share-dialog',
                                 'width=500,height=300, top='+top+', left='+left);
                         }
-                    </script>
-
+                    </script>--}}
                 </div>
             </div>
 
