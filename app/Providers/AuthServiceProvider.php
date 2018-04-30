@@ -32,31 +32,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define("view-report", function($user, $shop){
             return $user->id === $shop->owner_id;
         });
-
-        // gate for view the reward of by card
-        Gate::define('view-reward', function ($user, $template_id) {
-
-            $cards = \App\Card::where('user_id', '=', $user->id)->get();
-
-            foreach ($cards as $card) {
-                # code...
-                if ($card->template_id == $template_id){
-                    return true;
-                }
-            }
-            return false;
-        });
-
-        // gate check not owner
-        Gate::define('not-owner', function ($user) {
-            //
-            return $user->role === 'employees' || $user->role === 'customer';
-        });
-
-        // gate for employee only
-        Gate::define('employee-only', function ($user) {
-            //
-            return $user->role === 'employee';
-        });
     }
 }

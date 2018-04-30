@@ -22,10 +22,7 @@
     flex-direction: column;
 }
 
-.top-block:hover{
-    text-decoration: none;
-    color:white;
-}
+
 .top-block{
     padding: 10px 10px;
     color: white;
@@ -100,16 +97,4 @@ a#point-available-gender{
 }
 #total-exchange{
     background: #FFB732;
-}
-
-.borderless td, .borderless th {
-    border: none;
-}
-.table-borderless td,
-
-.table-borderless th {
-    border: 0;
-}
-.table-borderless tr{
-    border: hidden;
 }

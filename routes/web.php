@@ -32,12 +32,6 @@ Route::prefix("owner/report")->group(function(){
 
     Route::get("pointAvailable/age/{shop_id}", "ReportController@pointAvailableAge");
     Route::get("pointAvailable/gender/{shop_id}", "ReportController@pointAvailableGender");
-
-    Route::get("pointAvailable/checkin/age/{shop_id}", "ReportController@checkinPointAvailableAge");
-    Route::get("pointAvailable/checkin/gender/{shop_id}", "ReportController@checkinPointAvailableGender");
-
-    Route::get("customers/{shop_id}", "ReportController@listCustomers");
-    Route::get("customers/{shop_id}/{customer_id}", "ReportController@showCustomer");
 });
 Route::get('maitahome', 'MaitaHomeController@index');
 Route::get('/maitahome/{promotion}','MaitaHomeController@show')->where('promotion','[0-9]+');
@@ -61,44 +55,31 @@ Route::get('/maitahome/shops/{shop_id}/promotions', 'ShopController@showPromoBy'
 
 
 
-Route::get('/{id}/qr-code/{title}', 'QRController@showQR')->where('id', '[a-zA-Z0-9]+')->where('title', '[a-zA-Z]+')->middleware('auth');
+Route::get('/{id}/qr-code/{title}', 'QRController@showQR')->where('id', '[a-zA-Z0-9]+')->where('title', '[a-zA-Z]+');
 
 Route::get('/{template_id}/rewards', 'PromotionController@showCardPromo')->where('template_id', '[0-9]+');
 
-Route::get('/{template_id}/rewards/{promotion_id}', 'PromotionController@show')->where('template_id', '[0-9]+')->where('promotion_id', '[0-9]+')->middleware('auth');
+Route::get('/{template_id}/rewards/{promotion_id}', 'PromotionController@show')->where('template_id', '[0-9]+')->where('promotion_id', '[0-9]+');
 
-Route::post('/{template_id}/rewards/{promotion_id}', 'RewardHistoryController@store')->where('template_id', '[0-9]+')->where('promotion_id', '[0-9]+')->middleware('auth');
+Route::post('/{template_id}/rewards/{promotion_id}', 'RewardHistoryController@store')->where('template_id', '[0-9]+')->where('promotion_id', '[0-9]+');
 
-Route::get('/{template_id}/rewards/myrewardsQR', 'RewardHistoryController@checkHis')->where('template_id', '[0-9]+')->middleware('auth');
+Route::get('/{template_id}/rewards/myrewardsQR', 'RewardHistoryController@checkHis')->where('template_id', '[0-9]+');
 
-Route::get('/{user}/scan', 'QRController@scanQR')->where('user', '[0-9]+')->middleware('auth');
+Route::get('/{user}/work-his', 'UsageController@emWorkHis')->where('user', '[0-9]+');
 
-Route::post('/scanforbranch/{code}', 'BranchController@getBName')->where('code', '[a-zA-Z0-9]+')->middleware('auth');
+Route::get('/{user}/scan', 'QRController@scanQR')->where('user', '[0-9]+');
 
-Route::post('/scanforreward/{code}', 'RewardHistoryController@checkoutRewardDetail')->where('code', '[a-zA-Z0-9]+')->middleware('auth');
+Route::post('/scanforuser/{user}', 'ProfileController@getUName')->where('user', '[0-9]+');
 
-Route::put('/cscan', 'CardController@checkin')->middleware('auth');
+Route::post('/scanforbranch/{code}', 'BranchController@getBName')->where('code', '[a-zA-Z0-9]+');
 
-//employee
-Route::get('/work-his', 'UsageController@emWorkHis')->middleware('auth');
+Route::post('/scanforreward/{code}', 'RewardHistoryController@checkoutRewardDetail')->where('code', '[a-zA-Z0-9]+');
 
-Route::get('/employee-work-branch', 'BranchController@embranch')->middleware('auth');
+Route::post('/escan', 'UsageController@store');
 
-Route::post('/escan', 'UsageController@store')->middleware('auth');
+Route::put('/cscan', 'CardController@checkin');
 
-Route::post('/rscan', 'RewardHistoryController@update')->middleware('auth');
-
-Route::post('/scanforuser/{user}', 'ProfileController@getUName')->where('user', '[0-9]+')->middleware('auth');
-
-
-//owner
-Route::get('/employees/job-applied', 'EmployeeController@inactiveEm')->middleware('auth');
-
-Route::put('/employees/job-applied/{id}', 'EmployeeController@edit')->where('id', '[0-9]+')->middleware('auth');
-
-Route::delete('/employees/job-applied/{id}', 'EmployeeController@destroy')->where('id', '[0-9]+')->middleware('auth');
-
-
+Route::post('/rscan', 'RewardHistoryController@update');
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/{id}', 'ProfileController@show')
@@ -107,7 +88,6 @@ Route::get('/profile/{user}/edit', 'ProfileController@edit')
     ->where('user' ,'[0-9]+');
 Route::put('/profile/{user}', 'ProfileController@update')
     ->where('user' ,'[0-9]+');
-Route::get('/employees', 'EmployeeController@index');
 
 
 Route::resource('/shops', 'ShopController');

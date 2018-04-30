@@ -26,41 +26,11 @@
             </ul>
         </div>
     </div>
-    <div class="row m-3 p-2 panel-footer">
-        @if(Auth::user()->id === $user->id )
-        <div class="m-1 p-1">
-            <a class="btn btn-info" href="/profile/{{ $user->id }}/edit">Edit</a>
-        </div>
-            @if(Auth::user()->role === 'customer' )
-            <div class="m-1 p-1">
-                <a class="btn btn-success" href='/reward_history'>Reward history</a>
-            </div>
-            <div class="m-1 p-1">    
-                <a class="btn btn-success" href='{{ url("/". Auth::user()->id) . "/qr-code/My"}}'>QR code</a>
-            </div>
-            <div class="m-1 p-1 dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select Card
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @foreach($cards as $card)
-                        <a class="dropdown-item" value="{{ $card->id }}" href='/cards/{{ $card->id }}'>{{ $card->cardTemplate->name }} {{ $card->point }} point</a>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-            @if(Auth::user()->role === 'owner' )
-            <div class="m-1 p-1"> 
-                <a class="btn btn-danger" href='/maitahome/shops/allshops'>Shop Management</a>
-            </div>
-            <div class="m-1 p-1"> 
-                <a class="btn btn-success" href='/maitahome/shops/create'>Create Shop</a>
-            </div>
-            @endif
-        
-        @endif
-        
-        
+    <div class="row col-sm-3 m-3 p-2 panel-footer">
+        <a class="btn btn-info" href="/profile/{{ $user->id }}/edit">Edit</a>
+        <from  action="/users/{{ $user->id }}" method="post">
+            @csrf
+        </from>
     </div>
 </div>
 

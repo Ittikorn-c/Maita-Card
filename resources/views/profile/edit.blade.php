@@ -4,7 +4,6 @@
 <form class="form-horizontal" action="/profile/{{ $user->id }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     {{ csrf_field() }}
-    @if(Auth::user()->id === $user->id )
     <div class="container panel panel-default card">
         <div class="panel-heading m-3 p-2">
             <h2>Edit Profile : {{ $user->username }}</h2>
@@ -119,12 +118,7 @@
     <div class="row col-sm-1 m-3 p-2">
         <button class="btn btn-info m-3 p-2" tyoe="submit">Save</button>
     </div>
-    @else
-        <div class="container panel panel-default card">
-            <h1>You cannot edit this profile.</h1>
-            <a class="btn btn-danger" href="/profile/{{ Auth::user()->id }}">My profile</a>
-        </div>
-    @endif
+    
 </form>
 
 @endsection

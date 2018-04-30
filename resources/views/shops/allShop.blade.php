@@ -6,9 +6,8 @@
     <div class="">
       <a href="/owner/report"><button type="button" name="button" class="btn btn-default">report</button></a>
 
-      <a href="/employees"><button type="button" name="button" class="btn btn-warning">employees</button></a>
-
-
+      <button type="button" name="button" class="btn btn-warning">employees</button>
+      <button type="button" name="button" class="btn btn-success">promotions</button>
     </div>
 
   </div>
@@ -21,13 +20,13 @@
         <th scope="col">Phone</th>
         <th scope="col">Email</th>
         <th scope="col">Category</th>
-        <th scope="col"></th>
+
       </tr>
     </thead>
     <tbody>
       @foreach($shops as $shop)
       <tr>
-        <th scope="row">{{ $loop->iteration }}</th>
+        <th scope="row">{{ $shop->id }}</th>
         <td>
           <a href="{{ url('/maitahome/shops/' . $shop->id) }}">
             {{ $shop->name }}
@@ -37,7 +36,7 @@
         <td>{{ $shop->phone }}</td>
         <td>{{ $shop->email }}</td>
         <td>{{ $shop->category}}</td>
-        <td><a href="{{url('/shops/'.  $shop->id .'/promotion')}}"><button type="button" name="button" class="btn btn-success">promotions</button></a></td>
+
 
         </tr>
         @endforeach
