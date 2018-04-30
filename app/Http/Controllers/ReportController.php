@@ -280,6 +280,29 @@ class ReportController extends Controller
         return view("owner.report.pointAvailable.gender",compact("label", "datasets"));
     }
 
+    public function checkinPointAvailableAge($shop_id){
+
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+        
+        $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
+        $datasets = $this->getCheckinPointAvailableAge($shop_id);
+
+        return view("owner.report.pointAvailable.age",compact("label", "datasets"));
+    }
+
+    public function checkinPointAvailableGender($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies("view-report", $shop))
+            return $this->redirectUnpermission();
+        
+        $label = ["male", "female"];
+        $datasets = $this->getCheckinPointAvailableGender($shop_id);
+
+        return view("owner.report.pointAvailable.gender",compact("label", "datasets"));
+    }
+
 
     // ----------- helper method -----------
     private function checkRoleAuth(){
@@ -471,6 +494,48 @@ class ReportController extends Controller
             foreach ($cards as $card ) {
                 $user = $card->user;
                 $dataset["data"][$user->gender] += $card->point;
+            }
+            $datasets[$template->id] = $dataset;
+        }
+        return $datasets;
+    }
+
+    public function getCheckinPointAvailableAge($shop_id){
+        $shop = Shop::find($shop_id);
+        $datasets = [];
+        $templates = $shop->cardTemplates;
+        foreach($templates as $template){
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => [0, 0, 0, 0, 0, 0]
+            ];
+            $cards = $template->cards;
+            foreach($cards as $card){
+                $user = $card->user;
+                $dataset["data"][$this->getAgeIndex($user->age())] += $card->checkin_point;
+            }
+            $datasets[$template->id] = $dataset;
+        }
+        return $datasets;
+    }
+    public function getCheckinPointAvailableGender($shop_id){
+        $shop = Shop::find($shop_id);
+        $datasets = [];
+        $templates = $shop->cardTemplates;
+        foreach ($templates as $template) {
+            $dataset = [
+                "template_id" => $template->id,
+                "template_name" => $template->name,
+                "data" => [
+                    "male" => 0,
+                    "female" => 0
+                ]
+            ];
+            $cards = $template->cards;
+            foreach ($cards as $card ) {
+                $user = $card->user;
+                $dataset["data"][$user->gender] += $card->checkin_point;
             }
             $datasets[$template->id] = $dataset;
         }

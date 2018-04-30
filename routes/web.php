@@ -33,6 +33,9 @@ Route::prefix("owner/report")->group(function(){
     Route::get("pointAvailable/age/{shop_id}", "ReportController@pointAvailableAge");
     Route::get("pointAvailable/gender/{shop_id}", "ReportController@pointAvailableGender");
 
+    Route::get("pointAvailable/checkin/age/{shop_id}", "ReportController@checkinPointAvailableAge");
+    Route::get("pointAvailable/checkin/gender/{shop_id}", "ReportController@checkinPointAvailableGender");
+
     Route::get("customers/{shop_id}", "ReportController@listCustomers");
     Route::get("customers/{shop_id}/{customer_id}", "ReportController@showCustomer");
 });
