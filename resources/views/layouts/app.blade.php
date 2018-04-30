@@ -89,10 +89,10 @@
                                     <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/work-his") }}'>
+                                    <a class="dropdown-item" href='{{ url("/work-his") }}'>
                                         Working history
                                     </a>
-                                    <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
+                                    <a class="dropdown-item" href='{{ url("/employee-work-branch") }}'>
                                         Scan QR code
                                     </a>
                                     @endif

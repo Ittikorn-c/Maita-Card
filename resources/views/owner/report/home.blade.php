@@ -24,10 +24,10 @@
         
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <div id="total-customer" class="card top-block">
+                <a href='{{ url("/owner/report/customers/$shop->id") }}' id="total-customer" class="card top-block">
                     <h5>Total Customer</h5>
                     <h1>{{ $totalCustomer }}</h1>
-                </div>
+                </a>
             </div>
             <div class="col-xs-12 col-md-4">
                 <div id="total-card" class="card top-block">
@@ -135,6 +135,18 @@
                 <a id="point-available-gender" href='{{ url("/owner/report/pointAvailable/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         POINT AVAILABLE <br>
+                        GENDER
+                    </p>
+                </a>
+                <a id="checkin-point-available-gender" href='{{ url("/owner/report/pointAvailable/checkin/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                    <p>
+                        CHECK-IN POINT AVAILABLE <br>
+                        AGE
+                    </p>
+                </a>
+                <a id="checkin-point-available-gender" href='{{ url("/owner/report/pointAvailable/checkin/gender/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                    <p>
+                        CHECK-IN POINT AVAILABLE <br>
                         GENDER
                     </p>
                 </a>

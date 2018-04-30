@@ -10,6 +10,8 @@
 	      <th scope="col">#</th>
 	      <th scope="col">Giving To</th>
 	      <th scope="col">Point</th>
+	      <th scope="col">Shop's Name</th>
+	      <th scope="col">Branch's Name</th>
 	      <th scope="col">Giving At</th>
 
 	    </tr>
@@ -22,6 +24,8 @@
 	        {{ $work->username }}
 	      </td>
 	      <td>{{ $work->point }}</td>
+	      <td> {{ $work->name }}</td>
+	      <td> {{ $work->branch_name }}</td>
 	      <td>{{ $work->created_at->diffForHumans() }}</td>
 
 	    </tr>
