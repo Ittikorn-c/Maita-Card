@@ -12,14 +12,15 @@ class ShopController extends Controller
 {
     /*------------ Promotion-combined Controller -----------*/
     public function isShopOwner($shop) {
-        return true; //<<------------------------------- TRAP STATE FOR TEST
-        if (\Auth::user()->id !== $shop->owner_id){
-            return redirect('/');
+        /*return true;*/ //<<------------------------------- TRAP STATE FOR TEST
+        if (\Auth::user()->id === $shop->owner_id){
+            return true;
         }
+        return false;
     }
 
     public function indexPromotion(Shop $shop){
-        $this->isShopOwner($shop);
+        if(!$this->isShopOwner($shop)) {return redirect('/');}
 
         $templates = CardTemplate::where('shop_id', $shop->id)->pluck('id')->toArray();
         $promotions = Promotion::whereIn('template_id', $templates)->get();
@@ -28,13 +29,13 @@ class ShopController extends Controller
     }
 
     public function showPromotion(Shop $shop, Promotion $promotion){
-        $this->isShopOwner($shop);
+        if(!$this->isShopOwner($shop)) {return redirect('/');}
 
         return view('shops.promotion.show', compact('shop','promotion'));
     }
 
     public function createPromotion(Shop $shop){
-        $this->isShopOwner($shop);
+        if(!$this->isShopOwner($shop)) {return redirect('/');}
 
         $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id')->toArray();
         return view('shops.promotion.create', compact('shop', 'cards'));
@@ -70,15 +71,13 @@ class ShopController extends Controller
     }
 
     public function editPromotion(Shop $shop, Promotion $promotion) {
-        $this->isShopOwner($shop);
+        if(!$this->isShopOwner($shop)) {return redirect('/');}
 
         $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id');
         return view('shops.promotion.edit', compact('shop','promotion', 'cards'));
     }
 
     public function updatePromotion(Request $request,Shop $shop, Promotion $promotion) {
-        $this->isShopOwner($shop);
-
         $request->validate([
             'reward_name' => ['required'],
             'condition' => ['required'],

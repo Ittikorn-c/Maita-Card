@@ -77,6 +77,9 @@ class User extends Authenticatable
                         ->distinct();
     }
 
+    public function getNameAttribute(){
+        return $this->fname . " " . $this->lname;
+    }
     public function age(){
         $bdate = date_create($this->birth_date);
         $now = date_create(date("Y-m-d"));
