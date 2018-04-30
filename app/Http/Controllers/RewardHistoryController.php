@@ -29,6 +29,18 @@ class RewardHistoryController extends Controller
 
         $promotion_id = $request->input('promotion_id');
 
+        $reward_point = \App\Promotion::where('id', '=', $promotion_id)->first()->point;
+        //point
+
+        $card = \App\Card::where('id', '=', $reward_history->card_id)->first();
+
+        if ($card->point < $reward_point){
+            return "NOt ENOUGH POINT";
+        }
+
+        $card->point = $card->point - $reward_point;
+        $card->save();
+
 		$reward_code = \Faker\Factory::create()->lexify(sprintf("RW%07s?????", base_convert($promotion_id, 10, 36)));
 
         $reward_history = new RewardHistory;
@@ -37,6 +49,8 @@ class RewardHistoryController extends Controller
         $reward_history->promotion_id = $promotion_id;
 
         $reward_history->save();
+
+
 
         return redirect('/' . $reward_code .'/qr-code/Rewards');
 
@@ -90,13 +104,6 @@ class RewardHistoryController extends Controller
         $reward_history->employee_id = $em->id;
 
         $reward_history->save();
-
-        //point
-
-        $card = \App\Card::where('id', '=', $reward_history->card_id)->first();
-
-        $card->point = $card->point - $request->input('point');
-        $card->save();
 
         return redirect('/' . $branch_id . '/scan');
     }
