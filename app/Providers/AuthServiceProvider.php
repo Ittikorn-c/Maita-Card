@@ -48,9 +48,9 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // gate check not owner
-        Gate::define('not-owner', function ($user) {
+        Gate::define('owner', function ($user) {
             //
-            return $user->role === 'employees' || $user->role === 'customer';
+            return $user->role === 'owner';
         });
 
         // gate for employee only

@@ -70,11 +70,10 @@ class UsageController extends Controller
         $request->validate([
             'bid' => 'required',
             'uid' => 'required',
-            'point' => 'required,numeric'],
+            'point' => 'required'],
             [ 'bid.required' => 'Please Scan QR first',
             'uid.required' => 'Please Scan QR first',
-            'point.required' => 'Please Enter Point',
-            'point.numeric' => 'Please Enter Point as Number'
+            'point.required' => 'Please Enter Point'
         ]);
 
         // Get the currently authenticated user...

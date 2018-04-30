@@ -9,7 +9,7 @@ class QRController extends Controller
     //
     public function showQR($id, $title){
         //check gate for owner
-        if(\Gate::denies("not-owner"))
+        if(\Gate::allows("owner"))
             return redirect('/');
     	// qr as userid for reading
 
@@ -23,7 +23,7 @@ class QRController extends Controller
 
     public function scanQR($id) {
 
-        if(\Gate::denies("not-owner"))
+        if(\Gate::allows("owner"))
             return redirect('/');
 
         // Get the currently authenticated user...
