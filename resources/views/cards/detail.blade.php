@@ -19,12 +19,23 @@
                     </div>
                 </div>
                 <div id="social-links">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=
-                            {{url('/')}}"
-                       class="social-button my-class" id="my-id">
+                    <a target="_blank"
+                       onclick="shareToFB()"
+                       class="social-button my-class text-primary" id="my-id">
                         Share
                         <span class="fa fa-facebook-official fa-1x"></span>
                     </a>
+                    <script>
+                        function shareToFB() {
+                            let left = (screen.width/2)-(500/2);
+                            let top = (screen.height/2)-(300/2);
+                            let url = "https://www.facebook.com/sharer/sharer.php?u={{ url('/') }}";
+                            window.open(url,
+                                'facebook-share-dialog',
+                                'width=500,height=300, top='+top+', left='+left);
+                        }
+                    </script>
+
                 </div>
             </div>
 

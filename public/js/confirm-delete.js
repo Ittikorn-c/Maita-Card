@@ -1,4 +1,4 @@
-function confirmDelete() {
+function confirmDelete(id) {
     event.preventDefault();
     swal({
         title: 'Are you sure?',
@@ -19,7 +19,7 @@ function confirmDelete() {
                 showConfirmButton: false,
                 timer: 1000
             }).then(function() {
-                $('#del-btn').trigger( $.Event( "click" ) );
+                $('#del-btn-'+id).trigger( $.Event( "click" ) );
             })
         }
     })
