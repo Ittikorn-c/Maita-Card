@@ -128,7 +128,8 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        if(Gate::accepts("not-owner"))
+            return $this->redirect("/maitahome");
         $categories = ['restaurant','cafe','salon','mall','fitness','cinema'];
         return view('shops.create',['categories'=>$categories]);
     }
@@ -141,7 +142,8 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-
+        if(Gate::accepts("not-owner"))
+            return $this->redirect("/maitahome");
       $validateData = $request->validate([
           "shopname" => "min:6|max:20|unique:shops,name",
           "shopphone" => "max:10",
@@ -177,6 +179,8 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
+        if(Gate::accepts("view-shop", $shop))
+            return $this->redirect("/maitahome");
       return view('shops.show',['shop'=>$shop]);
     }
 
@@ -201,7 +205,8 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        //
+        if(Gate::accepts("view-shop", $shop))
+            return $this->redirect("/maitahome");
         $validateData = $request->validate([
             "shopname" => "min:6|max:20|unique:shops,name,$shop->id",
             "shopphone" => "max:10",
@@ -234,12 +239,16 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
+        if(Gate::accepts("view-shop", $shop))
+            return $this->redirect("/maitahome");
       $shop->delete();
       return redirect("/maitahome/shops/allshops");
     }
 
     public function showAllShop()
     {
+        if(Gate::accepts("not-owner"))
+            return $this->redirect("/maitahome");
       $shops = Shop::ShopOwner(\Auth::user()->id)->get();
       return view('shops.allShop',['shops'=>$shops]);
     }

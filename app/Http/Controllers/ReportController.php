@@ -38,7 +38,7 @@ class ReportController extends Controller
             $shop = Shop::findOrFail($shop_id);
         }
         
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
         $shops = $this->getShops();
 
@@ -63,7 +63,7 @@ class ReportController extends Controller
     }
     public function listCustomers($shop_id){
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies('view-report', $shop))
+        if(Gate::denies('view-shop', $shop))
             return $this->redirectUnpermission();
         $customers = \App\User::customersOf($shop->id)->get();
         foreach ($customers as $customer) {
@@ -76,7 +76,7 @@ class ReportController extends Controller
     }
     public function showCustomer($shop_id, $customer_id){
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies('view-report', $shop))
+        if(Gate::denies('view-shop', $shop))
             return $this->redirectUnpermission();
         $customer = \App\User::findOrFail($customer_id);
         $customer->shop_card =  $customer->cards()
@@ -94,7 +94,7 @@ class ReportController extends Controller
         // if(is_null($shop))
         //     return redirect("/home"); 
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies('view-report', $shop))
+        if(Gate::denies('view-shop', $shop))
             return $this->redirectUnpermission();
 
         $promotions = $this->getPromotionsWithAvailable($shop_id);
@@ -130,7 +130,7 @@ class ReportController extends Controller
         // if(is_null($shop))
         //     return redirect("/home"); 
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
 
         $promotions = $this->getPromotionsWithAvailable($shop_id);
@@ -179,7 +179,7 @@ class ReportController extends Controller
         // if(is_null($shop))
         //     return redirect("/home");  
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
 
         $promotions = $this->getPromotionsWithAvailable($shop_id);
@@ -222,7 +222,7 @@ class ReportController extends Controller
         // if(is_null($shop))
         //     return redirect("/home");
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
 
         $label = [];
@@ -237,7 +237,7 @@ class ReportController extends Controller
     public function pointReceiveAge($shop_id){
 
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
 
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
@@ -249,7 +249,7 @@ class ReportController extends Controller
     public function pointReceiveGender($shop_id){
 
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
 
         $label = ["male", "female"];
@@ -261,7 +261,7 @@ class ReportController extends Controller
     public function pointAvailableAge($shop_id){
 
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
         
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
@@ -272,7 +272,7 @@ class ReportController extends Controller
 
     public function pointAvailableGender($shop_id){
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
         
         $label = ["male", "female"];
@@ -284,7 +284,7 @@ class ReportController extends Controller
     public function checkinPointAvailableAge($shop_id){
 
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
         
         $label = ["0-6", "7-12", "13-19", "20-39", "40-59", "> 60"];
@@ -295,7 +295,7 @@ class ReportController extends Controller
 
     public function checkinPointAvailableGender($shop_id){
         $shop = Shop::findOrFail($shop_id);
-        if(Gate::denies("view-report", $shop))
+        if(Gate::denies("view-shop", $shop))
             return $this->redirectUnpermission();
         
         $label = ["male", "female"];
@@ -561,6 +561,6 @@ class ReportController extends Controller
     }
 
     private function redirectUnpermission(){
-        return redirect("/home");
+        return redirect("/maitahome");
     }
 }
