@@ -22,6 +22,7 @@
         <th scope="col">Email</th>
         <th scope="col">Category</th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +39,7 @@
         <td>{{ $shop->email }}</td>
         <td>{{ $shop->category}}</td>
         <td><a href="{{url('/shops/'.  $shop->id .'/promotion')}}"><button type="button" name="button" class="btn btn-success">promotions</button></a></td>
-
+        <td><a href='{{url("/templates/shop/$shop->id")}}'><button type="button" name="button" class="btn btn-outline-warning">templates</button></a></td>
         </tr>
         @endforeach
       </tbody>

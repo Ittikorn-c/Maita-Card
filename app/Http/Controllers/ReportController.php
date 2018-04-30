@@ -115,7 +115,8 @@ class ReportController extends Controller
 
         return view("owner.report.exchanges.promotion")
                     ->with("bundle", $bundle)
-                    ->with("promotions", $promotions);
+                    ->with("promotions", $promotions)
+                    ->with("shop_id", $shop_id);
         
     }
 
@@ -166,7 +167,7 @@ class ReportController extends Controller
             "dataset" => $dataset,
             "promotions" => $promotions
         ];
-        return view("owner.report.exchanges.age", $bundle);
+        return view("owner.report.exchanges.age", $bundle)->with("shop_id", $shop_id);
     }
     public function exchangeGender($shop_id){
         // $auth = $this->checkRoleAuth();
@@ -208,7 +209,7 @@ class ReportController extends Controller
             "datasets" => $datasets
         ];
 
-        return view("owner.report.exchanges.gender", $bundle);
+        return view("owner.report.exchanges.gender", $bundle)->with("shop_id", $shop_id);
     }
 
     public function pointReceiveTime($shop_id){
