@@ -56,4 +56,10 @@ class Shop extends Model
                     ->where("cards.user_id", '=', $user_id)
                     ->select('cards.id');
     }
+
+    public function scopeAllBranch($query, $id){
+        return $query->join("branches", "shops.id", "=", "branches.shop_id")
+                    ->where("shops.id", "=", $id)
+                    ->select("branches.id", "branches.address", "branches.phone", "branches.name", "shops.logo_img");  
+    }
 }

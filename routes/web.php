@@ -90,6 +90,10 @@ Route::post('/rscan', 'RewardHistoryController@update')->middleware('auth');
 
 Route::post('/scanforuser/{user}', 'ProfileController@getUName')->where('user', '[0-9]+')->middleware('auth');
 
+Route::get('/{shop_id}/branches', 'ShopController@showBranches')->where('shop_id', '[0-9]+')->middleware('auth');
+
+Route::post('{branch_id}/job-apply', 'EmployeeController@store')->where('branch_id', '[0-9]+')->middleware('auth');
+
 
 //owner
 Route::get('/employees/job-applied', 'EmployeeController@inactiveEm')->middleware('auth');

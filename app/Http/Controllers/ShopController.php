@@ -298,6 +298,7 @@ class ShopController extends Controller
                                     'shop'=>$shop]);
     }
 
+<<<<<<< HEAD
     public function joinCard($shop_id){
         $shop = Shop::findOrFail($shop_id);
         $templates = $shop->cardTemplates;
@@ -315,5 +316,12 @@ class ShopController extends Controller
         $card->exp_date = \Carbon\Carbon::now()->addYear(2);
         $card->save();
         return redirect("/profile/". \Auth::user()->id);
+=======
+    public function showBranches($shop_id){
+      //
+      $branches = Shop::allBranch($shop_id)->get();
+
+      return view('shops/branch', ['branches' => $branches]);
+>>>>>>> shop-branch
     }
 }
