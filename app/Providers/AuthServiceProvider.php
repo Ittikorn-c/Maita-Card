@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //
 
-        Gate::define("view-report", function($user, $shop){
+        Gate::define("view-shop", function($user, $shop){
             return $user->id === $shop->owner_id;
         });
 

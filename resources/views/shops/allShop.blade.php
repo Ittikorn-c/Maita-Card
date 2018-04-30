@@ -8,6 +8,7 @@
 
       <a href="/employees"><button type="button" name="button" class="btn btn-warning">employees</button></a>
 
+      <a href="/maitahome/shops/create"><button type="button" name="button" class="btn btn-success">create shop</button></a>
 
     </div>
 

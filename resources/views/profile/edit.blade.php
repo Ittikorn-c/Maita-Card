@@ -12,10 +12,10 @@
         </div>
         <div class="row m-3 p-2">
         <div class="col-sm-4 p-2 bg-white card">
-            <img src='{{ asset("storage/profile/$user->profile_img") }}' style="width:100%;max-width:400px">
+            <img id="profile-preview" src='{{ asset("storage/profile/$user->profile_img") }}' style="width:100%;max-width:400px">
             <div class="row justify-content-center">
                 <div class="form-group m-1 p-2">
-                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                    <input type="file" class="form-control-file" name="avatar" id="profile" aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
                 </div>
             </div>
@@ -128,3 +128,7 @@
 </form>
 
 @endsection
+
+@push('js')
+<script src="{{ asset('js/shops/create.js') }}" defer></script>
+@endpush

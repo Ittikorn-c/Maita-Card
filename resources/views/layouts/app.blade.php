@@ -98,6 +98,9 @@
                                     <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile
                                     </a>
+                                    <a class="dropdown-item" href='{{ url("maitahome/shops/allshops") }}'>
+                                        Shop Manage
+                                    </a>
                                     @else
                                     <a class="dropdown-item" href='{{ url("/profile/" . Auth::user()->id) }}'>
                                         Profile

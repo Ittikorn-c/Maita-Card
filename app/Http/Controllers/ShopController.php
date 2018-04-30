@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use App\CardTemplate;
 use App\Promotion;
 use App\Shop;
@@ -128,7 +129,8 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        if(Gate::allows("not-owner"))
+            return $this->redirect("/maitahome");
         $categories = ['restaurant','cafe','salon','mall','fitness','cinema'];
         return view('shops.create',['categories'=>$categories]);
     }
@@ -141,12 +143,14 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-
+        if(Gate::allows("not-owner"))
+            return $this->redirect("/maitahome");
       $validateData = $request->validate([
           "shopname" => "min:6|max:20|unique:shops,name",
           "shopphone" => "max:10",
           "shopemail" => "unique:shops,email|email",
-          "shopcategory" => "required"
+          "shopcategory" => "required",
+          "shoplog" => "required"
       ]);
         try {
           $shop = new Shop;
@@ -177,6 +181,8 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
+        if(Gate::denies("view-shop", $shop))
+            return $this->redirect("/maitahome");
       return view('shops.show',['shop'=>$shop]);
     }
 
@@ -188,7 +194,8 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        if(Gate::denies("view-shop", $shop))
+            return $this->redirect("/maitahome");
         return view('shops.edit',['shop'=>$shop]);
     }
 
@@ -201,7 +208,8 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        //
+        if(Gate::denies("view-shop", $shop))
+            return $this->redirect("/maitahome");
         $validateData = $request->validate([
             "shopname" => "min:6|max:20|unique:shops,name,$shop->id",
             "shopphone" => "max:10",
@@ -216,10 +224,12 @@ class ShopController extends Controller
             $shop->logo_img = "";
             $shop->owner_id = \Auth::user()->id;
             $shop->save();
-            $image_name = $shop->id . "." . $request->shoplogo->extension();
-            \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
-            $shop->logo_img = $image_name;
-            $shop->save();
+            if($request->file("shoplogo")){
+                $image_name = $shop->id . "." . $request->shoplogo->extension();
+                \Storage::disk('public')->put("shop/$image_name", file_get_contents($request->file("shoplogo")));
+                $shop->logo_img = $image_name;
+                $shop->save();
+            }
             return redirect("/maitahome/shops/allshops");
           } catch (\Exception $e) {
               return back()->withInput();
@@ -234,12 +244,16 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
+        if(Gate::denies("view-shop", $shop))
+            return $this->redirect("/maitahome");
       $shop->delete();
       return redirect("/maitahome/shops/allshops");
     }
 
     public function showAllShop()
     {
+        if(Gate::allows("not-owner"))
+            return $this->redirect("/maitahome");
       $shops = Shop::ShopOwner(\Auth::user()->id)->get();
       return view('shops.allShop',['shops'=>$shops]);
     }
@@ -282,5 +296,24 @@ class ShopController extends Controller
 
       return view('shops.showPromo',['promotions'=>$promotions,
                                     'shop'=>$shop]);
+    }
+
+    public function joinCard($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $templates = $shop->cardTemplates;
+        
+        return view("customers.join_card", compact("templates", "shop"));
+    }
+
+    public function joinCardRegis(Request $request){
+        $template_id = $request->input("template_id");
+        $card = new \App\Card;
+        $card->user_id = \Auth::user()->id;
+        $card->template_id = $template_id;
+        $card->point = 0;
+        $card->checkin_point = 0;
+        $card->exp_date = \Carbon\Carbon::now()->addYear(2);
+        $card->save();
+        return redirect("/profile/". \Auth::user()->id);
     }
 }
