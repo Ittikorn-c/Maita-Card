@@ -21,10 +21,12 @@ class CreateEmployeesTable extends Migration
 
             $table->foreign("user_id")
                     ->references("id")
-                    ->on("users");
+                    ->on("users")
+                    ->onDelete('cascade');
             $table->foreign("branch_id")
                     ->references("id")
-                    ->on("branches");
+                    ->on("branches")
+                    ->onDelete('cascade');
         });
     }
 

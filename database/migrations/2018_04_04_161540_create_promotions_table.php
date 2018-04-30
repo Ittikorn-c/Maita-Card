@@ -25,7 +25,8 @@ class CreatePromotionsTable extends Migration
 
             $table->foreign("template_id")
                     ->references("id")
-                    ->on("card_templates");
+                    ->on("card_templates")
+                    ->onDelete('cascade');
         });
     }
 

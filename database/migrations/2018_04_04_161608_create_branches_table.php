@@ -26,7 +26,8 @@ class CreateBranchesTable extends Migration
 
             $table->foreign("shop_id")
                     ->references("id")
-                    ->on("shops");
+                    ->on("shops")
+                    ->onDelete('cascade');
         });
     }
 

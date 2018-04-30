@@ -24,10 +24,12 @@ class CreateCardsTable extends Migration
 
             $table->foreign("user_id")
                     ->references("id")
-                    ->on("users");
+                    ->on("users")
+                    ->onDelete('cascade');
             $table->foreign("template_id")
                     ->references("id")
-                    ->on("card_templates");
+                    ->on("card_templates")
+                    ->onDelete('cascade');
         });
     }
 

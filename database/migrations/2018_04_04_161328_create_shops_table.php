@@ -32,7 +32,8 @@ class CreateShopsTable extends Migration
 
             $table->foreign("owner_id")
                     ->references("id")
-                    ->on("users");
+                    ->on("users")
+                    ->onDelete('cascade');
         });
     }
 

@@ -18,18 +18,21 @@ class CreateRewardHistoriesTable extends Migration
             $table->string("reward_code");
             $table->unsignedInteger("card_id");
             $table->unsignedInteger("promotion_id");
-            $table->unsignedInteger("employee_id");
+            $table->unsignedInteger("employee_id")->nullable();
             $table->timestamps();
 
             $table->foreign("card_id")
                     ->references("id")
-                    ->on("cards");
+                    ->on("cards")
+                    ->onDelete('cascade');
             $table->foreign("promotion_id")
                     ->references("id")
-                    ->on("promotions");
+                    ->on("promotions")
+                    ->onDelete('cascade');
             $table->foreign("employee_id")
                     ->references("id")
-                    ->on("users");
+                    ->on("users")
+                    ->onDelete('cascade');
         });
     }
 

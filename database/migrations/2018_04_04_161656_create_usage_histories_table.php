@@ -22,10 +22,12 @@ class CreateUsageHistoriesTable extends Migration
 
             $table->foreign("card_id")
                     ->references("id")
-                    ->on("cards");
+                    ->on("cards")
+                    ->onDelete('cascade');
             $table->foreign("employee_id")
                     ->references("id")
-                    ->on("users");
+                    ->on("users")
+                    ->onDelete('cascade');
         });
     }
 
