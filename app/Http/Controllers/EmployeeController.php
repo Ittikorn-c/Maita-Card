@@ -50,6 +50,17 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
+
+        $user = \Auth::user();
+
+        $employee = new Employee;
+        $employee->user_id = $user->id;
+        $employee->branch_id = $request->input('bid');
+        $employee->status = 'inactive';
+
+        $employee->save();
+
+        return redirect('/');
     }
 
     /**

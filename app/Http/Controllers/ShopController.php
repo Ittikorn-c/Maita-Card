@@ -294,4 +294,11 @@ class ShopController extends Controller
       return view('shops.showPromo',['promotions'=>$promotions,
                                     'shop'=>$shop]);
     }
+
+    public function showBranches($shop_id){
+      //
+      $branches = Shop::allBranch($shop_id)->get();
+
+      return view('shops/branch', ['branches' => $branches]);
+    }
 }
