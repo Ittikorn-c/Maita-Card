@@ -48,7 +48,7 @@ class ReportController extends Controller
         $exchangeData = $this->getBasicExchangeData($shop);
         $pointReceiveData = $this->getBasicPointReceiveData($shop);
         $pointAvailableData = $this->getBasicPointAvailableData($shop);
-        $totalCustomer = \App\User::customersOf($shop->id)->count();
+        $totalCustomer = \App\User::customersOf($shop->id)->get()->count();
         $totalCard = \App\Card::cardsOf($shop->id)->count();
         $totalExchange = \App\RewardHistory::ofShop($shop->id)->count();
         return view("owner.report.home")
@@ -61,7 +61,29 @@ class ReportController extends Controller
                     ->with("totalCard", $totalCard)
                     ->with("totalExchange", $totalExchange);
     }
-
+    public function listCustomers($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies('view-report', $shop))
+            return $this->redirectUnpermission();
+        $customers = \App\User::customersOf($shop->id)->get();
+        foreach ($customers as $customer) {
+            $customer->shop_card =  $customer->cards()
+                                            ->join("card_templates", "card_templates.id", "=", "cards.template_id")
+                                            ->where("card_templates.shop_id", 10)->get();
+        }
+        $shop_name = $shop->name;
+        return view("owner.report.customers.index", compact("customers", "shop_id", "shop_name"));
+    }
+    public function showCustomer($shop_id, $customer_id){
+        $shop = Shop::findOrFail($shop_id);
+        if(Gate::denies('view-report', $shop))
+            return $this->redirectUnpermission();
+        $customer = \App\User::findOrFail($customer_id);
+        $customer->shop_card =  $customer->cards()
+                                        ->join("card_templates", "card_templates.id", "=", "cards.template_id")
+                                        ->where("card_templates.shop_id", 10)->get();
+        return view("owner.report.customers.show", compact("customer"));
+    }
     public function exchangePromotion($shop_id){
         // $auth = $this->checkRoleAuth();
         // if(!is_null($auth))
