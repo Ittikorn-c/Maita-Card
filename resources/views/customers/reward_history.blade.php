@@ -9,9 +9,9 @@
             <thead class="bg-white">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Code</th>
                 <th scope="col">Card</th>
                 <th scope="col">Promotion</th>
+                <th scope="col">Shop</th>
                 <th scope="col">Approved By</th>
             </tr>
             </thead>
@@ -19,17 +19,11 @@
             @foreach($histories as $history)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $history->reward_code }}</td>
                     <td>{{ $history->card->cardTemplate->name }}</td>
                     <td>{{ $history->promotion->reward_name }}</td>
-                    {{--
-                                    <td>{{ $history->employee->user->fname.' '.$history->employee->user->lname.'  '.
-                                     $history->employee->branch->shop->name.' '.$history->employee->branch->name
-                                     }}</td>
-                    --}}
-                    <td>{{ $history->employee->fname.' '.$history->employee->lname.'  '.
-                 '[branch name]'.' [shop name]'
-                 }}</td>
+                    <td>{{ $history->card->cardTemplate->shop->name/*.' ,branch-'.
+                 \App\Employee::where('id', $history->employee->id)->first()->branch->name*/ }}</td>
+                    <td>{{ $history->employee->fname.' '.$history->employee->lname }}</td>
                 </tr>
             @endforeach
             </tbody>
