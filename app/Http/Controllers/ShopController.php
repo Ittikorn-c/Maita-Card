@@ -322,6 +322,5 @@ class ShopController extends Controller
       $branches = Shop::allBranch($shop_id)->get();
 
       return view('shops/branch', ['branches' => $branches]);
-
     }
 }
