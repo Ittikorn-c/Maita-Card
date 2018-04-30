@@ -103,9 +103,9 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-/*        if (\Auth::user()->cant('view', $card)) {
-            return redirect('/');
-        }*/
+        if (\Auth::user()->cant('view', $card)) {
+            return redirect('/profile/'.\Auth::user()->id);
+        }
 
         return view('cards.detail', compact('card'));
     }
