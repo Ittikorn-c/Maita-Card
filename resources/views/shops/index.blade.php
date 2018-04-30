@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col-md-7">
           <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="{{ asset('storage/promotions/'. $shop->logo_img) }}" alt="http://placehold.it/700x300">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="{{ asset('storage/shop/'. $shop->logo_img) }}" alt="http://placehold.it/700x300" style="width:100%;max-width:600px;height:300px">
           </a>
         </div>
         <div class="col-md-5">
