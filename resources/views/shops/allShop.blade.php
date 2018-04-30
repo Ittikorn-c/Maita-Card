@@ -6,7 +6,7 @@
     <div class="">
       <a href="/owner/report"><button type="button" name="button" class="btn btn-default">report</button></a>
 
-      <button type="button" name="button" class="btn btn-warning">employees</button>
+      <a href="/employees"><button type="button" name="button" class="btn btn-warning">employees</button></a>
       <button type="button" name="button" class="btn btn-success">promotions</button>
     </div>
 

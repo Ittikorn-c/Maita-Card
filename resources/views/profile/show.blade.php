@@ -51,7 +51,7 @@
             @endif
             @if(Auth::user()->role === 'owner' )
             <div class="m-1 p-1"> 
-                <a class="btn btn-danger" href='/maitahome/shops'>Shop Management</a>
+                <a class="btn btn-danger" href='/maitahome/shops/allshops'>Shop Management</a>
             </div>
             <div class="m-1 p-1"> 
                 <a class="btn btn-success" href='/maitahome/shops/create'>Create Shop</a>
