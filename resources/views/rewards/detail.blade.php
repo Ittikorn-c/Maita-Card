@@ -10,7 +10,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading" align="center">
-    	<img src="{{URL::asset('/images/'. $promo->reward_img)}}" alt="">
+    	<img src="{{ asset('storage/promotions/'. $promo->reward_img) }}" alt="">
     	<br>
         <h2>{{ $promo->reward_name }}</h2>
     </div>
