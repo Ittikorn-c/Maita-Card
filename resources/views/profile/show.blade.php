@@ -53,9 +53,6 @@
             <div class="m-1 p-1"> 
                 <a class="btn btn-danger" href='/maitahome/shops/allshops'>Shop Management</a>
             </div>
-            <div class="m-1 p-1"> 
-                <a class="btn btn-success" href='/maitahome/shops/create'>Create Shop</a>
-            </div>
             @endif
         
         @endif
