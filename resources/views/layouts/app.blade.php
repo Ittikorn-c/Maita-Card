@@ -5,6 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Search Engine -->
+    <meta name="description" content="Around with Gift & Promotion">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="Maita-Card">
+    <meta itemprop="description" content="Around with Gift & Promotion">
+    <meta itemprop="image" content="http://placehold.it/700x400">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content="Maita-Card">
+    <meta name="og:description" content="Around with Gift & Promotion">
+    <meta name="og:url" content="http://maita-card.test">
+    <meta name="og:site_name" content="Maita-Card">
+    <meta name="og:type" content="website">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

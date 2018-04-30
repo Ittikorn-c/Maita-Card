@@ -56,8 +56,8 @@
                     action="/shops/{{$shop->id}}/promotion/{{$promotion->id}}" method="post">
                 @csrf
                 @method("DELETE")
-                <button hidden id="del-btn" class="btn btn-danger" type="submit"></button>
-                <button class="btn btn-danger" onclick="confirmDelete()">delete</button>
+                <button hidden id="del-btn-{{$promotion->id}}" class="btn btn-danger" type="submit"></button>
+                <button class="btn btn-danger" onclick="confirmDelete('{{$promotion->id}}')">delete</button>
             </form>
 
             <a class="btn btn-success px-3"
