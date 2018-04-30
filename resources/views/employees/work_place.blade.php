@@ -15,7 +15,7 @@
 
 	    <div class="col-lg-4 col-sm-6 portfolio-item">
 	        <div class="card h-100">
-	            <a href="{{ url('/' . $branch->branch_id . '/scan') }}"><img class="card-img-top" src="{{URL::asset('/images/'. $branch->logo_img)}}" alt=""></a>
+	            <a href="{{ url('/' . $branch->branch_id . '/scan') }}"><img class="card-img-top" src="{{ asset('storage/shop/'. $branch->logo_img) }}" alt=""></a>
 	            <div class="card-body">
 	              <h4 class="card-title">
 	              	<!-- show shop name -->
