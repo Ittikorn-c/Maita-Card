@@ -50,7 +50,7 @@
                     @php($data = $dataset[$promotion->id]["data"])
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td><a href="">{{ $promotion->reward_name }}</a></td>
+                        <td><a href='{{ url("shops/$shop_id/promotion/$promotion->id/edit") }}'>{{ $promotion->reward_name }}</a></td>
                         <td><a href="">{{ $promotion->cardTemplate->name }}</a></td>
                         @foreach($data as $time)
                             <td>{{ $time }}</td>
