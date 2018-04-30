@@ -14,6 +14,12 @@ class EmployeeController extends Controller
         $this->middleware('auth');        
     }
 
+    //
+    public function inactiveEm(){
+        $employees = Employee::where('status', '=', 'inactive')->get();
+        return view('owner.employees.applied', ['employees' => $employees]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +27,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::where('status', '=', 'active')->get();
         return view('owner.employees.index', ['employees' => $employees]);
     }
 
@@ -66,6 +72,13 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         //
+        $em = Employee::where('id', '=', $id)->first();
+
+        $em->status = 'active';
+
+        $em->save();
+
+        return redirect('/employees/job-applied');
     }
 
     /**
@@ -89,5 +102,8 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+        $em = Employee::where('id', '=', $id)->first();
+        $em->delete();
+        return redirect('/employees/job-applied');
     }
 }
