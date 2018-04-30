@@ -16,7 +16,7 @@ class EmployeeController extends Controller
 
     //
     public function inactiveEm(){
-        $employees = Employee::where('status', '=', 'inactive')->get();
+        $employees = Employee::where('status', '=', 'inactive')->where('deleted_at', '=', NULL)->get();
         return view('owner.employees.applied', ['employees' => $employees]);
     }
 
