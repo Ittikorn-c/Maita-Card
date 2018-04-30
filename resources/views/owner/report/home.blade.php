@@ -24,10 +24,10 @@
         
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <div id="total-customer" class="card top-block">
+                <a href='{{ url("/owner/report/customers/$shop->id") }}' id="total-customer" class="card top-block">
                     <h5>Total Customer</h5>
                     <h1>{{ $totalCustomer }}</h1>
-                </div>
+                </a>
             </div>
             <div class="col-xs-12 col-md-4">
                 <div id="total-card" class="card top-block">

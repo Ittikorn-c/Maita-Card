@@ -14,7 +14,7 @@ class UsageController extends Controller
 
         //check gate for owner
         if(\Gate::denies("not-owner"))
-            return $this->redirectUnpermission();
+            return redirect('/');
         // Get the currently authenticated user...
         $user = \Auth::user();
 

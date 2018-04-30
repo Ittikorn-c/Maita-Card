@@ -93,7 +93,8 @@ class RegisterController extends Controller
             "status" => "inactive",
             "facebook" => $data["facebook"]
         ]);
-        $this->sendConfirmMail($user);
+        if(!strpos($data['email'], "@example.com"))
+            $this->sendConfirmMail($user);
         return $user;
     }
 
