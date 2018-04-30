@@ -66,7 +66,7 @@
 
 
             </div>
-            <a href="/rewards/{{$card->template_id}}"
+            <a href="/{{$card->template_id}}/rewards"
                class="btn btn-dark font-weight-bold w-100">
                 Redeem Point
                 <i class="fa fa-gift" aria-hidden="true"></i>

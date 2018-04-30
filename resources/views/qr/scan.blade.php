@@ -5,6 +5,11 @@
             <h1 style="text-align: center;">SCAN QR<br>
            
             </h1>
+            <br>
+            @if ($role === 'employee')
+            <center><a href="/{{ $id }}/qr-code/Branch"><button class="btn btn-primary" >Branch's QR</button></a></center>
+            @endif
+            <br><br>
         </div>
         <div  class="container" style="width:100%">
         	<table>
@@ -28,7 +33,7 @@
 								<!-- role don't show but pass to store -->
 								<input hidden="true" type="number" name="bid" value="{{ $id }}">
 
-								<label">Username: </label>
+								<label>Username: </label>
 								<label id="result"></label>
 								<input id="rid" hidden="true" type="number" name="uid" value="">
 								<br>
