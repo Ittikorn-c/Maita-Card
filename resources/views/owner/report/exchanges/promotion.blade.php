@@ -51,7 +51,7 @@
                     @foreach($promotions as $promotion)
                     <tr>
                         <th scope="row">{{ $i++ }}</th>
-                        <td><a href='{{ url("shops/$shop_id/promotion/$promotion->id/edit") }}'>{{ $promotion->reward_name }}</a></td>
+                        <td><a href='{{ url("shops/$shop_id/promotion/$promotion->id") }}'>{{ $promotion->reward_name }}</a></td>
                         <td><a href="">{{ $promotion->cardTemplate->name }}</a></td>
                         <td>{{ \Carbon\Carbon::parse($promotion->exp_date)->format('d/m/Y') }} ({{ \Carbon\Carbon::parse($promotion->exp_date)->diffForHumans() }})</td>
                         <td>{{ $promotion->rewardHistories()->count() }}</td>

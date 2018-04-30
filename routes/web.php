@@ -122,3 +122,12 @@ Route::post('/shops/{shop}/promotion', 'ShopController@storePromotion');
 
 Route::get('/reward_history', 'RewardHistoryController@index');
 Route::get('/cards/{card}', 'CardController@show')->where('card', '[0-9]+');
+
+
+Route::get("/templates/shop/{shop_id}", "CardTemplateController@index");
+Route::get("/templates/{template_id}", "CardTemplateController@show");
+Route::get("/templates/create/{shop_id}", "CardTemplateController@create");
+Route::get("/templates/edit/{template_id}", "CardTemplateController@edit");
+Route::put("/templates/{template_id}", "CardTemplateController@update");
+Route::post("/templates", "CardTemplateController@store");
+Route::delete("/templates/{template_id}", "CardTemplateController@destroy");
