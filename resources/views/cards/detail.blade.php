@@ -32,6 +32,7 @@
                 <div class="d-flex justify-content-around">
                     <img src="{{ url('storage/cards/'.$card->CardTemplate->img) }}"
                          width="350" height="200" alt="{{ $card->CardTemplate->img }}">
+
                 </div>
                 <div class="d-flex flex-column align-items-center">
                     @if($card->cardTemplate->style === 'point')

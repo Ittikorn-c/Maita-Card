@@ -2,15 +2,10 @@
 
 @section('content')
 @if(Auth::user()->role === 'owner')
-<<<<<<< HEAD
-=======
 <h1 style="text-align: center;">
-      My Employees
+      Job Applied
 </h1>
 
-<a href="/employees/job-applied"><button class="btn btn-info" style="position: absolute; right: 10px;">Job Applied</button></a>
-<br><br><br>
->>>>>>> origin/master
 <table class="table table-hover">
   <thead>
     <tr>
@@ -22,12 +17,14 @@
       <th scope="col">Phone</th>
       <th scope="col">Shop Name</th>
       <th scope="col">Branch Name</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     
     @foreach($employees as $employee)
-    @if(Auth::user()->id === $employee->branch->shop->owner_id)
+    @if((Auth::user()->id === $employee->branch->shop->owner_id) && ($employee->status === 'inactive'))
     <tr class='table'>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>
@@ -41,6 +38,22 @@
       <td>{{ $employee->user->phone }}</td>
       <td>{{ $employee->branch->shop->name }}</td>
       <td>{{ $employee->branch->name }}</td>
+      <td>     
+         <form action="/employees/job-applied/{{$employee->id}}" method="post">
+            @csrf
+            @method('PUT')
+
+            <button type="submit" class="btn btn-success">Approve</button>
+        </form>  
+      </td>
+      <td>
+        <form action="/employees/job-applied/{{$employee->id}}" method="post">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger">Cancel</button>
+        </form>  
+      </td>
     </tr>
     @endif
     @endforeach
