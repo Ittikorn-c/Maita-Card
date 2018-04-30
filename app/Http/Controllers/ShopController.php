@@ -247,6 +247,8 @@ class ShopController extends Controller
 
     public function showAllShop()
     {
+        if(Gate::accepts("not-owner"))
+            return $this->redirect("/maitahome");
       $shops = Shop::ShopOwner(\Auth::user()->id)->get();
       return view('shops.allShop',['shops'=>$shops]);
     }
