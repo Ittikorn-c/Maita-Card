@@ -7,7 +7,7 @@
     </div>
     @if(count($shops) === 0)
         <div class="h4 text-center">
-            No content Available
+            No Content Available
         </div>
     @endif
 
