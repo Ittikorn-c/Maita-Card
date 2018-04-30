@@ -20,16 +20,33 @@
 
             <div class="">
                 <div class="m-2 card-header">
+                    <i class="fa fa-gift" aria-hidden="true"></i>
                     <label class="font-weight-bold">Reward</label>
-                    <input class="w-100" type="text" name="reward_name" value="{{ old('reward_name') }}">
+                    @if ($errors->first('reward_name'))
+                        <input class="w-100 border border-danger" type="text" name="reward_name" value="{{ old('reward_name') }}">
+                    @else
+                        <input class="w-100" type="text" name="reward_name" value="{{ old('reward_name') }}">
+                    @endif
+
                 </div>
                 <div class="m-2 card-header">
+                    <i class="fa fa-th-list" aria-hidden="true"></i>
                     <label class="font-weight-bold">Condition</label>
                     <br>
-                    <textarea class="w-100" name="condition" rows="5" cols="20" >{{ old('condition')}}</textarea>
+                    @if ($errors->first('condition'))
+                        <textarea class="w-100 border border-danger" name="condition" rows="5" cols="20" >{{ old('condition')}}</textarea>
+                    @else
+                        <textarea class="w-100" name="condition" rows="5" cols="20" >{{ old('condition')}}</textarea>
+                    @endif
+
                 </div>
-                <div class="m-2 card-header">
+                @if ($errors->first('reward_img'))
+                    <div class="m-2 card-header border border-danger">
+                @else
+                    <div class="m-2 card-header">
+                @endif
                     <div class="custom-file-container" data-upload-id="reward_img">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
                         <label class="font-weight-bold">Reward Image <a href="javascript:void(0)" class="text-danger custom-file-container__image-clear" title="Clear Image">x</a></label>
                         <label class="custom-file-container__custom-file" >
                             <input name="reward_img" type="file" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
@@ -41,23 +58,46 @@
                 </div>
                 <div class="d-flex align-items-baseline justify-content-around m-2 card-header">
                     <div>
+                        <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                         <label class="font-weight-bold">Card</label>
-                        <select name="template_id" class="h4">
-                            @foreach($cards as $key => $card)
-                                @if(old('template_id') == $key)
-                                    <option value="{{ $key }}" selected>{{ $card }}</option>
-                                @else
-                                    <option value="{{ $key }}">{{ $card }}</option>
-                                @endif
-                            @endforeach
-                        </select>
+                        @if ($errors->first('template_id'))
+                            <select name="template_id" class="h4 border border-danger">
+                                @foreach($cards as $key => $card)
+                                    @if(old('template_id') == $key)
+                                        <option value="{{ $key }}" selected>{{ $card }}</option>
+                                    @else
+                                        <option value="{{ $key }}">{{ $card }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        @else
+                            <select name="template_id" class="h4">
+                                @foreach($cards as $key => $card)
+                                    @if(old('template_id') == $key)
+                                        <option value="{{ $key }}" selected>{{ $card }}</option>
+                                    @else
+                                        <option value="{{ $key }}">{{ $card }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        @endif
                     </div>
                     <div>
+                        <i class="fa fa-product-hunt" aria-hidden="true"></i>
                         <label class="font-weight-bold">Point </label>
-                        <input class="text-center h4" type="number" name="point" value="{{ old('point') }}">
+                        @if ($errors->first('point'))
+                            <input class="text-center h4 border border-danger" type="number" name="point" value="{{ old('point') }}">
+                        @else
+                            <input class="text-center h4" type="number" name="point" value="{{ old('point') }}">
+                        @endif
                     </div>
                 </div>
-                <div class="m-2 card-header text-center">
+                @if ($errors->first('exp_date') or $errors->first('exp_time'))
+                    <div class="m-2 card-header text-center border border-danger">
+                @else
+                    <div class="m-2 card-header text-center">
+                @endif
+                    <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
                     <label class="font-weight-bold">Expiry Date:</label>
                     <input name="exp_date" type="date" class="" value="{{ old('exp_date') }}">
                     <input name="exp_time" type="time" class="" value="{{ old('exp_time') }}">
@@ -66,6 +106,10 @@
                     <button class="mx-auto btn btn-dark font-weight-bold" type="submit">submit</button>
                 </div>
             </div>
+                @if(false)
+                    </div>
+                    </div>
+                @endif
         </form>
     </div>
 

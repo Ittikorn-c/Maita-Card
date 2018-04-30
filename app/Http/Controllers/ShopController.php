@@ -13,7 +13,7 @@ class ShopController extends Controller
     /*------------ Promotion-combined Controller -----------*/
     public function isShopOwner($shop) {
         /*return true;*/ //<<------------------------------- TRAP STATE FOR TEST
-        if (\Auth::user()->id === $shop->owner_id){
+        if (\Auth::user()->id === $shop->owner_id and \Auth::user()->role === 'owner'){
             return true;
         }
         return false;
@@ -29,7 +29,7 @@ class ShopController extends Controller
     }
 
     public function showPromotion(Shop $shop, Promotion $promotion){
-        if(!$this->isShopOwner($shop)) {return redirect('/');}
+        if(!$this->isShopOwner($shop) or $promotion->cardTemplate->shop_id !== $shop->id) {return redirect('/');}
 
         return view('shops.promotion.show', compact('shop','promotion'));
     }
@@ -71,7 +71,7 @@ class ShopController extends Controller
     }
 
     public function editPromotion(Shop $shop, Promotion $promotion) {
-        if(!$this->isShopOwner($shop)) {return redirect('/');}
+        if(!$this->isShopOwner($shop) or $promotion->cardTemplate->shop_id !== $shop->id) {return redirect('/');}
 
         $cards = CardTemplate::where('shop_id', $shop->id)->pluck('name','id');
         return view('shops.promotion.edit', compact('shop','promotion', 'cards'));

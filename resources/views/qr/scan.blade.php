@@ -7,7 +7,7 @@
             </h1>
             <br>
             @if ($role === 'employee')
-            <center><a href="/{{ $id }}/qr-code/Branch"><button class="btn btn-info" >Branch's QR</button></a></center>
+            <center><a href="/{{ $id }}/qr-code/Branch"><button class="btn btn-primary" >Branch's QR</button></a></center>
             @endif
             <br><br>
         </div>
@@ -33,7 +33,7 @@
 								<!-- role don't show but pass to store -->
 								<input hidden="true" type="number" name="bid" value="{{ $id }}">
 
-								<label">Username: </label>
+								<label>Username: </label>
 								<label id="result"></label>
 								<input id="rid" hidden="true" type="number" name="uid" value="">
 								<br>
