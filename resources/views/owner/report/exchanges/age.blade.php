@@ -51,7 +51,7 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td><a href='{{ url("shops/$shop_id/promotion/$promotion->id") }}'>{{ $promotion->reward_name }}</a></td>
-                        <td><a href="">{{ $promotion->cardTemplate->name }}</a></td>
+                        <td><a href='{{ url("/templates/$promotion->template_id") }}'>{{ $promotion->cardTemplate->name }}</a></td>
                         @foreach($data as $time)
                             <td>{{ $time }}</td>
                         @endforeach

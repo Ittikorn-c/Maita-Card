@@ -138,7 +138,7 @@
                         GENDER
                     </p>
                 </a>
-                <a id="checkin-point-available-gender" href='{{ url("/owner/report/pointAvailable/checkin/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
+                <a id="checkin-point-available-age" href='{{ url("/owner/report/pointAvailable/checkin/age/$shop->id") }}' class="card simple-block" style="flex-grow:1">
                     <p>
                         CHECK-IN POINT AVAILABLE <br>
                         AGE

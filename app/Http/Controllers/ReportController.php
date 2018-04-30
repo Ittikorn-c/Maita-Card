@@ -230,7 +230,7 @@ class ReportController extends Controller
             array_push($label, $i);
         }
         $datasets = $this->getPointReceiveTime($shop_id);
-
+        // return $datasets[10]["data"][8];
         return view("owner.report.pointReceive.time", compact("label", "datasets"));
     }
 
@@ -405,7 +405,9 @@ class ReportController extends Controller
             $datasets[$template->id] = [
                 "template_id" => $template->id,
                 "template_name" => $template->name,
-                "data" => []
+                "data" => [0,0,0,0, 0,0,0,0,
+                            0,0,0,0, 0,0,0,0,
+                            0,0,0,0, 0,0,0,0,]
             ];
         }
         foreach($raw as $data){
