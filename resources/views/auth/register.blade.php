@@ -8,7 +8,15 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="register">
                         @csrf
@@ -108,6 +116,11 @@
                             <div class="col-md-6">
                                 <input id="phone" type="text" value="{{ old('phone') }}" class="form-control" name="phone" required>
                             </div>
+                            @if ($errors->has('phone'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="form-group row">
