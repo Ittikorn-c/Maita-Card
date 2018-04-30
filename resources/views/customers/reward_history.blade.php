@@ -29,8 +29,8 @@
             </tbody>
         </table>
         @if(count($histories) === 0)
-            <div class="text-center">
-                No content Available
+            <div class="h4 text-center">
+                No Content Available
             </div>
         @endif
     </div>

@@ -119,7 +119,6 @@ Route::put('/shops/{shop}/promotion/{promotion}', 'ShopController@updatePromotio
 Route::delete('/shops/{shop}/promotion/{promotion}',  'ShopController@destroyPromotion');
 Route::post('/shops/{shop}/promotion', 'ShopController@storePromotion');
 
-
 Route::get('/reward_history', 'RewardHistoryController@index');
 Route::get('/cards/{card}', 'CardController@show')->where('card', '[0-9]+');
 
