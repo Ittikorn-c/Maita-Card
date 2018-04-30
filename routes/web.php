@@ -126,6 +126,7 @@ Route::post('/shops/{shop}/promotion', 'ShopController@storePromotion');
 Route::get('/reward_history', 'RewardHistoryController@index');
 Route::get('/cards/{card}', 'CardController@show')->where('card', '[0-9]+');
 
+Route::post('/maitahome/{promotion}','PromotionController@showCard')->where('promotion','[0-9]+');
 
 Route::get("/templates/shop/{shop_id}", "CardTemplateController@index");
 Route::get("/templates/{template_id}", "CardTemplateController@show");

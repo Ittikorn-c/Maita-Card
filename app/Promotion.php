@@ -10,7 +10,16 @@ class Promotion extends Model
     //
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-
+    
+    public function scopeShowCard($query, $user_id, $promotion_id)
+    {
+      return $query->join("card_templates", "promotions.template_id", "=", "card_templates.id")
+                  ->join("cards", "cards.template_id", "=", "card_templates.id")
+                  ->join("users", "users.id", "=", "cards.user_id")
+                  ->where("cards.user_id","=", $user_id)
+                  ->where("promotions.id","=", $promotion_id)
+                  ->select("cards.*");
+    }
     public function cardTemplate(){
         return $this->belongsTo("App\CardTemplate", "template_id");
     }

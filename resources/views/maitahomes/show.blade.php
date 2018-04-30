@@ -27,8 +27,10 @@
             <p>{{ $promotion->condition }}</p>
             <small class="text-muted">Exp:   {{\Carbon\Carbon::parse($promotion->exp_date)->diffForHumans() }}</small>
             <hr>
-            <form class="" action="index.html" method="post">
-              <a href="#" class="btn btn-success">do something</a>
+            <form class="" action="/maitahome/{{$promotion->id}}" method="post">
+              @csrf
+              <input type='hidden' name="promotion_id" value=" {{$promotion->id}} " />
+              <button type="submit"  class="btn btn-success"name="button">card</button>
             </form>
           </div>
 

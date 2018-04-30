@@ -20,6 +20,17 @@ class PromotionController extends Controller
         $today = new Carbon;
         return view('rewards/show', ['promos' => $promo, 'template_id' => $template_id, 'today' => $today]);
     }
+    public function showCard(Request $request)
+    {
+
+      $promotion_id = $request->input("promotion_id");
+      $shop = \App\Promotion::find($promotion_id)->cardTemplate->shop_id;
+      $cardNum = Promotion::ShowCard(\Auth::user()->id, $promotion_id)->get();
+      if($cardNum->count() == 0){
+        return redirect("/joinCard/" .$shop);
+      }
+      return redirect("/cards/". $cardNum->first()->id);
+    }
     /**
      * Display a listing of the resource.
      *
