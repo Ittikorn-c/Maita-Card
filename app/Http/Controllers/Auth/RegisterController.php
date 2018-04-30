@@ -74,8 +74,6 @@ class RegisterController extends Controller
     {
         echo "<script>console.log('". json_encode($data) ."')</script>";
         $image_name = $data["username"] . "." . $data["profile"]->getClientOriginalExtension();
-        // $data["profile"]->move(public_path("images/profile"), $image_name);
-        // Storage::put("public/profile/$image_name", $data["profile"]);
         Storage::disk('public')->put("profile/$image_name", file_get_contents($data["profile"]));
 
         $user =  User::create([

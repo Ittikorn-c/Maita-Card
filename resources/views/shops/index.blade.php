@@ -23,7 +23,13 @@
           <small >{{$shop->category}}</small>
           <p><i class="fa fa-phone-square"></i>      {{$shop->phone}}</p>
           <p><i class="fa fa-envelope"></i>      {{$shop->email}}</p>
-          <a class="btn btn-primary" href="{{url('/maitahome/shops/' . $shop->id. '/promotions')}}">View Promotion</a>
+          <a class="btn btn-primary" href="{{url('/maitahome/shops/' . $shop->id. '/promotions')}}">View Promotion</a> 
+          <br>
+          @if(Auth::check())
+            @if(Auth::user()->role === "customer")
+              <a style="margin-top:10px" class="btn btn-success" href='{{ url("/joinCard/$shop->id") }}'>Join Card</a>
+            @endif
+          @endif
         </div>
       </div>
       <!-- /.row -->
