@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             $u->profile_img = $u->username . ".jpg";
             $u->save();
         });
-        factory(App\Shop::class, 2)->create()->each(function($s){
+        factory(App\Shop::class, 10)->create()->each(function($s){
             $s->logo_img = $s->id . ".jpg";
             $s->save();
         });
