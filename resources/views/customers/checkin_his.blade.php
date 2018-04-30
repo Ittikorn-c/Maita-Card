@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="card-header h3 font-weight-bold bg-dark text-white">
-    My Usage History
+    My CheckIn History
 </div>
 
 <div class="row">
@@ -14,8 +14,7 @@
 	      <th scope="col">#</th>
 	      <th scope="col">Shop's Name</th>
 	      <th scope="col">Branch's Name</th>
-	      <th scope="col">Point</th>
-	      <th scope="col">Used At</th>
+	      <th scope="col">Check In At</th>
 
 	    </tr>
 	  </thead>
@@ -27,7 +26,6 @@
 	        {{ $use->name }}
 	      </td>
 	      <td> {{ $use->branch_name }}</td>	      
-	      <td>{{ $use->point }}</td>
 	      <td>{{ $use->created_at->diffForHumans() }}</td>
 
 	    </tr>

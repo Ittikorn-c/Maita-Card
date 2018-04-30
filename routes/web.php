@@ -81,6 +81,8 @@ Route::put('/cscan', 'CardController@checkin')->middleware('auth');
 
 Route::get('/my-usage-history', 'UsageController@index')->middleware('auth');
 
+Route::get('/my-checkin-history', 'CustomerCheckinController@index')->middleware('auth');
+
 //employee
 Route::get('/work-his', 'UsageController@emWorkHis')->middleware('auth');
 

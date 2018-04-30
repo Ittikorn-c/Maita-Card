@@ -94,6 +94,9 @@
                                     <a class="dropdown-item" href='{{ url("/my-usage-history")}}'>
                                         My Usage History 
                                     </a>
+                                    <a class="dropdown-item" href='{{ url("/my-checkin-history")}}'>
+                                        My Check In History 
+                                    </a>
                                     <a class="dropdown-item" href='{{ url("/" . Auth::user()->id . "/scan") }}'>
                                         Check in
                                     </a>
