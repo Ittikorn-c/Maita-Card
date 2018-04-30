@@ -2,6 +2,10 @@
 
 @section('content')
 @if(Auth::user()->role === 'owner')
+<h1 style="text-align: center;">
+      Job Applied
+</h1>
+
 <table class="table table-hover">
   <thead>
     <tr>

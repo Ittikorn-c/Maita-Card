@@ -2,6 +2,12 @@
 
 @section('content')
 @if(Auth::user()->role === 'owner')
+<h1 style="text-align: center;">
+      My Employees
+</h1>
+
+<a href="/employees/job-applied"><button class="btn btn-info" style="position: absolute; right: 10px;">Job Applied</button></a>
+<br><br><br>
 <table class="table table-hover">
   <thead>
     <tr>
