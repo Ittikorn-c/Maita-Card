@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix("owner/report")->group(function(){
     Route::get("{shop_id?}", "ReportController@home");
+    Route::get("alpha/{shop_id?}", "Report2Controller@home");
     Route::get("exchange/promotion/{shop_id}", "ReportController@exchangePromotion");
     Route::get("exchange/age/{shop_id}", "ReportController@exchangeAge");
     Route::get("exchange/gender/{shop_id}", "ReportController@exchangeGender");
