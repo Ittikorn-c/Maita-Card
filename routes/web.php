@@ -86,8 +86,6 @@ Route::get('/{user}/scan', 'QRController@scanQR')->where('user', '[0-9]+')->midd
 
 Route::post('/scanforbranch/{code}', 'BranchController@getBName')->where('code', '[a-zA-Z0-9]+')->middleware('auth');
 
-Route::post('/scanforreward/{code}', 'RewardHistoryController@checkoutRewardDetail')->where('code', '[a-zA-Z0-9]+')->middleware('auth');
-
 Route::put('/cscan', 'CardController@checkin')->middleware('auth');
 
 Route::get('/my-usage-history', 'UsageController@index')->middleware('auth');
@@ -104,6 +102,8 @@ Route::post('/escan', 'UsageController@store')->middleware('auth');
 Route::post('/rscan', 'RewardHistoryController@update')->middleware('auth');
 
 Route::post('/scanforuser/{user}', 'ProfileController@getUName')->where('user', '[0-9]+')->middleware('auth');
+
+Route::post('/scanforreward/{code}', 'RewardHistoryController@checkoutRewardDetail')->where('code', '[a-zA-Z0-9]+')->middleware('auth');
 
 Route::get('/{shop_id}/branches', 'ShopController@showBranches')->where('shop_id', '[0-9]+')->middleware('auth');
 
