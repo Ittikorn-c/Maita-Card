@@ -4,8 +4,15 @@ namespace App\Http\Controllers\reports;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Htto\Controllers\reports\ReportSupportController;
 
-class PointReceiveSupportController extends Controller
+class PointReceiveSupportController extends ReportController
 {
-    //
+    public function getAgeDatasets($shop_id){
+
+    }
+
+    public function getGenderDatasets($shop_id){
+        
+    }
 }
