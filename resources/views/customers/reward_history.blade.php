@@ -21,8 +21,7 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $history->card->cardTemplate->name }}</td>
                     <td>{{ $history->promotion->reward_name }}</td>
-                    <td>{{ $history->card->cardTemplate->shop->name/*.' ,branch-'.
-                 \App\Employee::where('id', $history->employee->id)->first()->branch->name*/ }}</td>
+                    <td>{{ $history->card->cardTemplate->shop->name }}</td>
                     <td>{{ $history->employee->fname.' '.$history->employee->lname }}</td>
                 </tr>
             @endforeach
