@@ -103,7 +103,6 @@ class CardTemplateController extends Controller
             $template->name = $request->input("name");
             $template->style = $request->input("style");
             $template->shop_id = $request->input("shop");
-            $template->img = "";
             $template->save();
             if($request->img){
                 $image_name = $template->id . "." . $request->img->extension();

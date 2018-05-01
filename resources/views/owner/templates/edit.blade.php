@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row card">
             <div class="col-12 card-header">
-                <h3>New Card Template</h3>
+                <h3>Edit Card Template</h3>
             </div>
             <div class="col-12 card-body">
                 <form class="form-group" action='{{url("/templates/$template->id")}}' enctype="multipart/form-data" method="post">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-12" style="text-align:center">
-                            <button style="margin:0 auto" class="btn btn-success">Create</button>
+                            <button style="margin:0 auto" class="btn btn-primary">Edit</button>
                         </div>
                     </div>
                 </form>
