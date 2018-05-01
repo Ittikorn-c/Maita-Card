@@ -95,6 +95,12 @@ class UsageController extends Controller
 
             $card = \App\Shop::where('shops.id', '=', $em->branch->shop_id)->usedCard($request->input('uid'))->first();
 
+            $card_point = $request->input('point');
+
+            $card->point = $card->point + $card_point;
+
+            $card->save();
+
             //$card_id = \App\Card::where('user_id', '=', $request->input('uid'))->where()->first();
 
             // fix 
@@ -102,7 +108,7 @@ class UsageController extends Controller
 
             $usage = new UsageHistory;
             $usage->card_id = $card->id;
-            $usage->point = $request->input('point');
+            $usage->point = $card_point;
             $usage->employee_id = $employee_id;
 
             $usage->save();
