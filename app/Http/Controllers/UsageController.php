@@ -79,6 +79,7 @@ class UsageController extends Controller
         // Get the currently authenticated user...
         $user = \Auth::user();
         $role = $user->role;
+        $branch_id =$request->input('bid');
 
         // still can't test fix first
         // $user = \App\User::where('id', '=', 1)->first();
@@ -87,7 +88,7 @@ class UsageController extends Controller
         //case employee scan
         if ($role === 'employee'){
 
-            $em = \App\Employee::where('user_id', '=', $user->id)->where('branch_id', '=', $request->input('bid'))->first();
+            $em = \App\Employee::where('user_id', '=', $user->id)->where('branch_id', '=', $branch_id)->first();
             $em->branch;
 
             // $branch = \App\Branch::where('id', '=', $em->branch_id)->first();
@@ -105,7 +106,7 @@ class UsageController extends Controller
             $usage->employee_id = $employee_id;
 
             $usage->save();
-            return redirect('/' . $user->id . '/scan');            
+            return redirect('/' . $branch_id . '/scan');            
         }
 
 

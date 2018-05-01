@@ -221,7 +221,6 @@ class ShopController extends Controller
             $shop->phone = $request->input("shopphone");
             $shop->email = $request->input("shopemail");
             $shop->category = $request->input("shopcategory");
-            $shop->logo_img = "";
             $shop->owner_id = \Auth::user()->id;
             $shop->save();
             if($request->file("shoplogo")){
