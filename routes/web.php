@@ -21,7 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix("owner/report")->group(function(){
     Route::get("{shop_id?}", "ReportController@home");
-    Route::get("alpha/{shop_id?}", "Report2Controller@home");
     Route::get("exchange/promotion/{shop_id}", "ReportController@exchangePromotion");
     Route::get("exchange/age/{shop_id}", "ReportController@exchangeAge");
     Route::get("exchange/gender/{shop_id}", "ReportController@exchangeGender");
@@ -108,6 +107,8 @@ Route::post('/scanforreward/{code}', 'RewardHistoryController@checkoutRewardDeta
 Route::get('/{shop_id}/branches', 'ShopController@showBranches')->where('shop_id', '[0-9]+')->middleware('auth');
 
 Route::post('{branch_id}/job-apply', 'EmployeeController@store')->where('branch_id', '[0-9]+')->middleware('auth');
+
+Route::get('/reward-history', 'RewardHistoryController@emrewardhis')->middleware('auth');
 
 
 //owner
