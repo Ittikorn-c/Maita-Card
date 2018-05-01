@@ -15,10 +15,20 @@ class QRController extends Controller
 
         //case em = branch qr
         if ($title === 'Branch'){
-            $id = \App\Branch::where('id', '=', $id)->first()->checkin_code;
+            $obj = \App\Branch::where('id', '=', $id)->first();
+            $obj->shop;
+            $id = $obj->checkin_code;
+        }
+        elseif ($title === 'My') {
+            $obj = \App\User::where('id', '=', $id)->first();
+        }
+        else {
+            $obj = \App\RewardHistory::where('reward_code', '=', $id)->first();
+            $template_id = $obj->promotion->template_id;
+            $obj = $obj->promotionDetail($template_id)->first();
         }
     	$qr = \QrCode::size(400)->generate($id);
-    	return view('qr/qr', ['qr' => $qr, 'title' => $title]);
+    	return view('qr/qr', ['qr' => $qr, 'title' => $title, 'obj' => $obj]);
     }
 
     public function scanQR($id) {

@@ -31,7 +31,7 @@ class RewardHistory extends Model
                         ->join('card_templates', 'card_templates.id', '=', 'promotions.template_id')
                         ->join('shops', 'shops.id', '=', 'card_templates.shop_id')
                         ->where('card_templates.id', $template_id)
-                        ->select("reward_histories.*", 'promotions.reward_name', 'shops.name');
+                        ->select("reward_histories.*", 'promotions.reward_name', 'promotions.reward_img', 'promotions.exp_date', 'shops.name');
     }
     
 }
