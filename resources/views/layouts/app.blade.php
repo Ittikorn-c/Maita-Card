@@ -114,6 +114,9 @@
                                     <a class="dropdown-item" href='{{ url("/work-his") }}'>
                                         Working history
                                     </a>
+                                    <a class="dropdown-item" href='{{ url("/reward-history") }}'>
+                                        Reward history
+                                    </a>
                                     <a class="dropdown-item" href='{{ url("/employee-work-branch") }}'>
                                         Scan QR code
                                     </a>

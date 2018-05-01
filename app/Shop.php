@@ -47,7 +47,7 @@ class Shop extends Model
                     ->join("branches", "shops.id", "=", "branches.shop_id")
                     ->join("employees", "branches.id", "=", "employees.branch_id")
                     ->join("users", "employees.user_id", "=", "users.id")
-                    ->select("users.*");
+                    ->select("employees.*");
     }
 
     public function scopeUsedCard($query, $user_id) {

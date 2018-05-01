@@ -134,4 +134,11 @@ class RewardHistoryController extends Controller
 
     	return view('/rewards/checknoscan', ['rewards' => $reward_history]);
     }
+
+    public function emrewardhis(){
+        $user_id = Auth::user()->id;
+        //$id = 127;
+        $rw_his = RewardHistory::emrewardhis($user_id)->get();
+        return view('employees.reward_his', ['rewards' => $rw_his]);
+    }
 }
