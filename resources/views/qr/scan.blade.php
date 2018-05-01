@@ -11,6 +11,25 @@
             @endif
             <br><br>
         </div>
+        <!-- alert -->
+		<div id="alert-alert" class="modal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Scan Rejected</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <p id="alert-msg"></p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
         <div  class="container" style="width:100%">
         	<table>
         		<tr>
@@ -95,12 +114,23 @@
 				data: { _token: '{!! csrf_token() !!}', code: content },
 				success:function(data){
 
-			        $("#result").text(data['username']);
-			        $('#rid').val(data['reward_id']);
-			        $('#adcol').text('Reward Name: ' + data['reward_name']);
-			        $('#point').hide();
-			        $('#point').val(data['point']);
-			        $('#em').attr('action', '/rscan');
+					if (data == 'used'){
+						$('#alert-msg').text('Can\'t Scan! This Code has been Used');
+						$('#alert-alert').modal('toggle');
+					}
+					else if (data == 'exp'){
+						$('#alert-msg').text('Can\'t Scan! This Promotion has been Expire');
+						$('#alert-alert').modal('toggle');						
+					}
+					else {
+				        $("#result").text(data['username']);
+				        $('#rid').val(data['reward_id']);
+				        $('#adcol').text('Reward Name: ' + data['reward_name']);
+				        $('#point').hide();
+				        $('#point').val(data['point']);
+				        $('#em').attr('action', '/rscan');						
+					}
+
 				},
 				error:function(){
 					console.log("No data returned");
