@@ -7,6 +7,8 @@ use App\Card;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 class RewardHistoryController extends Controller
 {
     public function index() {
@@ -67,7 +69,18 @@ class RewardHistoryController extends Controller
         //
 
         $reward_history = RewardHistory::where('reward_code', '=', $_POST['code'])->first();
+
+        //reject used code
+        if($reward_history->employee != NULL) {
+            return 'used';
+        }
         $reward_history->promotion->cardTemplate;
+
+        //reject expire
+        $today = new Carbon;
+        if($today < $reward_history->promotion->exp_date){
+            return 'exp';
+        }
 
         $card = \App\Card::where('id', '=', $reward_history->card_id)->first();
         $card->user;

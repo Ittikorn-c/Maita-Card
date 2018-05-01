@@ -36,4 +36,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    //app\Http\Auth\LoginController
+    protected function authenticated($request, $user)
+    {
+        if($user->role === 'employee'){
+            return redirect('/employee-work-branch');
+        }else{
+            return redirect('/maitahome');
+        }
+    }
 }
