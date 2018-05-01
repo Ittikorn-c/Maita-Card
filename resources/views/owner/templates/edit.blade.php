@@ -36,7 +36,7 @@
                             <select name="shop" id="shop" class="form-control">
                                 @foreach($shops as $shop)
                                     @if($shop->id === $template->shop_id)
-                                        <option value="{{$shop->id}}" checked>{{$shop->name}}</option>
+                                        <option value="{{$shop->id}}" selected>{{$shop->name}}</option>
                                     @else
                                         <option value="{{$shop->id}}">{{$shop->name}}</option>
                                     @endif
